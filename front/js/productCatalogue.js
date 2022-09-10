@@ -23,6 +23,12 @@ function reqProducts(){
             //création du lien avec id pour chaque produit dans l'url des liens des produits de la page d'accueil
             let idProduct= product._id;
             linkProduct.href=`./product.html?id=${idProduct}`;
+            urlProduct= new URLSearchParams(linkProduct.href);
+         for( url of urlProduct){
+            console.log("url", url);
+            let getId= url[1];
+            console.log( "get id", getId);
+         }
 
             let articleProducts= document.createElement("article");
             let imgProduct= document.createElement("img");
