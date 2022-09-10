@@ -21,9 +21,9 @@ function reqProducts(){
            //création des élémnts du DOM
             let linkProduct= document.createElement("a");
             //création du lien avec id pour chaque produit dans l'url des liens des produits de la page d'accueil
-            console.log("idproduct",idProduct)
             let idProduct= product._id;
-            linkProduct.href=`./page.html?id=${idProduct}`;
+            linkProduct.href=`./product.html?id=${idProduct}`;
+
             let articleProducts= document.createElement("article");
             let imgProduct= document.createElement("img");
             imgProduct.src=product.imageUrl;
