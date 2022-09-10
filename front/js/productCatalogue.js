@@ -12,7 +12,7 @@ let requestProducts= request.then(function(res){
 });
 // Récupération des produits retournés par l'api et sous forme d'objet javascript
 function reqProducts(){
-   let req= requestProducts.then(function(catalogue){
+    let req= requestProducts.then(function(catalogue){
         console.log("verification des produits kanapé",catalogue) 
         // récupération de la section pour rattacher les éléments du DOM
         let productsCatalogue=document.querySelector("#items");
