@@ -23,9 +23,7 @@ function reqProducts(){
             //création du lien avec id pour chaque produit dans l'url des liens des produits de la page d'accueil
             let idProduct= product._id;
             linkProduct.href=`./product.html?id=${idProduct}`
-        
-         
-
+            // Création des sous-éléments de chaque lien des produits dans le DOM
             let articleProducts= document.createElement("article");
             let imgProduct= document.createElement("img");
             imgProduct.src=product.imageUrl;
@@ -37,23 +35,17 @@ function reqProducts(){
             descriptionProduct.setAttribute("class","product-description");
             descriptionProduct.textContent=product.description;
            
-
-           // affichage dans le DOM
+            // affichage dans le DOM
             articleProducts.appendChild(imgProduct);
             articleProducts.appendChild(titleProduct);
             articleProducts.appendChild(descriptionProduct);
             linkProduct.appendChild(articleProducts);
             productsCatalogue.appendChild(linkProduct);  
         };
-      
        
     });
     return req;
 };
- let catalogueProducts= reqProducts();
- 
- 
 
-console.log("catalogue produit",catalogueProducts);
 
   

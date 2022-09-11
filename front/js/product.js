@@ -30,6 +30,8 @@ productSelected.then(function(productSelect){
     priceProduct.textContent=productSelect.price;
     let descriptionProduct= document.querySelector(".item__content__description__title + #description");
     descriptionProduct.textContent= productSelect.description;
+    //relier l'image du produit au DOM avec son element parent et affichage dans le DOM
+    itemImg.appendChild(imgProductSelected); 
     // création des options par couleur de chaque produit sélectionné
     for( colorProduct of productSelect.colors){
         let selectColor= document.querySelector(".item__content__settings__color #colors"); 
@@ -38,13 +40,10 @@ productSelected.then(function(productSelect){
         optionColor.setAttribute("id",colorProduct);
         optionColor.value= colorProduct;
         optionColor.textContent= colorProduct;
+        // modification de la couleur blanc du texte par defaut du body par la propriété style color des options 
         optionColor.style.color="#3d4c68";
-       
+       //relier les options au parent <select>
         selectColor.appendChild(optionColor);
-      
     }
-
    
-    itemImg.appendChild(imgProductSelected);
-  
 });
