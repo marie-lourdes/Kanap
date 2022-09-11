@@ -17,4 +17,5 @@ let productSelected= request.then(function(res){
 
 productSelected.then(function(product){
  console.log("produit selectionné",product)
+ console.log("titre d produit", product.name)
 });
