@@ -18,7 +18,6 @@ let productSelected= request.then(function(res){
 // recuperation du produit selectionné en objet javascrit 
 productSelected.then(function(productSelect){
     console.log("produit selectionné",productSelect)// verification du contenu de l objet du produit
-    console.log("titre du produit", productSelect.name)
     //Sélection et création des éléments du DOM et affichage des éléments (détails du produit) dans le DOM de la page produit
     let itemImg= document.querySelector(".item__img");
     let imgProductSelected= document.createElement("img");
