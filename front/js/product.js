@@ -45,35 +45,58 @@ productSelected.then(function(productSelect){
        //relier les options au parent <select>
         selectColor.appendChild(optionColor);
     };
+
+    class addCart {
+        static addQuantity(inputQuantity){
+            inputQuantity=document.querySelector("#quantity");
+            inputQuantity.addEventListener("input",function(event){
+                inputQuantity = event.target.value;
+                console.log("nombre de produit",inputQuantity);
+            });
+            return inputQuantity;
+        };
+        static addColor(selectColor) {
+            selectColor= document.querySelector(".item__content__settings__color #colors"); 
+            selectColor.addEventListener("input",function(event){
+                selectColor = event.target.value;
+                console.log("couleur",selectColor); 
+            });
+            return selectColor;
+        };
+        static addQuantityColorWindowStorage(inputQuantity,selectColor){
+            inputQuantity= addCart.addQuantity();
+            selectColor= addCart.addColor();
+            
+            let btnAddCart= document.querySelector("#addToCart");
+            btnAddCart.addEventListener("click", function(){
+              window.localStorage.setItem("nom produit",productSelect.name);
+              window.localStorage.setItem("quantite produit",inputQuantity.value);
+              window.localStorage.setItem("couleur produit",selectColor.value);
+    
+              console.log("quantité produit",window.localStorage.getItem("quantite produit"));
+              console.log( "couleur produit",window.localStorage.getItem("couleur produit")); 
+            });  
+            let tableau=[];
+            tableau.nomProduit= window.localStorage.getItem("nom produit");
+            tableau.quantité=window.localStorage.getItem("quantite produit");
+            tableau.couleur=window.localStorage.getItem("couleur produit");
+            console.log("tableau", tableau);
+            return tableau;  
+        };
+    };
+
+    addCart.addQuantityColorWindowStorage();
+
 });
 
-let btnAddCart= document.querySelector("#addToCart");
 
-class addCart {
-    static addQuantity(inputQuantity){
-        inputQuantity=document.querySelector("#quantity");
-        inputQuantity.addEventListener("input",function(event){
-            inputQuantity = event.target.value;
-            
-            console.log("nombre de produit",inputQuantity)
-        
-        });
-        return inputQuantity;
-    };
-  /*  addColor(color) {
-        quantity.addEventListener("input",function(event){
-            selectColor= document.querySelector(".item__content__settings__color #colors"); 
 
-            quantity = event.target.value;
-            
-            console.log("nombre de produit",inputQuantity)
-        
-        });
-        return quantity;
-    };*/
-    
-};
-addCart.addQuantity();
+
+
+
+   
+
+
 
 /*inputQuantity.addEventListener("input",function(event){
 
