@@ -44,5 +44,25 @@ productSelected.then(function(productSelect){
         optionColor.style.color="#3d4c68";
        //relier les options au parent <select>
         selectColor.appendChild(optionColor);
-    } 
+    };
 });
+
+let btnAddCart= document.querySelector("#addToCart");
+let inputQuantity= document.querySelector("#quantity");
+
+inputQuantity.addEventListener("input",function(event){
+
+
+    inputQuantity = event.target.value;
+    
+    console.log("nombre de produit",inputQuantity)
+
+});
+
+   
+
+
+
+
+    
+
