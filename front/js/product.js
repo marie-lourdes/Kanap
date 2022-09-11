@@ -48,16 +48,41 @@ productSelected.then(function(productSelect){
 });
 
 let btnAddCart= document.querySelector("#addToCart");
-let inputQuantity= document.querySelector("#quantity");
 
-inputQuantity.addEventListener("input",function(event){
+class addCart {
+    static addQuantity(inputQuantity){
+        inputQuantity=document.querySelector("#quantity");
+        inputQuantity.addEventListener("input",function(event){
+            inputQuantity = event.target.value;
+            
+            console.log("nombre de produit",inputQuantity)
+        
+        });
+        return inputQuantity;
+    };
+  /*  addColor(color) {
+        quantity.addEventListener("input",function(event){
+            selectColor= document.querySelector(".item__content__settings__color #colors"); 
+
+            quantity = event.target.value;
+            
+            console.log("nombre de produit",inputQuantity)
+        
+        });
+        return quantity;
+    };*/
+    
+};
+addCart.addQuantity();
+
+/*inputQuantity.addEventListener("input",function(event){
 
 
     inputQuantity = event.target.value;
     
     console.log("nombre de produit",inputQuantity)
 
-});
+});*/
 
    
 
