@@ -32,13 +32,16 @@ productSelected.then(function(productSelect){
     descriptionProduct.textContent= productSelect.description;
     // création des options par couleur de chaque produit sélectionné
     for( colorProduct of productSelect.colors){
-        let selectColor= document.querySelector(".item__content__settings__color select#colors"); 
+        let selectColor= document.querySelector(".item__content__settings__color #colors"); 
         let optionColor= document.createElement("option");
         optionColor.setAttribute("name","color");
         optionColor.setAttribute("id",colorProduct);
         optionColor.value= colorProduct;
-        
+        optionColor.textContent= colorProduct;
+        optionColor.style.color="#3d4c68";
+       
         selectColor.appendChild(optionColor);
+      
     }
 
    
