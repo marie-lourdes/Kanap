@@ -44,6 +44,5 @@ productSelected.then(function(productSelect){
         optionColor.style.color="#3d4c68";
        //relier les options au parent <select>
         selectColor.appendChild(optionColor);
-    }
-   
+    } 
 });

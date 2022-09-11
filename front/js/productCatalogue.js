@@ -46,6 +46,7 @@ function reqProducts(){
     });
     return req;
 };
+reqProducts();
 
 
   
