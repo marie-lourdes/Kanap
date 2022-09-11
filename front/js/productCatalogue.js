@@ -22,13 +22,20 @@ function reqProducts(){
             let linkProduct= document.createElement("a");
             //création du lien avec id pour chaque produit dans l'url des liens des produits de la page d'accueil
             let idProduct= product._id;
-            linkProduct.href=`./product.html?id=${idProduct}`;
-            urlProduct= new URLSearchParams(linkProduct.href);
+          
+            urlProduct1= new URL("/api/product/","http://localhost:3000");
+           urlProduct1.search=`id=${idProduct}`;
+           console.log("pathname",urlProduct1)
+           linkProduct.href=`./product.html${urlProduct1.search}`;
+           paramsProduct= new URLSearchParams(urlProduct1.search);
+           console.log("get params",paramsProduct.get("id"));
+          
+           /* urlProduct= new URLSearchParams(urlProduct1);
          for( url of urlProduct){
             console.log("url", url);
             let getId= url[1];
             console.log( "get id", getId);
-         }
+         }*/
 
             let articleProducts= document.createElement("article");
             let imgProduct= document.createElement("img");
