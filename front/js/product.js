@@ -30,6 +30,7 @@ productSelected.then(function(productSelect){
     priceProduct.textContent=productSelect.price;
     let descriptionProduct= document.querySelector(".item__content__description__title + #description");
     descriptionProduct.textContent= productSelect.description;
+    // création des options par couleur de chaque produit sélectionné
     for( colorProduct of productSelect.colors){
         let selectColor= document.querySelector(".item__content__settings__color select#colors"); 
         let optionColor= document.createElement("option");
@@ -37,9 +38,7 @@ productSelected.then(function(productSelect){
         optionColor.setAttribute("id",colorProduct);
         optionColor.value= colorProduct;
         
-
         selectColor.appendChild(optionColor);
-
     }
 
    
