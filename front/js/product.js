@@ -85,14 +85,14 @@ productSelected.then(function(productSelect){
               console.log( "couleur produit",window.localStorage.getItem("couleur produit")); */
               
                  
-            let productStorage=window.localStorage.setItem("product storage", JSON.stringify([window.localStorage.setItem("id produit",idSelected),
-            window.localStorage.setItem("quantite produit",inputQuantity.value),
-            window.localStorage.setItem("couleur produit",selectColor.value)]));
+            let productStorage=localStorage.setItem("product storage", JSON.stringify([localStorage.setItem("id produit",idSelected),
+            localStorage.setItem("quantite produit",inputQuantity.value),
+            localStorage.setItem("couleur produit",selectColor.value)]));
         
-            productStorage=window.localStorage.getItem("product storage");
-            productStorage.idProduit=window.localStorage.getItem("id produit");
-            productStorage.quantite=window.localStorage.getItem("quantite produit");
-            productStorage.couleur= window.localStorage.getItem("couleur produit");
+            productStorage.getItem("product storage");
+            productStorage.idProduit.getItem("id produit");
+            productStorage.quantite.getItem("quantite produit");
+            productStorage.couleur.getItem("couleur produit");
            
           
             console.log("product storage", tableauLocalStorage.productStorage);
