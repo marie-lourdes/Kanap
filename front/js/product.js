@@ -82,16 +82,15 @@ productSelected.then(function(productSelect){
                 console.log("tableauStorage id",tableauStorage);
                 for (let product of productStorage){
                     console.log("product", product.idProduit)
-                }
+                    if (!product){
+
+                    }else if( idSelected == product.idProduit && selectColor.value == product.couleur){
+                       return product.quantite+=inputQuantity;
+                    }
+
+                };
           
-                if(!tableauStorage){
-                    productStorage=[];
-                    tableauStorage.push(productStorage);
-                   
-                 }else if(tableauStorage.idProduit== idSelected && tableauStorage.couleur== selectColor.value){
-                    tableauStorage.quantite+=inputQuantity.value;
-                     
-                 }
+               
 
            
                
