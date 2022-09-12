@@ -66,21 +66,63 @@ productSelected.then(function(productSelect){
             inputQuantity= addCart.addQuantity();
             selectColor= addCart.addColor();
             
+         
+            
             let btnAddCart= document.querySelector("#addToCart");
+            let tableauLocalStorage =[];
+            tableauLocalStorage.productStorage=[];
+        
             btnAddCart.addEventListener("click", function(){
-              window.localStorage.setItem("nom produit",productSelect.name);
-              window.localStorage.setItem("quantite produit",inputQuantity.value);
-              window.localStorage.setItem("couleur produit",selectColor.value);
+            
+               /* let idproduit=window.localStorage.setItem("id produit",idSelected);
+                let quantite=window.localStorage.setItem("quantite produit",inputQuantity.value);
+               let couleur= window.localStorage.setItem("couleur produit",selectColor.value);*/
+              /* let productStorage=window.localStorage.setItem("product storage",[`${idproduit}`,`${quantite}`,`${couleur}`]);*/
+               
+            
+        
+       
     
-              console.log("quantité produit",window.localStorage.getItem("quantite produit"));
-              console.log( "couleur produit",window.localStorage.getItem("couleur produit")); 
-            });  
-            let tableau=[];
-            tableau.nomProduit= window.localStorage.getItem("nom produit");
-            tableau.quantité=window.localStorage.getItem("quantite produit");
-            tableau.couleur=window.localStorage.getItem("couleur produit");
-            console.log("tableau", tableau);
-            return tableau;  
+              /*console.log("quantité produit",window.localStorage.getItem("quantite produit"));
+              console.log( "couleur produit",window.localStorage.getItem("couleur produit")); */
+              
+                 
+            let productStorage=window.localStorage.setItem("product storage", JSON.stringify([window.localStorage.setItem("id produit",idSelected),
+            window.localStorage.setItem("quantite produit",inputQuantity.value),
+            window.localStorage.setItem("couleur produit",selectColor.value)]));
+        
+            
+            tableauLocalStorage.productStorage.idProduit= window.localStorage.getItem("id produit");
+            tableauLocalStorage.productStorage.quantite=window.localStorage.getItem("quantite produit");
+            tableauLocalStorage.productStorage.couleur= window.localStorage.getItem("couleur produit");
+              
+              
+                 console.log("product storage", tableauLocalStorage.productStorage);
+                
+               
+               
+                
+                console.log("product storage set item", tableauLocalStorage.productStorage);
+                
+                  
+           console.log("tableau local storage", tableauLocalStorage);
+           
+            });
+            
+           
+          
+        
+         /*   if ( !tableauLocalStorage.productStorage){
+                
+                
+               
+            } else if(tableauLocalStorage.productStorage){
+                tableauLocalStorage.push(tableauLocalStorage.productStorage);
+            }
+            else if (tableauLocalStorage.productStorage.idproduit == idSelected && tableauLocalStorage.productStorage.couleur == selectColor.value) {
+             tableauLocalStorage.productStorage.quantite += inputQuantity.value;
+            }*/
+            return tableauLocalStorage;  
         };
     };
 
