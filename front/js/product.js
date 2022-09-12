@@ -66,8 +66,6 @@ productSelected.then(function(productSelect){
             inputQuantity= addCart.addQuantity();
             selectColor= addCart.addColor();
             
-         
-            
             let btnAddCart= document.querySelector("#addToCart");
             let tableauLocalStorage =[];
             tableauLocalStorage.productStorage=[];
@@ -91,26 +89,20 @@ productSelected.then(function(productSelect){
             window.localStorage.setItem("quantite produit",inputQuantity.value),
             window.localStorage.setItem("couleur produit",selectColor.value)]));
         
-            
-            tableauLocalStorage.productStorage.idProduit= window.localStorage.getItem("id produit");
-            tableauLocalStorage.productStorage.quantite=window.localStorage.getItem("quantite produit");
-            tableauLocalStorage.productStorage.couleur= window.localStorage.getItem("couleur produit");
-              
-              
-                 console.log("product storage", tableauLocalStorage.productStorage);
-                
-               
-               
-                
-                console.log("product storage set item", tableauLocalStorage.productStorage);
-                
+            productStorage=window.localStorage.getItem("product storage");
+            productStorage.idProduit=window.localStorage.getItem("id produit");
+            productStorage.quantite=window.localStorage.getItem("quantite produit");
+            productStorage.couleur= window.localStorage.getItem("couleur produit");
+           
+          
+            console.log("product storage", tableauLocalStorage.productStorage);
                   
-           console.log("tableau local storage", tableauLocalStorage);
+            console.log("tableau local storage", tableauLocalStorage);
            
             });
             
            
-          
+            return tableauLocalStorage; 
         
          /*   if ( !tableauLocalStorage.productStorage){
                 
@@ -122,7 +114,7 @@ productSelected.then(function(productSelect){
             else if (tableauLocalStorage.productStorage.idproduit == idSelected && tableauLocalStorage.productStorage.couleur == selectColor.value) {
              tableauLocalStorage.productStorage.quantite += inputQuantity.value;
             }*/
-            return tableauLocalStorage;  
+            
         };
     };
 
