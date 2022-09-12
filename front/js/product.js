@@ -44,7 +44,7 @@ productSelected.then(function(productSelect){
        //relier les options au parent <select>
         selectColor.appendChild(optionColor);
     };
-
+    // ajout du panier
     class addCart {
         static addQuantity(inputQuantity){
             inputQuantity=document.querySelector("#quantity");
@@ -71,14 +71,30 @@ productSelected.then(function(productSelect){
             
         
             btnAddCart.addEventListener("click", function(){
-            
-            
-             let productStorage=
-               [{idProduit:idSelected,
-                quantite: inputQuantity.value,
-                couleur: selectColor.value}];
-            localStorage.setItem("tableau produit",JSON.stringify(productStorage));
-            console.log("product storage", productStorage);
+                let productStorage=
+                [{idProduit:idSelected,
+                    quantite: inputQuantity.value,
+                    couleur: selectColor.value}];
+                
+                localStorage.setItem("tableau produit",JSON.stringify(productStorage));
+                console.log("product storage", productStorage);
+                let tableauStorage=localStorage.getItem("tableau produit");
+                console.log("tableauStorage id",tableauStorage);
+                for (let product of productStorage){
+                    console.log("product", product.idProduit)
+                }
+          
+                if(!tableauStorage){
+                    productStorage=[];
+                    tableauStorage.push(productStorage);
+                   
+                 }else if(tableauStorage.idProduit== idSelected && tableauStorage.couleur== selectColor.value){
+                    tableauStorage.quantite+=inputQuantity.value;
+                     
+                 }
+
+           
+               
            
             });
             
