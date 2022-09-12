@@ -68,52 +68,19 @@ productSelected.then(function(productSelect){
             
             let btnAddCart= document.querySelector("#addToCart");
             let tableauLocalStorage =[];
-            tableauLocalStorage.productStorage=[];
+            
         
             btnAddCart.addEventListener("click", function(){
             
-               /* let idproduit=window.localStorage.setItem("id produit",idSelected);
-                let quantite=window.localStorage.setItem("quantite produit",inputQuantity.value);
-               let couleur= window.localStorage.setItem("couleur produit",selectColor.value);*/
-              /* let productStorage=window.localStorage.setItem("product storage",[`${idproduit}`,`${quantite}`,`${couleur}`]);*/
-               
             
-        
-       
-    
-              /*console.log("quantité produit",window.localStorage.getItem("quantite produit"));
-              console.log( "couleur produit",window.localStorage.getItem("couleur produit")); */
-              
-                 
-            let productStorage=localStorage.setItem("product storage", JSON.stringify([localStorage.setItem("id produit",idSelected),
-            localStorage.setItem("quantite produit",inputQuantity.value),
-            localStorage.setItem("couleur produit",selectColor.value)]));
-        
-            productStorage.getItem("product storage");
-            productStorage.idProduit.getItem("id produit");
-            productStorage.quantite.getItem("quantite produit");
-            productStorage.couleur.getItem("couleur produit");
-           
-          
-            console.log("product storage", tableauLocalStorage.productStorage);
-                  
-            console.log("tableau local storage", tableauLocalStorage);
+             let productStorage=
+               [{idProduit:idSelected,
+                quantite: inputQuantity.value,
+                couleur: selectColor.value}];
+            localStorage.setItem("tableau produit",JSON.stringify(productStorage));
+            console.log("product storage", productStorage);
            
             });
-            
-           
-            return tableauLocalStorage; 
-        
-         /*   if ( !tableauLocalStorage.productStorage){
-                
-                
-               
-            } else if(tableauLocalStorage.productStorage){
-                tableauLocalStorage.push(tableauLocalStorage.productStorage);
-            }
-            else if (tableauLocalStorage.productStorage.idproduit == idSelected && tableauLocalStorage.productStorage.couleur == selectColor.value) {
-             tableauLocalStorage.productStorage.quantite += inputQuantity.value;
-            }*/
             
         };
     };
