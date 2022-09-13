@@ -1,6 +1,6 @@
 //recuperation de l id du produit selectionné sur la page  actuelle du produit
 params= new URLSearchParams(window.location.search);
-idSelected=params.get("id");
+idSelected= params.get("id");
 
 console.log("id selectionné id selectionné",idSelected)
 // requête du produit selectionné avec son id
@@ -26,7 +26,7 @@ productSelected.then(function(productSelect){
     let titleProduct= document.querySelector(".item__content__titlePrice #title");
     titleProduct.textContent= productSelect.name;
     let priceProduct= document.querySelector("#title + p > #price");
-    priceProduct.textContent=productSelect.price;
+    priceProduct.textContent= productSelect.price;
     let descriptionProduct= document.querySelector(".item__content__description__title + #description");
     descriptionProduct.textContent= productSelect.description;
     //relier l'image du produit au DOM avec son element parent et affichage dans le DOM
@@ -47,9 +47,9 @@ productSelected.then(function(productSelect){
     // ajout du panier
     class addCart {
         static addQuantity(inputQuantity){
-            inputQuantity=document.querySelector("#quantity");
+            inputQuantity= document.querySelector("#quantity");
             inputQuantity.addEventListener("input",function(event){
-                inputQuantity = event.target.value;
+                inputQuantity= event.target.value;
                 console.log("nombre de produit",inputQuantity);
             });
             return inputQuantity;
@@ -67,40 +67,33 @@ productSelected.then(function(productSelect){
             selectColor= addCart.addColor();
             
             let btnAddCart= document.querySelector("#addToCart");
-            let tableauLocalStorage =[];
-            
-        
             btnAddCart.addEventListener("click", function(){
-                let productStorage=
-                [{idProduit:idSelected,
+                let productStorage= {
+                    idProduit:idSelected,
                     quantite: inputQuantity.value,
-                    couleur: selectColor.value}];
-                
-                localStorage.setItem("tableau produit",JSON.stringify(productStorage));
-                console.log("product storage", productStorage);
-                let tableauStorage=localStorage.getItem("tableau produit");
-                console.log("tableauStorage id",tableauStorage);
-                for (let product of productStorage){
-                    console.log("product", product.idProduit)
-                    if (!product){
-
-                    }else if( idSelected == product.idProduit && selectColor.value == product.couleur){
-                       return product.quantite+=inputQuantity;
-                    }
-
+                    couleur: selectColor.value
                 };
-          
-               
-
-           
-               
-           
-            });
-            
+                console.log("product storage", productStorage);
+              
+                let tabCartStorage= JSON.parse(localStorage.getItem("produits"));
+                if(tabCartStorage == null){
+                            
+                    tabCartStorage= [];
+                
+                    tabCartStorage.push(productStorage);
+                    localStorage.setItem("produits",JSON.stringify(tabCartStorage));
+                    console.log("tableau storage",tabCartStorage);
+                
+                }else{
+                    tabCartStorage.push(productStorage);
+                    localStorage.setItem("produits",JSON.stringify(tabCartStorage));
+                };
+                                 
+            });   
         };
     };
+addCart.addQuantityColorWindowStorage();
 
-    addCart.addQuantityColorWindowStorage();
 
 });
 
