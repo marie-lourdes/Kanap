@@ -73,21 +73,38 @@ productSelected.then(function(productSelect){
                     quantite: inputQuantity.value,
                     couleur: selectColor.value
                 };
-                console.log("product storage", productStorage);
-              
+               
+               const addProductSelected= ()=>{
+                    tabCartStorage.push(productStorage);
+                    localStorage.setItem("produits",JSON.stringify(tabCartStorage));
+               }
                 let tabCartStorage= JSON.parse(localStorage.getItem("produits"));
                 if(tabCartStorage == null){
                             
                     tabCartStorage= [];
                 
-                    tabCartStorage.push(productStorage);
-                    localStorage.setItem("produits",JSON.stringify(tabCartStorage));
+                    addProductSelected();
                     console.log("tableau storage",tabCartStorage);
                 
                 }else{
-                    tabCartStorage.push(productStorage);
-                    localStorage.setItem("produits",JSON.stringify(tabCartStorage));
+                    addProductSelected();
                 };
+
+                for( let article of tabCartStorage){
+                    
+                    article.quantite=Number(article.quantite);
+               
+                    if( article.idProduit && article.couleur == selectColor.value ){
+                    article.quantite=0;
+                   
+                    article.quantite += inputQuantity.value;
+                     
+                    
+                    }
+                    console.log("idArticle",article);
+                console.log("tableau storage2",tabCartStorage);
+                };
+                
                                  
             });   
         };
