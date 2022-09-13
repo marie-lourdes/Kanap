@@ -96,17 +96,21 @@ productSelected.then(function(productSelect){
                     if(foundProduct != undefined){
                         foundProduct.quantite++;
                     }*/
-               
-                 if(article.idproduit==undefined){
-                    let quantiteAdd=addCart.addQuantity();
                    
-                 article.quantite+= quantiteAdd;
+                 if(article.idproduit==undefined && article.couleur == undefined){
+                  article.quantite++;
+                
+                /* article.quantite+=quantiteAdd;*/
+             
                  }
+                 console.log("quantité Article",article.quantite);
                     console.log("idArticle",article.idProduit);
-                    console.log("quantité article", article.quantite)
+                  
                 console.log("tableau storage2",tabCartStorage);
                 };
-                    addProductSelected();
+               
+                   addProductSelected();
+                 
                 };
 
               
