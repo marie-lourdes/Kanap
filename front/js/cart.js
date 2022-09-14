@@ -3,8 +3,17 @@ let tabCartStorage= JSON.parse(localStorage.getItem("produits"));
 console.log("produit selected storage",tabCartStorage);
 for( productSelected of tabCartStorage){
     console.log("produit selctionné panier", productSelected);
-}
-// Requête GET des données des produits de l'api et transformation des données au format json en objet javascript
+    const sectionBascket= document.getElementById("cart__items");
+    const articleBascket= document.createElement("article");
+    articleBascket.dataset.id= productSelected.idProduit;
+    articleBascket.dataset.color= productSelected.couleur;
+
+
+    sectionBascket.appendChild(articleBascket);
+   
+};
+
+/*// Requête GET des données des produits de l'api et transformation des données au format json en objet javascript
 let request=fetch("http://localhost:3000/api/products");
 let requestProducts= request.then(function(res){
     if(res.ok){
@@ -22,9 +31,11 @@ function reqProducts(){
             console.log("product api", product);
             idProduct= product._id;
             console.log("id product", idProduct);
+            
         }
+        
 
     });
  return reqResolve;
 }
-reqProducts()
+reqProducts()*/
