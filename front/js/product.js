@@ -1,3 +1,13 @@
+let reqData= fetch("http://localhost:3000/api/products/");
+let productData= reqData.then(function(res){
+    if(res.ok){
+      return res.json();  
+   
+    };
+   
+});
+
+
 //recuperation de l id du produit selectionné sur la page  actuelle du produit
 params= new URLSearchParams(window.location.search);
 idSelected= params.get("id");
@@ -44,6 +54,7 @@ productSelected.then(function(productSelect){
        //relier les options au parent <select>
         selectColor.appendChild(optionColor);
     };
+  
     // ajout du panier
     class addCart {
         static addQuantity(inputQuantity){
@@ -65,58 +76,74 @@ productSelected.then(function(productSelect){
         static addQuantityColorWindowStorage(inputQuantity,selectColor){
             inputQuantity= addCart.addQuantity();
             selectColor= addCart.addColor();
-            
-            let btnAddCart= document.querySelector("#addToCart");
-            btnAddCart.addEventListener("click", function(){
-                let productStorage= {
-                    idProduit:idSelected,
-                    quantite: inputQuantity.value,
-                    couleur: selectColor.value
-                };
-               
-               const addProductSelected= ()=>{
-                    tabCartStorage.push(productStorage);
-                    localStorage.setItem("produits",JSON.stringify(tabCartStorage));
-               }
-                let tabCartStorage= JSON.parse(localStorage.getItem("produits"));
-                if(tabCartStorage == null){
-                            
-                    tabCartStorage= [];
+            // recueperation de la promesse resolue de la requete fetch reqData
+            let productIdData= Promise.resolve(productData);
+           
+            productIdData.then(function(products){
+                for( let product of products ){
+                    console.log("id data", product._id)
                 
-                    addProductSelected();
-                    console.log("tableau storage",tabCartStorage);
-                
-                }else{
-                    for( let article of tabCartStorage){
+                    let btnAddCart= document.querySelector("#addToCart");
+                    btnAddCart.addEventListener("click", function(){
+                        let productStorage= [
+                            idProduit:idSelected,
+                            quantite: inputQuantity.value,
+                            couleur: selectColor.value
+                        ];
+                       
+                       const addProductSelected= ()=>{
+                            tabCartStorage.push(productStorage);
+                            localStorage.setItem("produits",JSON.stringify(tabCartStorage));
+                       };
                     
-                 
-                   /* const foundProduct= article.find(p =>{
-                        p.idProduit == productStorage.idProduit;
-                    });
-                    if(foundProduct != undefined){
-                        foundProduct.quantite++;
-                    }*/
-                   
-                 if(article.idproduit==undefined && article.couleur == undefined){
-                  article.quantite++;
+                        let tabCartStorage= JSON.parse(localStorage.getItem("produits"));
+                        if(tabCartStorage == null){
+                                    
+                            tabCartStorage= [];
+                        
+                            addProductSelected();
+                            console.log("tableau storage",tabCartStorage);
+                        
+                        }else if (productStorage.idProduit !=undefined && productStorage.couleur != undefined) {
+                            productStorage.quantite++;
+                         
+                            addProductSelected();
+                         
+                           /* tabCartStorage.push(productStorage);
+                            localStorage.setItem("produits",JSON.stringify(tabCartStorage));*/
+                        /* article.quantite+=quantiteAdd;*/
+                       
+                    
+                        console.log(" !=undefined")
+                        
+                       
+                       
+                       
                 
-                /* article.quantite+=quantiteAdd;*/
-             
-                 }
-                 console.log("quantité Article",article.quantite);
-                    console.log("idArticle",article.idProduit);
+                           
+                        
+                        console.log("quantité Article",productStorage.quantite);
+                        console.log("idArticle",productStorage.idProduit);
+                        console.log("product data couleur", product.colors)
+                          
+                        console.log("tableau storage2",tabCartStorage);
+        
+                        }
+                        
+                        return  tabCartStorage= JSON.parse(localStorage.getItem("produits"));                      
+                    });  
+                
                   
-                console.log("tableau storage2",tabCartStorage);
-                };
+    
+                }
                
-                   addProductSelected();
-                 
-                };
-
-              
-                
-                                 
-            });   
+             
+            });
+            
+            
+            
+    
+          
         };
     };
 addCart.addQuantityColorWindowStorage();
