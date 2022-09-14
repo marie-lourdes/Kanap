@@ -35,6 +35,7 @@ function reqProducts(){
             divImgItem.setAttribute("class","cart__item__img");
             const imgArticle= document.createElement("img");
            let id= articleBascket.dataset.id;
+           // recuperation de l image du produit selectionné
            imgArticle.src= productSelected.imgUrl;
            imgArticle.alt= productSelected.altImg;
 
