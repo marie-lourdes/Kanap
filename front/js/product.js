@@ -67,7 +67,6 @@ productSelected.then(function(productSelect){
             inputQuantity= addCart.addQuantity();
             selectColor= addCart.addColor();
             // recueperation de la promesse resolue de la requete fetch reqData
-            let productIdData= Promise.resolve(productData);
             let btnAddCart= document.querySelector("#addToCart");
             btnAddCart.addEventListener("click", function(){
                 let productStorage= {
