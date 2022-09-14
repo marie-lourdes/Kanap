@@ -99,6 +99,7 @@ productSelected.then(function(productSelect){
                        };
                     
                         let tabCartStorage= JSON.parse(localStorage.getItem("produits"));
+                        // si le localstorage est vide on crée un nouveau tableau
                         if(tabCartStorage == null){
                                     
                             tabCartStorage= [];
@@ -106,13 +107,14 @@ productSelected.then(function(productSelect){
                             addProductSelected();
                             console.log("tableau storage",tabCartStorage);
                         
-                        }else if (tabCartStorage != null) {
+                        }else if (tabCartStorage != null){
+                        //si le localstorage contient des produits et avec le même id et la meme couleur , on incremente la quantité en modifiant le tableau 
                             for( let product of tabCartStorage){
                                 console.log("produt stockée", product);
                                 if(product.idProduit== idSelected && product.couleur == selectColor.value){
                                     return(
                                         product.quantite++,
-                                        console.log("product quantité ++", product.quantite++),
+                                        console.log("product quantité ++", product.quantite),
                                         localStorage.setItem("produits",JSON.stringify(tabCartStorage)),
                                         (tabCartStorage= JSON.parse(localStorage.getItem("produits")))
 
