@@ -72,7 +72,9 @@ productSelected.then(function(productSelect){
                 let productStorage= {
                     idProduit:idSelected,
                     quantite: inputQuantity.value,
-                    couleur: selectColor.value
+                    couleur: selectColor.value,
+                    imgUrl:productSelect.imageUrl,
+                    altImg:productSelect.altTxt
                 };
                
                const addProductSelected= ()=>{
