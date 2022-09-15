@@ -74,13 +74,14 @@ while( tabCartStorage != null) {
                 inputQuantity.addEventListener("change", function(event){
                         let val= event.target.value;
                         console.log( "inputQuantity value modifié listener",val);
+                        
+                       
+                        
 
                      return( productSelected.quantite=val,
-                        tabCartStorage.push(productSelected),
-                        localStorage.setItem("produits",JSON.stringify(productSelected))
-
-                    (tabCartStorage= JSON.parse(localstorage.getItem("produits")))
-                     );
+                        localStorage.setItem("produit",JSON.stringify(productSelected)),
+                     (tabCartStorage= JSON.parse(localStorage.getItem("produit")))
+                     )
                         
                 });
                 
@@ -89,9 +90,6 @@ while( tabCartStorage != null) {
             return;
         }
         quantityProduct();
-       
-      /*  localStorage.setItem("produits",JSON.stringify(productStorage));*/
-
 
         // bouton supprimer produit
         const btnDelete= document.querySelector(".deleteItem");
