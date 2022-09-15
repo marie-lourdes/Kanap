@@ -58,44 +58,59 @@ while( tabCartStorage != null) {
         divContentSettingItem.appendChild(divContentDeleteItem);
         divContentItem.appendChild(divContentSettingItem);
         articleBascket.appendChild(divContentItem);
-        sectionBascket.appendChild(articleBascket); 
+        sectionBascket.appendChild(articleBascket);
 
-      
+        // élément closest  cibler article  avec data-id
+        const dataArticleProduct= inputQuantity.closest(":not(div, input)");
+        console.log("data article product", dataArticleProduct );
+
+        dataId= articleBascket.dataset.id;
+        console.log( "data id article", dataId);
+        dataArticleProduct.dataId;
+    
+        // recuperation de la quantité modifiée du produit
+        function quantityProduct (){
+            function modifQuantity(){
+                inputQuantity.addEventListener("change", function(event){
+                        let val= event.target.value;
+                        console.log( "inputQuantity value modifié listener",val);
+
+                     return( productSelected.quantite=val,
+                        tabCartStorage.push(productSelected),
+                        localStorage.setItem("produits",JSON.stringify(productSelected))
+
+                    (tabCartStorage= JSON.parse(localstorage.getItem("produits")))
+                     );
+                        
+                });
+                
+            };
+            modifQuantity();
+            return;
+        }
+        quantityProduct();
+       
+      /*  localStorage.setItem("produits",JSON.stringify(productStorage));*/
+
+
+        // bouton supprimer produit
+        const btnDelete= document.querySelector(".deleteItem");
+        btnDelete.addEventListener("click", function(){
+            inputQuantity.value= modifQuantity();
+            productSelected.quantite= inputQuantity.value;
+        });
     };
     break;       
 }
 console.log("produit selected storage",tabCartStorage);
-// élément closest  cibler article  avec data-id
-const valInputQuantityProduct= document.querySelector(".itemQuantity");
-const dataArticleProduct= valInputQuantityProduct.closest(":not(div, input)");
-console.log("data article product", dataArticleProduct )
-
-function quantityProduct (valInputQuantityProduct){
-    valInputQuantityProduct= document.querySelector(".itemQuantity");
-    function modifQuantity(){
-        valInputQuantityProduct.addEventListener("change", function(event){
-            let val= event.target.value;
-            console.log( "inputQuantity value modifié listener",val)
-            return val;
-
-        });
-        return;
-    };
-    modifQuantity();
-    return;
-}
 
 
 
 
 
-const btnDelete= document.querySelector(".deleteItem");
-btnDelete.addEventListener("click", function(){
-    inputQuantity.value= modifQuantity();
-    productSelected.quantite= inputQuantity.value;
 
 
-});
+
 
 
         
