@@ -65,6 +65,25 @@ while( tabCartStorage != null) {
 }
 console.log("produit selected storage",tabCartStorage);
 
+const valInputQuantity= document.querySelector(".itemQuantity");
+function modifQuantity(){
+    valInputQuantity.addEventListener("change", function(event){
+        let val= event.target.value;
+        console.log( "inputQuantity value modifié listener",val)
+        return val;
+
+    });
+   return;
+};
+modifQuantity();
+const btnDelete= document.querySelector(".deleteItem");
+btnDelete.addEventListener("click", function(){
+    inputQuantity.value= modifQuantity();
+    productSelected.quantite= inputQuantity.value;
+
+
+});
+
 
         
       
