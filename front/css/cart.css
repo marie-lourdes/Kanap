@@ -55,9 +55,6 @@ h2 {
 	text-align: center;
 	text-align-last: center;
 }
-.cart__item__content__settings input:focus {
-	outline: none;
-}
 .cart__item__content__settings__quantity {
 	display: flex;
 }
@@ -65,10 +62,13 @@ h2 {
 	margin-right: 10px;
 	display: flex;
 }
-.cart__item__content__settings__delete p {
+.cart__item__content__settings__quantity .itemQuantity:focus {
+	outline: none;
+}
+.cart__item__content__settings__delete .deleteItem {
 	display: inline;
 }
-.cart__item__content__settings__delete p:hover {
+.cart__item__content__settings__delete .deleteItem:hover {
 	cursor: pointer;
 	font-weight: 700;
 }

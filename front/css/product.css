@@ -69,9 +69,9 @@
 	text-align: center;
 	text-align-last: center;
 }
-/*option[name="color"] {
+option[name="color"] {
 	color:#3d4c68;
-}*/
+}
 .item__content__settings__color select:focus,
 .item__content__settings__quantity input:focus {
 	outline: none;

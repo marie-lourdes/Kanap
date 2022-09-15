@@ -39,8 +39,6 @@ productSelected.then(function(productSelect){
         optionColor.setAttribute("id",colorProduct);
         optionColor.value= colorProduct;
         optionColor.textContent= colorProduct;
-        // modification de la couleur blanc du texte par defaut du body par la propriété style color des options 
-        optionColor.style.color="#3d4c68";
        //relier les options au parent <select>
         selectColor.appendChild(optionColor);
     };
