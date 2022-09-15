@@ -58,24 +58,33 @@ while( tabCartStorage != null) {
         divContentSettingItem.appendChild(divContentDeleteItem);
         divContentItem.appendChild(divContentSettingItem);
         articleBascket.appendChild(divContentItem);
-        sectionBascket.appendChild(articleBascket);
-       
+        sectionBascket.appendChild(articleBascket); 
+
+      
     };
     break;       
 }
 console.log("produit selected storage",tabCartStorage);
 
-const valInputQuantity= document.querySelector(".itemQuantity");
-function modifQuantity(){
-    valInputQuantity.addEventListener("change", function(event){
-        let val= event.target.value;
-        console.log( "inputQuantity value modifié listener",val)
-        return val;
+function quantityProduct (){
+    const valInputQuantity= document.querySelector(".itemQuantity");
+    function modifQuantity(){
+        valInputQuantity.addEventListener("change", function(event){
+            let val= event.target.value;
+            console.log( "inputQuantity value modifié listener",val)
+            return val;
 
-    });
-   return;
-};
-modifQuantity();
+        });
+        return;
+    };
+    modifQuantity();
+    return;
+}
+const valInputQuantityProduct= quantityProduct(); 
+
+console.log("valinputquantity", valInputQuantityProduct);
+
+
 const btnDelete= document.querySelector(".deleteItem");
 btnDelete.addEventListener("click", function(){
     inputQuantity.value= modifQuantity();
