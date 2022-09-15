@@ -71,10 +71,13 @@ productSelected.then(function(productSelect){
             btnAddCart.addEventListener("click", function(){
                 let productStorage= {
                     idProduit:idSelected,
-                    quantite: inputQuantity.value,
-                    couleur: selectColor.value,
                     imgUrl:productSelect.imageUrl,
-                    altImg:productSelect.altTxt
+                    altImg:productSelect.altTxt,
+                    nameProduct:productSelect.name,
+                    couleur: selectColor.value,
+                    priceProduct:productSelect.price,
+                    quantite: inputQuantity.value,
+                    
                 };
                
                const addProductSelected= ()=>{
