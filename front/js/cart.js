@@ -65,11 +65,15 @@ while( tabCartStorage != null) {
     break;       
 }
 console.log("produit selected storage",tabCartStorage);
+// élément closest  cibler article  avec data-id
+const valInputQuantityProduct= document.querySelector(".itemQuantity");
+const dataArticleProduct= valInputQuantityProduct.closest(":not(div, input)");
+console.log("data article product", dataArticleProduct )
 
-function quantityProduct (){
-    const valInputQuantity= document.querySelector(".itemQuantity");
+function quantityProduct (valInputQuantityProduct){
+    valInputQuantityProduct= document.querySelector(".itemQuantity");
     function modifQuantity(){
-        valInputQuantity.addEventListener("change", function(event){
+        valInputQuantityProduct.addEventListener("change", function(event){
             let val= event.target.value;
             console.log( "inputQuantity value modifié listener",val)
             return val;
@@ -80,9 +84,9 @@ function quantityProduct (){
     modifQuantity();
     return;
 }
-const valInputQuantityProduct= quantityProduct(); 
 
-console.log("valinputquantity", valInputQuantityProduct);
+
+
 
 
 const btnDelete= document.querySelector(".deleteItem");
