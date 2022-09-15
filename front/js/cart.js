@@ -74,13 +74,13 @@ while( tabCartStorage != null) {
                 inputQuantity.addEventListener("change", function(event){
                         let val= event.target.value;
                         console.log( "inputQuantity value modifié listener",val);
-                        
-                       
-                        
-
+                        let tabStorage= Array.from(tabCartStorage);
+                        localStorage.removeItem("produits");
+                        tabCartStorage= Array.from(tabStorage)  
                      return( productSelected.quantite=val,
-                        localStorage.setItem("produit",JSON.stringify(productSelected)),
-                     (tabCartStorage= JSON.parse(localStorage.getItem("produit")))
+                       
+                        localStorage.setItem("produits",JSON.stringify(productSelected)),
+                     (tabCartStorage= JSON.parse(localStorage.getItem("produits")))
                      )
                         
                 });
@@ -101,6 +101,7 @@ while( tabCartStorage != null) {
     break;       
 }
 console.log("produit selected storage",tabCartStorage);
+
 
 
 
