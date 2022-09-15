@@ -38,6 +38,7 @@ while( tabCartStorage != null) {
         inputQuantity.setAttribute("name","itemQuantity");
         inputQuantity.min= "1";
         inputQuantity.max= "100";
+        inputQuantity.value= productSelected.quantite;
         const divContentDeleteItem= document.createElement("div");
         divContentDeleteItem.setAttribute("class","cart__item__content__settings__delete");
         const deleteItem= document.createElement("p");
@@ -63,6 +64,8 @@ while( tabCartStorage != null) {
     break;       
 }
 console.log("produit selected storage",tabCartStorage);
+
+
         
       
   
