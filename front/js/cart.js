@@ -1,5 +1,6 @@
 //recuperation du panier depuis le localStorage
 let tabCartStorage= JSON.parse(localStorage.getItem("produits"));
+console.log("tabcart storage",tabCartStorage)
 
 // récupération et affichage dans le DOM des produits du localStorage
 while( tabCartStorage != null) {
