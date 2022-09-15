@@ -74,14 +74,14 @@ while( tabCartStorage != null) {
                 inputQuantity.addEventListener("change", function(event){
                         let val= event.target.value;
                         console.log( "inputQuantity value modifié listener",val);
-                        let tabStorage= Array.from(tabCartStorage);
-                        localStorage.removeItem("produits");
-                        tabCartStorage= Array.from(tabStorage)  
+                       
+                  
+                      
                      return( productSelected.quantite=val,
                        
-                        localStorage.setItem("produits",JSON.stringify(productSelected)),
+                        localStorage.setItem("produits",JSON.stringify(tabCartStorage)),
                      (tabCartStorage= JSON.parse(localStorage.getItem("produits")))
-                     )
+                     );
                         
                 });
                 
@@ -89,6 +89,10 @@ while( tabCartStorage != null) {
             modifQuantity();
             return;
         }
+       /* localStorage.removeItem("produits");
+        tabCartStorage=[];
+        localStorage.setItem("produits",JSON.stringify(productSelected))
+        tabCartStorage= JSON.parse(localStorage.getItem("produits"))*/
         quantityProduct();
 
         // bouton supprimer produit
@@ -97,9 +101,13 @@ while( tabCartStorage != null) {
             inputQuantity.value= modifQuantity();
             productSelected.quantite= inputQuantity.value;
         });
+       
     };
+   
     break;       
 }
+
+
 console.log("produit selected storage",tabCartStorage);
 
 
