@@ -62,7 +62,7 @@ while( tabCartStorage != null) {
     };
     break;       
 }
-        console.log("produit selected storage",tabCartStorage);
+console.log("produit selected storage",tabCartStorage);
         
       
   
