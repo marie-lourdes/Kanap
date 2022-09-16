@@ -74,8 +74,7 @@ productSelected.then(function(productSelect){
                     nameProduct:productSelect.name,
                     couleur: selectColor.value,
                     priceProduct:productSelect.price,
-                    quantite: inputQuantity.value,
-                    
+                    quantite: inputQuantity.value,   
                 };
                
                const addProductSelected= ()=>{

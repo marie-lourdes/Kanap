@@ -1,6 +1,7 @@
 //recuperation du panier depuis le localStorage
 let tabCartStorage= JSON.parse(localStorage.getItem("produits"));
 
+
 // récupération et affichage dans le DOM des produits du localStorage
 while( tabCartStorage != null) {
     for( productSelected of tabCartStorage){
@@ -60,13 +61,21 @@ while( tabCartStorage != null) {
         articleBascket.appendChild(divContentItem);
         sectionBascket.appendChild(articleBascket);
 
-        // élément closest  cibler article  avec data-id
-        const dataArticleProduct= inputQuantity.closest(":not(div, input)");
-        console.log("data article product", dataArticleProduct );
-
-        dataId= articleBascket.dataset.id;
+ 
+      /*  dataId= articleBascket.dataset.id
+        dataColor= articleBascket.dataset.color;
         console.log( "data id article", dataId);
-        dataArticleProduct.dataId;
+        console.log("data color",dataColor)
+
+
+        // élément closest  cibler article  avec data-id
+    dataArticleProduct= inputQuantity.closest("article[data-id]",`article[data-color="${dataColor}"`);
+        console.log("data article product", dataArticleProduct );*/
+    
+    
+   
+
+      
     
         // recuperation de la quantité modifiée du produit
         function quantityProduct (){
@@ -74,49 +83,39 @@ while( tabCartStorage != null) {
                 inputQuantity.addEventListener("change", function(event){
                         let val= event.target.value;
                         console.log( "inputQuantity value modifié listener",val);
-                       
-                  
-                      
-                     return( productSelected.quantite=val,
-                       
-                        localStorage.setItem("produits",JSON.stringify(tabCartStorage)),
+                        return( productSelected.quantite=val,
+                     localStorage.setItem("produits",JSON.stringify(tabCartStorage)),
                      (tabCartStorage= JSON.parse(localStorage.getItem("produits")))
+                 
                      );
                         
                 });
-                
+               
             };
             modifQuantity();
             return;
         }
-       /* localStorage.removeItem("produits");
-        tabCartStorage=[];
-        localStorage.setItem("produits",JSON.stringify(productSelected))
-        tabCartStorage= JSON.parse(localStorage.getItem("produits"))*/
+      
         quantityProduct();
+    
 
         // bouton supprimer produit
         const btnDelete= document.querySelector(".deleteItem");
+        
         btnDelete.addEventListener("click", function(){
-            inputQuantity.value= modifQuantity();
-            productSelected.quantite= inputQuantity.value;
+        
+            console.log("element supprimé", dataArticleProduct)
+            /*return  dataArticleProduct.remove();*/
+            
         });
-       
-    };
+    
+    }
    
     break;       
-}
+};
 
 
 console.log("produit selected storage",tabCartStorage);
-
-
-
-
-
-
-
-
 
 
 
