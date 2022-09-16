@@ -72,7 +72,7 @@ while( tabCartStorage != null) {
       /* dataArticleProduct.dataId;*/
 
         // élément closest  cibler article  avec data-id
-      dataArticleProduct= inputQuantity.closest("article[data-color='Pink']");
+      dataArticleProduct= inputQuantity.closest(`article[data-id="${dataId"]`,`article[data-color="${datColor}"]`);
         console.log("data article product", dataArticleProduct );
         console.log("input quantity",inputQuantity)
         
@@ -81,7 +81,8 @@ while( tabCartStorage != null) {
       console.log("dataarticle input quantity",inputQuantity.value)
       let dataInput= inputQuantity.id;
       console.log("datainput", dataInput)
-    
+     
+     
         // recuperation de la quantité modifiée du produit
         function quantityProduct (){
             function modifQuantity(){
@@ -110,7 +111,7 @@ while( tabCartStorage != null) {
       
         quantityProduct();
         
-    
+
 
         // bouton supprimer produit
       
