@@ -61,13 +61,17 @@ while( tabCartStorage != null) {
         articleBascket.appendChild(divContentItem);
         sectionBascket.appendChild(articleBascket);
 
+        dataId= articleBascket.getAttribute("data-id")
+        dataColor= articleBascket.dataset.color;
+        console.log( "data id article", dataId);
+        console.log("data color",dataColor)
+      /* dataArticleProduct.dataId;*/
+
         // élément closest  cibler article  avec data-id
-        const dataArticleProduct= inputQuantity.closest(":not(div, input)");
+        const dataArticleProduct= inputQuantity.closest("article[data-id]");
         console.log("data article product", dataArticleProduct );
 
-        dataId= articleBascket.dataset.id;
-        console.log( "data id article", dataId);
-        dataArticleProduct.dataId;
+      
     
         // recuperation de la quantité modifiée du produit
         function quantityProduct (){
@@ -99,8 +103,10 @@ while( tabCartStorage != null) {
         // bouton supprimer produit
         const btnDelete= document.querySelector(".deleteItem");
         btnDelete.addEventListener("click", function(){
-            inputQuantity.value= modifQuantity();
-            productSelected.quantite= inputQuantity.value;
+           let elementSup= sectionBascket.removeChild(dataArticleProduct);
+           console.log("element supprimé", elementSup)
+           return elementSup
+        
         });
        
     };
