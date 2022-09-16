@@ -61,14 +61,14 @@ while( tabCartStorage != null) {
         articleBascket.appendChild(divContentItem);
         sectionBascket.appendChild(articleBascket);
 
-        dataId= articleBascket.getAttribute("data-id")
+        dataId= articleBascket.dataset.id
         dataColor= articleBascket.dataset.color;
         console.log( "data id article", dataId);
         console.log("data color",dataColor)
       /* dataArticleProduct.dataId;*/
 
         // élément closest  cibler article  avec data-id
-        const dataArticleProduct= inputQuantity.closest("article[data-id]");
+      dataArticleProduct= inputQuantity.closest("article[data-id]",`article[data-color="${dataColor}"`);
         console.log("data article product", dataArticleProduct );
 
       
@@ -101,11 +101,14 @@ while( tabCartStorage != null) {
         quantityProduct();
 
         // bouton supprimer produit
-        const btnDelete= document.querySelector(".deleteItem");
-        btnDelete.addEventListener("click", function(){
-           let elementSup= sectionBascket.removeChild(dataArticleProduct);
-           console.log("element supprimé", elementSup)
-           return elementSup
+      
+      
+       const btnDelete= document.querySelector(".deleteItem");
+        
+       btnDelete.addEventListener("click", function(){
+     
+           console.log("element supprimé", dataArticleProduct)
+           return  dataArticleProduct.remove();
         
         });
        
