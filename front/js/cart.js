@@ -40,7 +40,7 @@ while( tabCartStorage != null) {
         inputQuantity.setAttribute("name","itemQuantity");
         inputQuantity.min= "1";
         inputQuantity.max= "100";
-        inputQuantity.value= productSelected.quantite;
+        inputQuantity.setAttribute("value",`${productSelected.quantite}`);
         const divContentDeleteItem= document.createElement("div");
         divContentDeleteItem.setAttribute("class","cart__item__content__settings__delete");
         const deleteItem= document.createElement("p");
@@ -71,18 +71,22 @@ while( tabCartStorage != null) {
       /* dataArticleProduct.dataId;*/
 
         // élément closest  cibler article  avec data-id
-      dataArticleProduct= inputQuantity.closest("article[data-id]",`article[data-color="${dataColor}"`);
+      dataArticleProduct= inputQuantity.closest("article[data-color='Pink']");
         console.log("data article product", dataArticleProduct );
-
-
+        console.log("input quantity",inputQuantity)
+        
+       
       
+      console.log("dataarticle input quantity",inputQuantity.value)
     
         // recuperation de la quantité modifiée du produit
         function quantityProduct (){
             function modifQuantity(){
                 inputQuantity.addEventListener("change", function(event){
-                    for( productSelected of tabCartStorage){
+                    console.log("data id listener",dataId)
                         let val= event.target.value;
+                        dataArticleProduct.inputQuantity=val
+                        console.log("data product article input value",dataArticleProduct.inputQuantity)
                         console.log( "inputQuantity value modifié listener",val);
                         return( productSelected.quantite=val,
                             console.log( "productselected modifié",productSelected.quantite),
@@ -90,10 +94,8 @@ while( tabCartStorage != null) {
                      (tabCartStorage= JSON.parse(localStorage.getItem("produits")))
                  
                      );
-            
-                    }
-                        
-                        
+   
+          
                 });
                
             };
@@ -111,21 +113,30 @@ while( tabCartStorage != null) {
        const btnDelete= document.querySelector(".deleteItem");
         
        btnDelete.addEventListener("click", function(){
-     
+        dataArticleProduct.remove();
            console.log("element supprimé", dataArticleProduct)
-           return  dataArticleProduct.remove();
+           return  dataArticleProduct 
         
 
         });
     
     }
-   
-    break;       
+    localStorage.setItem("produits",JSON.stringify(tabCartStorage)) 
+    break; 
+         
 };
 
-
-
 console.log("produit selected storage",tabCartStorage);
+
+
+/*console.log("produit local",produitLocal);
+let tabProduitlocal=[];
+ let produitForEach= produitLocal.forEach( function(produit){
+console.log("produit for each", produit.quantite)
+ });
+console.log("produit FOREACH",produitForEach);*/
+
+
 
 
 
