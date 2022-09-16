@@ -81,13 +81,18 @@ while( tabCartStorage != null) {
         function quantityProduct (){
             function modifQuantity(){
                 inputQuantity.addEventListener("change", function(event){
+                    for( productSelected of tabCartStorage){
                         let val= event.target.value;
                         console.log( "inputQuantity value modifié listener",val);
                         return( productSelected.quantite=val,
+                            console.log( "productselected modifié",productSelected.quantite),
                      localStorage.setItem("produits",JSON.stringify(tabCartStorage)),
                      (tabCartStorage= JSON.parse(localStorage.getItem("produits")))
                  
                      );
+            
+                    }
+                        
                         
                 });
                
@@ -97,6 +102,7 @@ while( tabCartStorage != null) {
         }
       
         quantityProduct();
+        
     
 
         // bouton supprimer produit
@@ -116,6 +122,7 @@ while( tabCartStorage != null) {
    
     break;       
 };
+
 
 
 console.log("produit selected storage",tabCartStorage);
