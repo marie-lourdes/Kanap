@@ -15,7 +15,6 @@ while( tabCartStorage != null) {
         const divImgItem= document.createElement("div");
         divImgItem.setAttribute("class","cart__item__img");
         const imgArticle= document.createElement("img");
-        let id= articleBascket.dataset.id;
         imgArticle.src= productSelected.imgUrl;
         imgArticle.alt= productSelected.altImg;
         const divContentItem= document.createElement("div");
@@ -41,6 +40,8 @@ while( tabCartStorage != null) {
         inputQuantity.min= "1";
         inputQuantity.max= "100";
         inputQuantity.setAttribute("value",`${productSelected.quantite}`);
+      /* let id= articleBascket.dataset.id;
+        inputQuantity.setAttribute("id",`${id}`);*/
         const divContentDeleteItem= document.createElement("div");
         divContentDeleteItem.setAttribute("class","cart__item__content__settings__delete");
         const deleteItem= document.createElement("p");
@@ -78,6 +79,8 @@ while( tabCartStorage != null) {
        
       
       console.log("dataarticle input quantity",inputQuantity.value)
+      let dataInput= inputQuantity.id;
+      console.log("datainput", dataInput)
     
         // recuperation de la quantité modifiée du produit
         function quantityProduct (){
@@ -85,12 +88,14 @@ while( tabCartStorage != null) {
                 inputQuantity.addEventListener("change", function(event){
                     console.log("data id listener",dataId)
                         let val= event.target.value;
-                        dataArticleProduct.inputQuantity=val
-                        console.log("data product article input value",dataArticleProduct.inputQuantity)
-                        console.log( "inputQuantity value modifié listener",val);
+                   
+                   
+                      console.log( "inputQuantity value modifié listener",val);
                         return( productSelected.quantite=val,
                             console.log( "productselected modifié",productSelected.quantite),
+                          
                      localStorage.setItem("produits",JSON.stringify(tabCartStorage)),
+                  
                      (tabCartStorage= JSON.parse(localStorage.getItem("produits")))
                  
                      );
@@ -110,7 +115,8 @@ while( tabCartStorage != null) {
         // bouton supprimer produit
       
       
-       const btnDelete= document.querySelector(".deleteItem");
+       let btnDelete= document.querySelector(".deleteItem");
+       console.log("btn delete", btnDelete)
         
        btnDelete.addEventListener("click", function(){
         dataArticleProduct.remove();
