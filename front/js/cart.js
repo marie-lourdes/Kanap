@@ -1,5 +1,6 @@
 //recuperation du panier depuis le localStorage
 let tabCartStorage= JSON.parse(localStorage.getItem("produits"));
+console.log("tabcart storage",tabCartStorage)
 
 
 // récupération et affichage dans le DOM des produits du localStorage
@@ -61,19 +62,18 @@ while( tabCartStorage != null) {
         articleBascket.appendChild(divContentItem);
         sectionBascket.appendChild(articleBascket);
 
- 
-      /*  dataId= articleBascket.dataset.id
+
+
+        dataId= articleBascket.dataset.id
         dataColor= articleBascket.dataset.color;
         console.log( "data id article", dataId);
         console.log("data color",dataColor)
-
+      /* dataArticleProduct.dataId;*/
 
         // élément closest  cibler article  avec data-id
-    dataArticleProduct= inputQuantity.closest("article[data-id]",`article[data-color="${dataColor}"`);
-        console.log("data article product", dataArticleProduct );*/
-    
-    
-   
+      dataArticleProduct= inputQuantity.closest("article[data-id]",`article[data-color="${dataColor}"`);
+        console.log("data article product", dataArticleProduct );
+
 
       
     
@@ -100,13 +100,16 @@ while( tabCartStorage != null) {
     
 
         // bouton supprimer produit
-        const btnDelete= document.querySelector(".deleteItem");
+      
+      
+       const btnDelete= document.querySelector(".deleteItem");
         
-        btnDelete.addEventListener("click", function(){
+       btnDelete.addEventListener("click", function(){
+     
+           console.log("element supprimé", dataArticleProduct)
+           return  dataArticleProduct.remove();
         
-            console.log("element supprimé", dataArticleProduct)
-            /*return  dataArticleProduct.remove();*/
-            
+
         });
     
     }
