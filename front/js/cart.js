@@ -72,29 +72,32 @@ while( tabCartStorage != null) {
       /* dataArticleProduct.dataId;*/
 
         // élément closest  cibler article  avec data-id
-      dataArticleProduct= inputQuantity.closest(`article[data-id="${dataId"]`,`article[data-color="${datColor}"]`);
-        console.log("data article product", dataArticleProduct );
-        console.log("input quantity",inputQuantity)
+     
         
        
       
-      console.log("dataarticle input quantity",inputQuantity.value)
+     /* console.log("dataarticle input quantity",inputQuantity.value)
       let dataInput= inputQuantity.id;
       console.log("datainput", dataInput)
+      console.log("input article",dataArticleProduct.inputQuantity);*/
      
      
         // recuperation de la quantité modifiée du produit
         function quantityProduct (){
             function modifQuantity(){
                 inputQuantity.addEventListener("change", function(event){
+                  dataArticleProduct= inputQuantity.closest(`article[data-id="${dataId}"]`,`article[data-color="${dataColor}"]`);
+                  console.log("data article product", dataArticleProduct );
+                  console.log("input quantity",inputQuantity)
                     console.log("data id listener",dataId)
-                        let val= event.target.value;
+                       let val= event.target.value;
                    
                    
-                      console.log( "inputQuantity value modifié listener",val);
+                      console.log( "inputQuantity value modifié listener",dataArticleProduct);
+                     
                         return( productSelected.quantite=val,
                             console.log( "productselected modifié",productSelected.quantite),
-                          
+                             
                      localStorage.setItem("produits",JSON.stringify(tabCartStorage)),
                   
                      (tabCartStorage= JSON.parse(localStorage.getItem("produits")))
