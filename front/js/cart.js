@@ -4,7 +4,7 @@ console.log("tabcart storage", tabCartStorage)
 
 
 // récupération et affichage dans le DOM des produits du localStorage
-//while (tabCartStorage != null) {
+
 for (let productSelected of tabCartStorage) {
   console.log("produit selctionné panier", productSelected);
   const sectionBascket = document.getElementById("cart__items");
@@ -42,8 +42,6 @@ for (let productSelected of tabCartStorage) {
   inputQuantity.min = "1";
   inputQuantity.max = "100";
   inputQuantity.setAttribute("value", `${productSelected.quantite}`);
-  /* let id= articleBascket.dataset.id;
-    inputQuantity.setAttribute("id",`${id}`);*/
   const divContentDeleteItem = document.createElement("div");
   divContentDeleteItem.setAttribute("class", "cart__item__content__settings__delete");
   const deleteItem = document.createElement("p");
@@ -71,54 +69,10 @@ for (let productSelected of tabCartStorage) {
   dataColor = articleBascket.dataset.color;
   console.log("data id article", dataId);
   console.log("data color", dataColor)
-  /* dataArticleProduct.dataId;*/
 
-  // élément closest  cibler article  avec data-id
-
-
-
-
-  /* console.log("dataarticle input quantity",inputQuantity.value)
-   let dataInput= inputQuantity.id;
-   console.log("datainput", dataInput)
-   console.log("input article",dataArticleProduct.inputQuantity);*/
-
-
-  // recuperation de la quantité modifiée du produit
-
-  // function modifQuantity() {
-  //   inputQuantity.addEventListener("change", function (event) {
-  //     dataArticleProduct = inputQuantity.closest(`article[data-id="${dataId}"]`, `article[data-color="${dataColor}"]`);
-  //     console.log("data article product", dataArticleProduct);
-  //     console.log("input quantity", inputQuantity)
-  //     console.log("data id listener", dataId)
-  //     let val = event.target.value;
-
-
-  //     console.log("inputQuantity value modifié listener", dataArticleProduct);
-
-  //     productSelected.quantite = val;
-  //     console.log("productselected modifié", productSelected.quantite)
-  //     localStorage.setItem("produits", JSON.stringify(tabCartStorage));
-  //     tabCartStorage = JSON.parse(localStorage.getItem("produits"));
-
-  //     // return (productSelected.quantite = val,
-  //     //   console.log("productselected modifié", productSelected.quantite),
-
-  //     //   localStorage.setItem("produits", JSON.stringify(tabCartStorage)),
-
-  //     //   (tabCartStorage = JSON.parse(localStorage.getItem("produits")))
-
-  //     // );
-
-
-  //   });
-
-  // };
-  // var value = modifQuantity();
-
+// Recuperation des quantité modifié avec listener sur les inputs de chaque article des produits du storage
   inputQuantity.addEventListener("change", function (event) {
-    // let dataArticleProduct = inputQuantity.closest(`article[data-id="${dataId}"]`, `article[data-color="${dataColor}"]`);
+  
     let dataArticleProduct = inputQuantity.closest("article");
 
     console.log("input quantity", inputQuantity)
@@ -146,12 +100,8 @@ for (let productSelected of tabCartStorage) {
 
     localStorage.setItem("produits", JSON.stringify(tabCartStorage));
     console.log("TAB CART STORAGE", tabCartStorage);
-    //tabCartStorage = JSON.parse(localStorage.getItem("produits"));
+    tabCartStorage = JSON.parse(localStorage.getItem("produits"));
   });
-
-
-
-
 
   // bouton supprimer produit
 
@@ -170,20 +120,11 @@ for (let productSelected of tabCartStorage) {
   });
 
 }
-//  localStorage.setItem("produits", JSON.stringify(tabCartStorage))
-//  break;
-
-//};
 
 console.log("produit selected storage", tabCartStorage);
 
 
-/*console.log("produit local",produitLocal);
-let tabProduitlocal=[];
- let produitForEach= produitLocal.forEach( function(produit){
-console.log("produit for each", produit.quantite)
- });
-console.log("produit FOREACH",produitForEach);*/
+
 
 
 
