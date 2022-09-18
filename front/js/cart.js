@@ -101,13 +101,13 @@ for (let productSelected of tabCartStorage) {
       console.log("deleteproduct", deleteProduct);
     /* verifier la data color et data-id corresponde au idproduit et couleur du produit de la tabCartStorage,
      pour supprimer  supprimer dans la TabCartStorage*/
-     tabCartStorage=tabCartStorage.filter(function(elem){
-   
-      elem.idProduit!==id
-     console.log("elem produit",elem);
-   });
+    
     tabCartStorage.forEach(elem => {
-     
+      tabCartStorage=tabCartStorage.filter(function(elem){
+   
+        if(elem.idProduit !== id && elem.couleur !== color) return true;
+       console.log("elem produit",elem);
+     });
 
       if (elem.couleur === color && elem.idProduit === id) { 
         
