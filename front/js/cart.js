@@ -84,7 +84,7 @@ for (let productSelected of tabCartStorage) {
       }
     });
 
-
+  // on reenregistre dans le locastorage le tableau de produits stockés avec les quantité modifié et recupere le tableau modifé de la tabCartStorage
     localStorage.setItem("produits", JSON.stringify(tabCartStorage));
     console.log("TAB CART STORAGE", tabCartStorage);
     tabCartStorage = JSON.parse(localStorage.getItem("produits"));
@@ -101,14 +101,14 @@ for (let productSelected of tabCartStorage) {
     /* verifier la data color et data-id corresponde au idproduit et couleur du produit de la tabCartStorage avec filter(),
      pour supprimer  supprimer dans la TabCartStorage*/
      tabCartStorage.forEach(elem => {
-      // supression de l element supprimé par l event click dans le localstorage
+      // supression de l element  par l event click dans le localstorage
       tabCartStorage=tabCartStorage.filter(function(elem){
    
         if(elem.idProduit !== id ) return true;
         if(elem.couleur!==color) return true;
        console.log("elem produit",elem);
      });
-     //suppression de l'article du produit supprimé dans le DOM en  generant un tableau avec les elements qui ont un id et une couleur differente de l'element supprimé
+     //suppression de l'article du produit  dans le DOM en  generant un tableau avec les elements qui ont un id et une couleur differente de l'element supprimé
       if (elem.couleur === color && elem.idProduit === id) { 
         
         deleteProduct.remove();
@@ -118,10 +118,8 @@ for (let productSelected of tabCartStorage) {
       }
       console.log("evenet",event)
     });
-
-     
-             
-  // on reenregistre dans le locastorage le tableau de produits stockés dans la tabCartStorage
+         
+  // on reenregistre dans le locastorage le tableau de produits stockés avec les produits non supprimé par le filter  dans la tabCartStorage
     /* on recupere la TabCartStorage avec les elements du DOM generé par la boucle for avec la mise à jour de la tabCartStorage 
    dans lequel la boucle itere sur chaque element et les affiche un a un et sans l element supprimé*/
     localStorage.setItem("produits", JSON.stringify(tabCartStorage));
