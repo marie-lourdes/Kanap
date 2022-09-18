@@ -64,20 +64,11 @@ for (let productSelected of tabCartStorage) {
   sectionBascket.appendChild(articleBascket);
 
 
-
-  dataId = articleBascket.dataset.id
-  dataColor = articleBascket.dataset.color;
-  console.log("data id article", dataId);
-  console.log("data color", dataColor)
-
-
-
 // Recuperation des quantité modifié avec listener sur les inputs de chaque article des produits du storage
   inputQuantity.addEventListener("change", function (event) {
     
     let val = event.target.value;
 
-    console.log("inputQuantity value modifié listener", dataArticleProduct);
 
     //productSelected.quantite = val;
     console.log("productselected modifié", productSelected.quantite)
@@ -89,8 +80,10 @@ for (let productSelected of tabCartStorage) {
       console.log("COLOR ", color)
       console.log("ID ", id)
     console.log("input quantity", inputQuantity)
-    console.log("data id listener", dataId)
+
     
+    console.log("inputQuantity value modifié listener", dataArticleProduct);
+
     tabCartStorage.forEach(elem => {
       if (elem.couleur === color && elem.idProduit === id) {
         elem.quantite = val;
@@ -105,14 +98,11 @@ for (let productSelected of tabCartStorage) {
 
   // bouton supprimer produit
 
-
-  /*let btnDelete = document.querySelectorAll(".deleteItem");*/
-  /*console.log("btn delete", btnDelete)*/
-
   deleteItem.addEventListener("click", function () {
     let deleteProduct = deleteItem.closest("article");
     let color = deleteProduct.getAttribute("data-color");
       let id = deleteProduct.getAttribute("data-id");
+      console.log("deleteproduct", deleteItem)
    
     tabCartStorage.forEach(elem => {
       if (elem.couleur === color && elem.idProduit === id) {
@@ -130,9 +120,6 @@ for (let productSelected of tabCartStorage) {
      
       }
     
-      /*localStorage.setItem("produits", JSON.stringify(tabCartStorage));
-      console.log("TAB CART STORAGE", tabCartStorage);
-      tabCartStorage = JSON.parse(localStorage.getItem("produits"));   */ 
       
     });
    
