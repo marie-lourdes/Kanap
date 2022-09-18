@@ -28,7 +28,7 @@ for (let productSelected of tabCartStorage) {
   const colorItem = document.createElement("p");
   colorItem.textContent = productSelected.couleur;
   const priceItem = document.createElement("p");
-  priceItem.textContent = productSelected.priceProduct + " " + "€";
+  priceItem.textContent = productSelected.priceProduct  + " " + "€";
   const divContentSettingItem = document.createElement("div");
   divContentSettingItem.setAttribute("class", "cart__item__content__settings");
   const divContentQuantityItem = document.createElement("div");
@@ -68,6 +68,7 @@ for (let productSelected of tabCartStorage) {
   inputQuantity.addEventListener("change", function (event) {
     
     let val = event.target.value;
+    
     console.log("productselected modifié", productSelected.quantite)
 
    /* selectionner l'ancêtre le plus proche de l'input et qui soit un article avec closest()
@@ -80,7 +81,12 @@ for (let productSelected of tabCartStorage) {
 
     tabCartStorage.forEach(elem => {
       if (elem.couleur === color && elem.idProduit === id) {
-        elem.quantite = val;
+        elem.quantite =val;
+        let calculArticlePrice= elem.priceProduct *= val;
+        
+        elem.priceProduct+=calculArticlePrice;
+        
+        
       }
     });
 
