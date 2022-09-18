@@ -28,7 +28,8 @@ for (let productSelected of tabCartStorage) {
   const colorItem = document.createElement("p");
   colorItem.textContent = productSelected.couleur;
   const priceItem = document.createElement("p");
-  priceItem.textContent = productSelected.priceProduct  + " " + "€";
+  let priceArticles= productSelected.priceProduct * productSelected.quantite
+  priceItem.textContent = priceArticles + " " + "€";
   const divContentSettingItem = document.createElement("div");
   divContentSettingItem.setAttribute("class", "cart__item__content__settings");
   const divContentQuantityItem = document.createElement("div");
@@ -64,6 +65,8 @@ for (let productSelected of tabCartStorage) {
   sectionBascket.appendChild(articleBascket);
 
 
+
+
 // Recuperation des quantité modifié avec listener sur les inputs de chaque article des produits du storage
   inputQuantity.addEventListener("change", function (event) {
     
@@ -81,10 +84,12 @@ for (let productSelected of tabCartStorage) {
 
     tabCartStorage.forEach(elem => {
       if (elem.couleur === color && elem.idProduit === id) {
+        //recueperation de la quantité modifiée
         elem.quantite =val;
-        let calculArticlePrice= elem.priceProduct *= val;
-        
-        elem.priceProduct+=calculArticlePrice;
+        // calcul de la quantité modifié avec le prix du produit
+        let calculArticlePrice=productSelected.priceProduct * val;
+        // mise à jour de l 'affichage  dans le DOM du prix calculé avec la quantité modifié
+        priceItem.textContent = calculArticlePrice + " " + "€";
         
         
       }
