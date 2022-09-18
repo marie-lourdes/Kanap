@@ -97,18 +97,18 @@ for (let productSelected of tabCartStorage) {
     let deleteProduct = deleteItem.closest("article");
     let color = deleteProduct.getAttribute("data-color");
     let id = deleteProduct.getAttribute("data-id");
-
-      console.log("deleteproduct", deleteProduct);
+    console.log("deleteproduct", deleteProduct);
     /* verifier la data color et data-id corresponde au idproduit et couleur du produit de la tabCartStorage avec filter(),
      pour supprimer  supprimer dans la TabCartStorage*/
-    
-    tabCartStorage.forEach(elem => {
+     tabCartStorage.forEach(elem => {
+      // supression de l element supprimé par l event click dans le localstorage
       tabCartStorage=tabCartStorage.filter(function(elem){
    
-        if(elem.idProduit !== id && elem.couleur !== color) return true;
+        if(elem.idProduit !== id ) return true;
+        if(elem.couleur!==color) return true;
        console.log("elem produit",elem);
      });
-
+     //suppression de l'article du produit supprimé dans le DOM en  generant un tableau avec les elements qui ont un id et une couleur differente de l'element supprimé
       if (elem.couleur === color && elem.idProduit === id) { 
         
         deleteProduct.remove();
@@ -118,6 +118,8 @@ for (let productSelected of tabCartStorage) {
       }
       console.log("evenet",event)
     });
+
+     
              
   // on reenregistre dans le locastorage le tableau de produits stockés dans la tabCartStorage
     /* on recupere la TabCartStorage avec les elements du DOM generé par la boucle for avec la mise à jour de la tabCartStorage 
