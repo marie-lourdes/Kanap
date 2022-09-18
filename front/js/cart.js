@@ -74,13 +74,7 @@ for (let productSelected of tabCartStorage) {
 
 // Recuperation des quantité modifié avec listener sur les inputs de chaque article des produits du storage
   inputQuantity.addEventListener("change", function (event) {
-    let dataArticleProduct = inputQuantity.closest("article");
-    let color = dataArticleProduct.getAttribute("data-color");
-      let id = dataArticleProduct.getAttribute("data-id");
-      console.log("COLOR ", color)
-      console.log("ID ", id)
-    console.log("input quantity", inputQuantity)
-    console.log("data id listener", dataId)
+    
     let val = event.target.value;
 
     console.log("inputQuantity value modifié listener", dataArticleProduct);
@@ -88,7 +82,15 @@ for (let productSelected of tabCartStorage) {
     //productSelected.quantite = val;
     console.log("productselected modifié", productSelected.quantite)
 
-    console.log("PRODUCT", productSelected)
+   
+    let dataArticleProduct = inputQuantity.closest("article");
+    let color = dataArticleProduct.getAttribute("data-color");
+      let id = dataArticleProduct.getAttribute("data-id");
+      console.log("COLOR ", color)
+      console.log("ID ", id)
+    console.log("input quantity", inputQuantity)
+    console.log("data id listener", dataId)
+    
     tabCartStorage.forEach(elem => {
       if (elem.couleur === color && elem.idProduit === id) {
         elem.quantite = val;
