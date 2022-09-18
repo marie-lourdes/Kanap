@@ -3,7 +3,7 @@ let tabCartStorage = JSON.parse(localStorage.getItem("produits"));
 console.log("tabcart storage", tabCartStorage)
 
 
-// récupération et affichage dans le DOM des produits du localStorage
+// récupération et affichage dans le DOM des produits du localStorag
 
 for (let productSelected of tabCartStorage) {
   console.log("produit selctionné panier", productSelected);
@@ -70,11 +70,15 @@ for (let productSelected of tabCartStorage) {
   console.log("data id article", dataId);
   console.log("data color", dataColor)
 
+
+
 // Recuperation des quantité modifié avec listener sur les inputs de chaque article des produits du storage
   inputQuantity.addEventListener("change", function (event) {
-  
     let dataArticleProduct = inputQuantity.closest("article");
-
+    let color = dataArticleProduct.getAttribute("data-color");
+      let id = dataArticleProduct.getAttribute("data-id");
+      console.log("COLOR ", color)
+      console.log("ID ", id)
     console.log("input quantity", inputQuantity)
     console.log("data id listener", dataId)
     let val = event.target.value;
@@ -85,14 +89,8 @@ for (let productSelected of tabCartStorage) {
     console.log("productselected modifié", productSelected.quantite)
 
     console.log("PRODUCT", productSelected)
-
-    let color = dataArticleProduct.getAttribute("data-color");
-    let id = dataArticleProduct.getAttribute("data-id");
-    console.log("COLOR ", color)
-    console.log("ID ", id)
-
     tabCartStorage.forEach(elem => {
-      if (elem.couleur == color && elem.idProduit == id) {
+      if (elem.couleur === color && elem.idProduit === id) {
         elem.quantite = val;
       }
     });
@@ -106,22 +104,48 @@ for (let productSelected of tabCartStorage) {
   // bouton supprimer produit
 
 
-  let btnDelete = document.querySelector(".deleteItem");
-  console.log("btn delete", btnDelete)
+  /*let btnDelete = document.querySelectorAll(".deleteItem");*/
+  /*console.log("btn delete", btnDelete)*/
 
-  btnDelete.addEventListener("click", function () {
-    let dataArticleProduct = inputQuantity.closest(`article`);
-
-    dataArticleProduct.remove();
-    console.log("element supprimé", dataArticleProduct)
-    return dataArticleProduct
-
-
+  deleteItem.addEventListener("click", function () {
+    let deleteProduct = deleteItem.closest("article");
+    let color = deleteProduct.getAttribute("data-color");
+      let id = deleteProduct.getAttribute("data-id");
+   
+    tabCartStorage.forEach(elem => {
+      if (elem.couleur === color && elem.idProduit === id) {
+   
+        /*tabCartStorage.removeItem("produits",elem)*/
+        deleteProduct.remove();
+        
+             
+        console.log("element supprimé", deleteProduct)
+        localStorage.setItem("produits", JSON.stringify(tabCartStorage.elem));
+        tabCartStorage = JSON.parse(localStorage.getItem("produits"));
+      
+      
+        
+     
+      }
+    
+      /*localStorage.setItem("produits", JSON.stringify(tabCartStorage));
+      console.log("TAB CART STORAGE", tabCartStorage);
+      tabCartStorage = JSON.parse(localStorage.getItem("produits"));   */ 
+      
+    });
+   
+    
   });
+
+  console.log("TAB CART STORAGE", tabCartStorage);
 
 }
 
+
 console.log("produit selected storage", tabCartStorage);
+
+  
+console.log( "tabcart  storage apres supression element", tabCartStorage)
 
 
 
