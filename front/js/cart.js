@@ -49,12 +49,21 @@ for (let productSelected of tabCartStorage) {
   deleteItem.setAttribute("class", "deleteItem");
   deleteItem.textContent = "Supprimer";
   const totalQuantity = document.querySelector(".cart__items  #totalQuantity");
-  for(let quantity of productSelected.quantite){
-    let quantiteProduct=productSelected.quantite;
-   let quant=quantiteProduct+quantity;
-    
-    console.log("toute les quantité des product selected",quant)
+  let tabQuantity=[];
+  let quantity= Object.entries(productSelected);
+  for( let cle of quantity[6][1]){
+    console.log("cle tab quantité", cle)
+    tabQuantity.push(cle);
   }
+  /*tabQuantity.push(quantity[6][1]);*/
+  console.log( "tableau quantite product selected", quantity)
+    
+   
+ 
+  console.log( "tab de les toutes las quantié de chaque produit", tabQuantity)
+  
+
+
 
   /*console.log("calcul quantité des produit", calculQuantity);*/
   /*totalQuantity.textContent= */
