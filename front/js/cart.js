@@ -124,31 +124,51 @@ for (let productSelected of tabCartStorage) {
     
       if(productSelected.quantite <= val){
         totalQuantite = totalQuantite+1; 
-       
-        return totalQuantityElement.textContent=totalQuantite;
+        
+
+       totalQuantityElement.textContent=totalQuantite;
     
     }else if(productSelected.quantite >= val){
       totalQuantite = totalQuantite-1;
+     
+    
+       totalQuantityElement.textContent= totalQuantite;
       
       
-      return totalQuantityElement.textContent = totalQuantite;
     };
     
-  }
-  modifTotalQuantite();
-  localStorage.setItem("produits", JSON.stringify(tabCartStorage));
+  };
+
+ modifTotalQuantite();
+/* localStorage.setItem("produits", JSON.stringify(tabCartStorage));
 
   tabCartStorage = JSON.parse(localStorage.getItem("produits"));
 
-  function modifTotalPrice(){
+ function modifTotalPrice(){
+
+  if(productSelected.quantite <= val){
     console.log("totalprice", totalPrice);
-    totalPrice= totalPrice+calculArticlePrice;
-    
-    return totalPriceElement.textContent= totalPrice;
+    totalPrice+=priceArticles;
+    totalPriceElement.textContent= totalPrice;
+   
+
+}else if(productSelected.quantite >= val){
+
+  console.log("totalprice", totalPrice);
+    totalPrice-=priceArticles;
+    totalPriceElement.textContent= totalPrice;
+  
+};
+  
+  
 
   }
+ 
 
   modifTotalPrice();
+  localStorage.setItem("produits", JSON.stringify(tabCartStorage));
+
+  tabCartStorage = JSON.parse(localStorage.getItem("produits"));*/
      
   });
 
