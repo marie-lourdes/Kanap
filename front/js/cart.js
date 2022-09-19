@@ -116,20 +116,25 @@ for (let productSelected of tabCartStorage) {
       tabCartStorage = JSON.parse(localStorage.getItem("produits"));
     
 
-      // comparaison  de la quantité du produit et de la quantité modifié du produit par l input  pour incrementer ou desicrementer le total de quantité
+      // comparaison  de la quantité du produit et de la quantité modifié du produit par l input  pour incrementer ou desincrementer le total de quantité
    function modifTotalQuantite(){
+    console.log(" function total ",val)
+    console.log(" total quantity element ",totalQuantityElement.textContent);
+    console.log(" total quantité function ",totalQuantite);
     
       if(productSelected.quantite <= val){
-        return totalQuantityElement.textContent=val++;
+        totalQuantite = totalQuantite+1; 
+        return totalQuantityElement.textContent=totalQuantite;
     
     }else if(productSelected.quantite >= val){
-
+      totalQuantite = totalQuantite-1; 
       
-      return totalQuantityElement.textContent=val--;
+      return totalQuantityElement.textContent=totalQuantite;
     };
     
   }
   modifTotalQuantite();
+  
 
 
        
