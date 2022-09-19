@@ -2,6 +2,11 @@
 let tabCartStorage = JSON.parse(localStorage.getItem("produits"));
 console.log("tabcart storage", tabCartStorage)
 
+let totalPrice = 0;
+let totalQuantite = 0;
+const totalQuantityElement = document.getElementById("totalQuantity");
+console.log( "span total quantity",totalQuantity);
+const totalPriceElement = document.getElementById("totalPrice");
 
 // récupération et affichage dans le DOM des produits du localStorag
 
@@ -28,7 +33,9 @@ for (let productSelected of tabCartStorage) {
   const colorItem = document.createElement("p");
   colorItem.textContent = productSelected.couleur;
   const priceItem = document.createElement("p");
-  let priceArticles= productSelected.priceProduct * productSelected.quantite
+  let priceArticles = productSelected.priceProduct * productSelected.quantite;
+  totalPrice += priceArticles;
+  totalQuantite += parseInt(productSelected.quantite);
   priceItem.textContent = priceArticles + " " + "€";
   const divContentSettingItem = document.createElement("div");
   divContentSettingItem.setAttribute("class", "cart__item__content__settings");
@@ -48,19 +55,32 @@ for (let productSelected of tabCartStorage) {
   const deleteItem = document.createElement("p");
   deleteItem.setAttribute("class", "deleteItem");
   deleteItem.textContent = "Supprimer";
-  const totalQuantity = document.querySelector(".cart__items  #totalQuantity");
-  let tabQuantity=[];
+
+  console.log("TOTAL PRICE: ", totalPrice)
+  console.log("TOTAL QUANTITE: ", totalQuantite)
+  totalQuantityElement.textContent=`${totalQuantite}`;
+  totalPriceElement.textContent=`${totalPrice}`;
+ 
+  
+  
+  /*let tabQuantity=[];
   let quantity= Object.entries(productSelected);
-  for( let cle of quantity[6][1]){
+  console.log("PRODUCT: ", productSelected)
+  console.log("QUANTITE: ", productSelected.quantite)
+  console.log("PRIX: ", productSelected.priceProduct)*/
+  //totalPrice += productSelected.priceProduct * productSelected.quantite
+
+  /*for( let cle of quantity[6][1]){
     console.log("cle tab quantité", cle)
     tabQuantity.push(cle);
-  }
+  }*/
+
   /*tabQuantity.push(quantity[6][1]);*/
-  console.log( "tableau quantite product selected", quantity)
+  /*console.log( "tableau quantite product selected", quantity)*/
     
    
  
-  console.log( "tab de les toutes las quantié de chaque produit", tabQuantity)
+ /* console.log( "tab de les toutes las quantié de chaque produit", tabQuantity)*/
   
 
 
@@ -106,7 +126,8 @@ for (let productSelected of tabCartStorage) {
         //recueperation de la quantité modifiée
         elem.quantite =val;
         // calcul de la quantité modifié avec le prix du produit
-        let calculArticlePrice=productSelected.priceProduct * val;
+        let calculArticlePrice=elem.priceProduct * val;
+        console.log("PRODUCT SELECTED PRICE: ", productSelected.priceProduct);
         // mise à jour de l 'affichage  dans le DOM du prix calculé avec la quantité modifié sans stocker le nouveau prix calculé dans le localstorage
         priceItem.textContent = calculArticlePrice + " " + "€";
         
