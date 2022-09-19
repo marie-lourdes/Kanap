@@ -4,8 +4,6 @@ console.log("tabcart storage", tabCartStorage)
 
 let totalPrice = 0;
 let totalQuantite = 0;
-
-
 // récupération et affichage dans le DOM des produits du localStorag
 
 for (let productSelected of tabCartStorage) {
@@ -34,7 +32,6 @@ for (let productSelected of tabCartStorage) {
   let priceArticles = productSelected.priceProduct * productSelected.quantite;
   totalPrice += priceArticles;
   totalQuantite += parseInt(productSelected.quantite);
- 
   priceItem.textContent = priceArticles + " " + "€";
   const divContentSettingItem = document.createElement("div");
   divContentSettingItem.setAttribute("class", "cart__item__content__settings");
@@ -55,8 +52,8 @@ for (let productSelected of tabCartStorage) {
   deleteItem.setAttribute("class", "deleteItem");
   deleteItem.textContent = "Supprimer";
 
-  console.log("TOTAL PRICE: ", totalPrice)
-  console.log("TOTAL QUANTITE: ", totalQuantite)
+  console.log("total price", totalPrice)
+  console.log("total quantité", totalQuantite)
   const totalQuantityElement = document.getElementById("totalQuantity");
   console.log( "span total quantity",totalQuantity);
   const totalPriceElement = document.getElementById("totalPrice");
@@ -105,34 +102,37 @@ for (let productSelected of tabCartStorage) {
         elem.quantite =val;
         // calcul de la quantité modifié avec le prix du produit
         let calculArticlePrice=productSelected.priceProduct * val;
-        console.log("PRODUCT SELECTED PRICE: ", productSelected.priceProduct);
+        console.log("price product: ", productSelected.priceProduct);
         // mise à jour de l 'affichage  dans le DOM du prix calculé avec la quantité modifié sans stocker le nouveau prix calculé dans le localstorage
       
         priceItem.textContent = calculArticlePrice + " " + "€";
         console.log("total quantité modifié",totalQuantite);
-
-        
-        
       }
-      
-      
     });
-   if(productSelected.quantite <= val){
-    return totalQuantityElement.textContent=val++;
-   }else if(productSelected.quantite >= val){
-    return totalQuantityElement.textContent=val--;
-   };
-    
-   totalQuantityElement.textContent=totalQuantite+1;
-    
-   
-    
+      
+    // on reenregistre dans le locastorage le tableau de produits stockés avec les quantité modifié et recupere le tableau modifé de la tabCartStorage
+      localStorage.setItem("produits", JSON.stringify(tabCartStorage));
+      console.log("TAB CART STORAGE", tabCartStorage);
+      tabCartStorage = JSON.parse(localStorage.getItem("produits"));
     
 
-  // on reenregistre dans le locastorage le tableau de produits stockés avec les quantité modifié et recupere le tableau modifé de la tabCartStorage
-    localStorage.setItem("produits", JSON.stringify(tabCartStorage));
-    console.log("TAB CART STORAGE", tabCartStorage);
-    tabCartStorage = JSON.parse(localStorage.getItem("produits"));
+      // comparaison  de la quantité du produit et de la quantité modifié du produit par l input  pour incrementer ou desicrementer le total de quantité
+   function modifTotalQuantite(){
+    
+      if(productSelected.quantite <= val){
+        return totalQuantityElement.textContent=val++;
+    
+    }else if(productSelected.quantite >= val){
+
+      
+      return totalQuantityElement.textContent=val--;
+    };
+    
+  }
+  modifTotalQuantite();
+
+
+       
   });
 
   // bouton supprimer produit
@@ -148,18 +148,15 @@ for (let productSelected of tabCartStorage) {
      tabCartStorage.forEach(elem => {
       // supression de l element  par l event click dans le localstorage
       tabCartStorage=tabCartStorage.filter(function(elem){
-   
         if(elem.idProduit !== id ) return true;
         if(elem.couleur!==color) return true;
-       console.log("elem produit",elem);
+      console.log("elem produit",elem);
      });
+
      //suppression de l'article du produit  dans le DOM en  generant un tableau avec les elements qui ont un id et une couleur differente de l'element supprimé
       if (elem.couleur === color && elem.idProduit === id) { 
-        
-        deleteProduct.remove();
-  
-       console.log( "tabcartstorage apres supression element", tabCartStorage);
- 
+         deleteProduct.remove();
+      console.log( "tabcartstorage apres supression element", tabCartStorage);
       }
       console.log("evenet",event)
     });
