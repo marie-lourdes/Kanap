@@ -126,13 +126,13 @@ for (let productSelected of tabCartStorage) {
         totalQuantite = totalQuantite+1; 
         
 
-       totalQuantityElement.textContent=totalQuantite;
+       return totalQuantityElement.textContent=totalQuantite;
     
     }else if(productSelected.quantite >= val){
       totalQuantite = totalQuantite-1;
      
     
-       totalQuantityElement.textContent= totalQuantite;
+       return totalQuantityElement.textContent= totalQuantite;
       
       
     };
@@ -140,6 +140,7 @@ for (let productSelected of tabCartStorage) {
   };
 
  modifTotalQuantite();
+
 /* localStorage.setItem("produits", JSON.stringify(tabCartStorage));
 
   tabCartStorage = JSON.parse(localStorage.getItem("produits"));
@@ -209,11 +210,6 @@ for (let productSelected of tabCartStorage) {
 }
 
 console.log("produit selected storage", tabCartStorage);
-
-//Récuperation des données saisies par l'utilisateur
-
-const orderForm= document.querySelector(".cart__order__form");
-console.log("order form", orderForm);
 
 
   
