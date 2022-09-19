@@ -81,7 +81,7 @@ for (let productSelected of tabCartStorage) {
 
   console.log("typeof",typeof inputQuantity.value =="number")
 
-// Recuperation des quantité modifié avec listener sur les inputs de chaque article des produits du storage
+// Bouton modifier quantité:Recuperation des quantité modifié avec listener sur les inputs de chaque article des produits du storage
   inputQuantity.addEventListener("change", function (event) {
     
     let val = event.target.value;
@@ -124,20 +124,32 @@ for (let productSelected of tabCartStorage) {
     
       if(productSelected.quantite <= val){
         totalQuantite = totalQuantite+1; 
+       
         return totalQuantityElement.textContent=totalQuantite;
     
     }else if(productSelected.quantite >= val){
-      totalQuantite = totalQuantite-1; 
+      totalQuantite = totalQuantite-1;
       
-      return totalQuantityElement.textContent=totalQuantite;
+      
+      return totalQuantityElement.textContent = totalQuantite;
     };
     
   }
   modifTotalQuantite();
-  
+  localStorage.setItem("produits", JSON.stringify(tabCartStorage));
 
+  tabCartStorage = JSON.parse(localStorage.getItem("produits"));
 
-       
+  function modifTotalPrice(){
+    console.log("totalprice", totalPrice);
+    totalPrice= totalPrice+calculArticlePrice;
+    
+    return totalPriceElement.textContent= totalPrice;
+
+  }
+
+  modifTotalPrice();
+     
   });
 
   // bouton supprimer produit
@@ -174,12 +186,15 @@ for (let productSelected of tabCartStorage) {
     tabCartStorage = JSON.parse(localStorage.getItem("produits"));
   });
 
-  console.log("TAB CART STORAGE", tabCartStorage);
-
 }
 
-
 console.log("produit selected storage", tabCartStorage);
+
+//Récuperation des données saisies par l'utilisateur
+
+const orderForm= document.querySelector(".cart__order__form");
+console.log("order form", orderForm);
+
 
   
 
