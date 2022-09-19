@@ -34,6 +34,7 @@ for (let productSelected of tabCartStorage) {
   let priceArticles = productSelected.priceProduct * productSelected.quantite;
   totalPrice += priceArticles;
   totalQuantite += parseInt(productSelected.quantite);
+ 
   priceItem.textContent = priceArticles + " " + "€";
   const divContentSettingItem = document.createElement("div");
   divContentSettingItem.setAttribute("class", "cart__item__content__settings");
@@ -57,18 +58,13 @@ for (let productSelected of tabCartStorage) {
   console.log("TOTAL PRICE: ", totalPrice)
   console.log("TOTAL QUANTITE: ", totalQuantite)
   const totalQuantityElement = document.getElementById("totalQuantity");
-console.log( "span total quantity",totalQuantity);
-const totalPriceElement = document.getElementById("totalPrice");
+  console.log( "span total quantity",totalQuantity);
+  const totalPriceElement = document.getElementById("totalPrice");
   totalQuantityElement.textContent=`${totalQuantite}`;
   totalPriceElement.textContent=`${totalPrice}`;
  
   
-  /*tabQuantity.push(quantity[6][1]);*/
-  /*console.log( "tableau quantite product selected", quantity)*/
-    
-   
 
-  /*totalQuantity.textContent= */
 
   divImgItem.appendChild(imgArticle);
   articleBascket.appendChild(divImgItem);
@@ -86,13 +82,13 @@ const totalPriceElement = document.getElementById("totalPrice");
   sectionBascket.appendChild(articleBascket);
 
 
-
+  console.log("typeof",typeof inputQuantity.value =="number")
 
 // Recuperation des quantité modifié avec listener sur les inputs de chaque article des produits du storage
   inputQuantity.addEventListener("change", function (event) {
     
     let val = event.target.value;
-    
+  
     console.log("productselected modifié", productSelected.quantite)
 
    /* selectionner l'ancêtre le plus proche de l'input et qui soit un article avec closest()
@@ -113,16 +109,25 @@ const totalPriceElement = document.getElementById("totalPrice");
         // mise à jour de l 'affichage  dans le DOM du prix calculé avec la quantité modifié sans stocker le nouveau prix calculé dans le localstorage
       
         priceItem.textContent = calculArticlePrice + " " + "€";
-        totalQuantite= ++val;
         console.log("total quantité modifié",totalQuantite);
-        totalQuantityElement.textContent= totalQuantite;
-       
-        
+
         
         
       }
-    
+      
+      
     });
+   if(productSelected.quantite <= val){
+    return totalQuantityElement.textContent=val++;
+   }else if(productSelected.quantite >= val){
+    return totalQuantityElement.textContent=val--;
+   };
+    
+   totalQuantityElement.textContent=totalQuantite+1;
+    
+   
+    
+    
 
   // on reenregistre dans le locastorage le tableau de produits stockés avec les quantité modifié et recupere le tableau modifé de la tabCartStorage
     localStorage.setItem("produits", JSON.stringify(tabCartStorage));
