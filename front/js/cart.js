@@ -233,7 +233,7 @@ lastName.addEventListener("input", function(event){
   console.log("contact input value",user);
 });
 
-address.addEventListener("input", function(event){
+address.addEventListener("change", function(event){
   let msgError= document.getElementById("addressErrorMsg");
   let dataAdress=event.target.value;
   const regex=/^(([A-Z])*(\d+)([A-Z])*)(-|\/|&)*(([A-Z])*(\d+)([A-Z])*)*((\/)*(([A-Z])*(\d+)([A-Z])*))*/;
@@ -243,7 +243,7 @@ address.addEventListener("input", function(event){
   if(testRegex){
     user.contact.address=dataAdress;
   }else{
-    error(address,msgError,"Adresse invalide, commencez par le numéro de votre rue");
+    error(address,msgError,"Adresse invalide, Ex: 45, boulevard de Paris");
   }
     console.log("contact input value",user);
 });
@@ -259,19 +259,17 @@ city.addEventListener("input", function(event){
   console.log("contact input value",user)
 });
 
-email.addEventListener("input", function(event){
+email.addEventListener("change", function(event){
   let msgError= document.getElementById("emailErrorMsg");
   let emailAddress=event.target.value;
   const regexEmail=/^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
   //test des normes du regex email avec les données de l'utilisateur
-  let testRegex=regexEmail.test(emailAddress);
-  console.log("test regex email", testRegex);
-  if(testRegex){
+  let testRegexEmail=regexEmail.test(emailAddress);
+  console.log("test regex email", testRegexEmail);
+  if(testRegexEmail){
     user.contact.address=emailAddress;
   }else{
-    email.style.border= " 2px solid #fbbcbc";
-    email.style.backgroundColor="rgba(251,188,188,0.5)";
-    msgError.textContent="Email invalide";
+    error(email,msgError,"Email invalide, Ex: contact@kanap.com");
   }
     console.log("contact input value",user);
 });
