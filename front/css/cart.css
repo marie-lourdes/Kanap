@@ -96,6 +96,7 @@ h2 {
 .cart__order__form {
 	width: 50%;
 }
+
 .cart__order__form__question {
 	display: flex;
 	flex-direction: column;
@@ -106,6 +107,9 @@ h2 {
 	border: 0;
 	height: 26px;
 	margin-top: 4px;
+}
+.cart__order__form__question input:disabled {
+	background: rgba(251,188,188,0.5);
 }
 .cart__order__form__question input:focus {
 	outline: none;

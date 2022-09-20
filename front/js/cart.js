@@ -199,8 +199,9 @@ for (let productSelected of tabCartStorage) {
 
 console.log("produit selected storage", tabCartStorage);
 
-//Récupération et analyse  des données saisies par  l'utilisateur dans le fomulaire
+//Récupération dans  un objet contact des données saisies par  l'utilisateur dans le fomulaire 
 
+//creation de l objet contact
 const firstName= document.getElementById("firstName");
 const lastName= document.getElementById("lastName");
 const address= document.getElementById("address");
@@ -224,34 +225,47 @@ user.contact= new objetContact(firstName, lastName, address, city, email)
 
 console.log("class instance contact", user);
 
-
-
-
+// recuperation des données du formulaire dans l'objet contact avec verification des données au préalable
 
 firstName.addEventListener("input", function(event){
+  let msgError= document.getElementById("firstNameErrorMsg");
+  let datafirstName=event.target.value
  
-  user.contact.firstName=event.target.value;
-
+  console.log("valeur is nan",isNaN(datafirstName));
+  
+  if(isNaN(datafirstName)!=true){
+   error(firstName,msgError,"Prénom invalide");
+  }else {
+    user.contact.firstName= datafirstName;
+  }
   console.log("contact input value",user)
 });
+
 lastName.addEventListener("input", function(event){
- 
-  user.contact.lastName=event.target.value;
-
+  let msgError= document.getElementById("lastNameErrorMsg");
+  let datalastName=event.target.value
+  if(isNaN(datalastName)!=true){
+    error(lastName,msgError,"Nom invalide");
+  }else {
+    user.contact.lastName=datalastName;
+  }
   console.log("contact input value",user)
 });
+
 address.addEventListener("input", function(event){
  
   user.contact.address=event.target.value;
 
   console.log("contact input value",user)
 });
+
 city.addEventListener("input", function(event){
  
   user.contact.city=event.target.value;
 
   console.log("contact input value",user)
 });
+
 email.addEventListener("input", function(event){
  
   user.contact.email=event.target.value;
@@ -260,13 +274,22 @@ email.addEventListener("input", function(event){
 });
 
 console.log("class instance contact apres remplissage du formulaire", user);
-
+//Enregistrement de l object contact localstorage et post object contact
 const orderForm = document.querySelector(".cart__order__form");
 console.log("order form", orderForm);
 orderForm.addEventListener("submit", function(event){
   localStorage.setItem("contact",JSON.stringify(user))
 
 })
+
+// function css border error
+function error(inputDataUser,msgError,txtError){
+  inputDataUser.setAttribute("disabled", true);
+  inputDataUser.style.border= " 2px solid #fbbcbc";
+  msgError.textContent=txtError;
+
+}
+
 
 
 
