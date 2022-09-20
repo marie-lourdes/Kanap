@@ -201,23 +201,68 @@ console.log("produit selected storage", tabCartStorage);
 
 //Récupération et analyse  des données saisies par  l'utilisateur dans le fomulaire
 
-class contact= contact={
+const firstName= document.getElementById("firstName");
+const lastName= document.getElementById("lastName");
+const address= document.getElementById("address");
+const city= document.getElementById("city");
+const email= document.getElementById("email");
+class objetContact {
+  
   constructor(firstName, lastName, address, city, email){
-    this.firstName= firstName,
-    this.lastName= lastName,
-    this.address= address,
-    this.city= city,
-    this.email=email
+    this.firstName= firstName.value,
+    this.lastName= lastName.value,
+    this.address= address.value,
+    this.city= city.value,
+    this.email=email.value
 
   }
-};
-console.log("objet contact", contact);
 
+};
+console.log("objet contact", objetContact);
+const contact= new objetContact(firstName, lastName, address, city, email)
+console.log("class instance contact", contact);
+
+
+
+
+
+firstName.addEventListener("input", function(event){
+ 
+  contact.firstName=event.target.value;
+
+  console.log("contact input value",contact)
+});
+lastName.addEventListener("input", function(event){
+ 
+  contact.lastName=event.target.value;
+
+  console.log("contact input value",contact)
+});
+address.addEventListener("input", function(event){
+ 
+  contact.address=event.target.value;
+
+  console.log("contact input value",contact)
+});
+city.addEventListener("input", function(event){
+ 
+  contact.city=event.target.value;
+
+  console.log("contact input value",contact)
+});
+email.addEventListener("input", function(event){
+ 
+  contact.email=event.target.value;
+
+  console.log("contact input value",contact)
+});
+
+console.log("class instance contact apres remplissage du formulaire", contact);
 
 const orderForm = document.querySelector(".cart__order__form");
 console.log("order form", orderForm);
 orderForm.addEventListener("submit", function(event){
-  event.preventDefault();
+  localStorage.setItem("contact",JSON.stringify(contact))
 })
 
 
