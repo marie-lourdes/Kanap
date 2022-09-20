@@ -261,15 +261,17 @@ city.addEventListener("input", function(event){
 
 email.addEventListener("input", function(event){
   let msgError= document.getElementById("emailErrorMsg");
-  let emailAdress=event.target.value;
-  const regex= /^(?=[a-z][a-z0-9@._-]{5,40}$)[a-z0-9._-]{1,20}@(?:(?=[a-z0-9-]{1,15}\.)[a-z0-9]+(?:-[a-z0-9]+)*\.){1,2}[a-z]{2,6}$/;
+  let emailAddress=event.target.value;
+  const regexEmail=/^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
   //test des normes du regex email avec les données de l'utilisateur
-  let testRegex=regex.test(emailAdress);
-  console.log("test regex", testRegex);
+  let testRegex=regexEmail.test(emailAddress);
+  console.log("test regex email", testRegex);
   if(testRegex){
-    user.contact.address=emailAdress;
+    user.contact.address=emailAddress;
   }else{
-    error(email,msgError,"Email invalide, n'oubliez pas l'arobase et l'extension '.fr, .com...'");
+    email.style.border= " 2px solid #fbbcbc";
+    email.style.backgroundColor="rgba(251,188,188,0.5)";
+    msgError.textContent="Email invalide";
   }
     console.log("contact input value",user);
 });
