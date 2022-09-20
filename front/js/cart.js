@@ -219,8 +219,10 @@ class objetContact {
 
 };
 console.log("objet contact", objetContact);
-const contact= new objetContact(firstName, lastName, address, city, email)
-console.log("class instance contact", contact);
+const user={};
+user.contact= new objetContact(firstName, lastName, address, city, email)
+
+console.log("class instance contact", user);
 
 
 
@@ -228,42 +230,44 @@ console.log("class instance contact", contact);
 
 firstName.addEventListener("input", function(event){
  
-  contact.firstName=event.target.value;
+  user.contact.firstName=event.target.value;
 
-  console.log("contact input value",contact)
+  console.log("contact input value",user)
 });
 lastName.addEventListener("input", function(event){
  
-  contact.lastName=event.target.value;
+  user.contact.lastName=event.target.value;
 
-  console.log("contact input value",contact)
+  console.log("contact input value",user)
 });
 address.addEventListener("input", function(event){
  
-  contact.address=event.target.value;
+  user.contact.address=event.target.value;
 
-  console.log("contact input value",contact)
+  console.log("contact input value",user)
 });
 city.addEventListener("input", function(event){
  
-  contact.city=event.target.value;
+  user.contact.city=event.target.value;
 
-  console.log("contact input value",contact)
+  console.log("contact input value",user)
 });
 email.addEventListener("input", function(event){
  
-  contact.email=event.target.value;
+  user.contact.email=event.target.value;
 
-  console.log("contact input value",contact)
+  console.log("contact input value",user)
 });
 
-console.log("class instance contact apres remplissage du formulaire", contact);
+console.log("class instance contact apres remplissage du formulaire", user);
 
 const orderForm = document.querySelector(".cart__order__form");
 console.log("order form", orderForm);
 orderForm.addEventListener("submit", function(event){
-  localStorage.setItem("contact",JSON.stringify(contact))
+  localStorage.setItem("contact",JSON.stringify(user))
+
 })
+
 
 
 
