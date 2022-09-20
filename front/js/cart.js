@@ -205,6 +205,9 @@ console.log(" class objet contact", objetContact);
 const user={};
 user.contact= new objetContact(firstName, lastName, address, city, email);
 console.log("class instance contact", user);
+user.products=[]
+
+
 
 // recuperation des données du formulaire dans l'objet contact avec verification des données au préalable
 
@@ -218,6 +221,7 @@ firstName.addEventListener("input", function(event){
    error(firstName,msgError,"Prénom invalide");
   }else {
     user.contact.firstName= datafirstName;
+    localStorage.setItem("contact",JSON.stringify(user));
   }
   console.log("contact input value",user);
 });
@@ -229,6 +233,7 @@ lastName.addEventListener("input", function(event){
     error(lastName,msgError,"Nom invalide");
   }else {
     user.contact.lastName=datalastName;
+    localStorage.setItem("contact",JSON.stringify(user));
   }
   console.log("contact input value",user);
 });
@@ -242,6 +247,7 @@ address.addEventListener("change", function(event){
   console.log("test regex", testRegex);
   if(testRegex){
     user.contact.address=dataAdress;
+    localStorage.setItem("contact",JSON.stringify(user));
   }else{
     error(address,msgError,"Adresse invalide, Ex: 45, boulevard de Paris");
   }
@@ -254,7 +260,8 @@ city.addEventListener("input", function(event){
   if(isNaN(dataCity)!=true){
     error(city,msgError,"Ville non valide");
   }else {
-    user.contact.lastName=dataCity;
+    user.contact.city=dataCity;
+    localStorage.setItem("contact",JSON.stringify(user));
   }
   console.log("contact input value",user)
 });
@@ -267,7 +274,8 @@ email.addEventListener("change", function(event){
   let testRegexEmail=regexEmail.test(emailAddress);
   console.log("test regex email", testRegexEmail);
   if(testRegexEmail){
-    user.contact.address=emailAddress;
+    user.contact.email=emailAddress;
+    localStorage.setItem("contact",JSON.stringify(user));
   }else{
     error(email,msgError,"Email invalide, Ex: contact@kanap.com");
   }
@@ -281,15 +289,46 @@ function error(inputDataUser,msgError,txtError){
   msgError.textContent=txtError;
 
 }
-
-console.log("class instance contact apres remplissage du formulaire", user);
-
 //Enregistrement de l object contact dans localstorage et post object contact
 const orderForm = document.querySelector(".cart__order__form");
 console.log("order form", orderForm);
 orderForm.addEventListener("submit", function(event){
   localStorage.setItem("contact",JSON.stringify(user));
 });
+localStorage.setItem("contact",JSON.stringify(user));
+let command= JSON.parse(localStorage.getItem("contact"));
+
+
+console.log("class instance contact apres remplissage du formulaire", user);
+
+
+let commandProduit={}
+commandProduit.id_Product=tabCartStorage.map(elem => {
+  return elem.idProduit; /*(elem.nameProduct, elem.couleur,elem.quantite);*/
+});
+commandProduit.name_Product=tabCartStorage.map(elem => {
+  return elem.nameProduct; /*(elem.nameProduct, elem.couleur,elem.quantite);*/
+});
+commandProduit.color=tabCartStorage.map(elem => {
+  return elem.couleur; /*(elem.nameProduct, elem.couleur,elem.quantite);*/
+});
+commandProduit.quantity_Model=tabCartStorage.map(elem => {
+  return elem.quantite; /*(elem.nameProduct, elem.couleur,elem.quantite);*/
+});
+commandProduit.total_Quantity= document.getElementById("totalQuantity").textContent;
+commandProduit.total= document.getElementById("totalPrice").textContent +" "+ "€";
+user.products.push(commandProduit);
+
+
+
+
+console.log("tabcartstorage map",commandProduit)
+localStorage.setItem("contact",JSON.stringify(user));
+command= JSON.parse(localStorage.getItem("contact"));
+console.log("tab user commande", user)
+
+
+
 
 
 
