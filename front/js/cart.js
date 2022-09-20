@@ -293,6 +293,7 @@ function error(inputDataUser,msgError,txtError){
 const orderForm = document.querySelector(".cart__order__form");
 console.log("order form", orderForm);
 orderForm.addEventListener("submit", function(event){
+  event.preventDefault();
   localStorage.setItem("contact",JSON.stringify(user));
 });
 localStorage.setItem("contact",JSON.stringify(user));
