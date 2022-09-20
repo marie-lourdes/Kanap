@@ -253,10 +253,18 @@ lastName.addEventListener("input", function(event){
 });
 
 address.addEventListener("input", function(event){
+  let msgError= document.getElementById("addressErrorMsg");
+  let dataAdress=event.target.value
+  const regex=/^(([A-Z])*(\d+)([A-Z])*)(-|\/|&)*(([A-Z])*(\d+)([A-Z])*)*((\/)*(([A-Z])*(\d+)([A-Z])*))*/;
  
-  user.contact.address=event.target.value;
-
-  console.log("contact input value",user)
+  let testRegex=regex.test(dataAdress);
+  console.log("test regex", testRegex);
+  if(testRegex){
+    user.contact.address=dataAdress;
+  }else{
+    error(address,msgError,"Adresse invalide, commencez par le numéro de votre rue");
+  }
+    console.log("contact input value",user)
 });
 
 city.addEventListener("input", function(event){
@@ -274,7 +282,7 @@ email.addEventListener("input", function(event){
 });
 
 console.log("class instance contact apres remplissage du formulaire", user);
-//Enregistrement de l object contact localstorage et post object contact
+//Enregistrement de l object contact dans localstorage et post object contact
 const orderForm = document.querySelector(".cart__order__form");
 console.log("order form", orderForm);
 orderForm.addEventListener("submit", function(event){
