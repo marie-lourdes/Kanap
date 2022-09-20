@@ -94,6 +94,8 @@ for (let productSelected of tabCartStorage) {
     let color = dataArticleProduct.getAttribute("data-color");
     let id = dataArticleProduct.getAttribute("data-id");
 
+
+    // product selected avec la modification de la valeur de l input stockée pour la comparaison pour le total de la quantité et le total du prix 
     let previousQuantite = productSelected.quantite;
 
     console.log("inputQuantity value modifié listener", dataArticleProduct);
@@ -123,7 +125,7 @@ for (let productSelected of tabCartStorage) {
 
 
     // comparaison  de la quantité du produit et de la quantité modifié du produit par l input  pour incrementer ou desincrementer le total de quantité
-    //function modifTotalQuantite() {
+   
     console.log(" function total val", val)
     console.log(" total quantity element ", totalQuantityElement.textContent);
     console.log(" total quantité function ", totalQuantite);
@@ -154,39 +156,8 @@ for (let productSelected of tabCartStorage) {
 
     };
 
-    //};
-
-    //modifTotalQuantite();
-
-    localStorage.setItem("produits", JSON.stringify(tabCartStorage));
-
-    tabCartStorage = JSON.parse(localStorage.getItem("produits"));
-
-    // function modifTotalPrice() {
-
-    //   if (productSelected.quantite <= val) {
-    //     console.log("totalprice", totalPrice);
-    //     totalPrice += priceArticles;
-    //     totalPriceElement.textContent = totalPrice;
-
-
-    //   } else if (productSelected.quantite >= val) {
-
-    //     console.log("totalprice", totalPrice);
-    //     totalPrice -= priceArticles;
-    //     totalPriceElement.textContent = totalPrice;
-
-    //   };
-
-
-
-    // }
-
-
-    //modifTotalPrice();
-    localStorage.setItem("produits", JSON.stringify(tabCartStorage));
-
-    tabCartStorage = JSON.parse(localStorage.getItem("produits"));
+  localStorage.setItem("produits", JSON.stringify(tabCartStorage));
+   tabCartStorage = JSON.parse(localStorage.getItem("produits"));
 
   });
 
@@ -228,7 +199,26 @@ for (let productSelected of tabCartStorage) {
 
 console.log("produit selected storage", tabCartStorage);
 
+//Récupération et analyse  des données saisies par  l'utilisateur dans le fomulaire
 
+class contact= contact={
+  constructor(firstName, lastName, address, city, email){
+    this.firstName= firstName,
+    this.lastName= lastName,
+    this.address= address,
+    this.city= city,
+    this.email=email
+
+  }
+};
+console.log("objet contact", contact);
+
+
+const orderForm = document.querySelector(".cart__order__form");
+console.log("order form", orderForm);
+orderForm.addEventListener("submit", function(event){
+  event.preventDefault();
+})
 
 
 
