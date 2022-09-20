@@ -51,17 +51,13 @@ for (let productSelected of tabCartStorage) {
   const deleteItem = document.createElement("p");
   deleteItem.setAttribute("class", "deleteItem");
   deleteItem.textContent = "Supprimer";
-
-  console.log("total price", totalPrice)
-  console.log("total quantité", totalQuantite)
   const totalQuantityElement = document.getElementById("totalQuantity");
   console.log("span total quantity", totalQuantity);
   const totalPriceElement = document.getElementById("totalPrice");
   totalQuantityElement.textContent = `${totalQuantite}`;
   totalPriceElement.textContent = `${totalPrice}`;
-
-
-
+  console.log("total price", totalPrice)
+  console.log("total quantité", totalQuantite)
 
   divImgItem.appendChild(imgArticle);
   articleBascket.appendChild(divImgItem);
@@ -78,14 +74,11 @@ for (let productSelected of tabCartStorage) {
   articleBascket.appendChild(divContentItem);
   sectionBascket.appendChild(articleBascket);
 
-
-  console.log("typeof", typeof inputQuantity.value == "number")
+ console.log("typeof", typeof inputQuantity.value == "number")
 
   // Bouton modifier quantité:Recuperation des quantité modifié avec listener sur les inputs de chaque article des produits du storage
   inputQuantity.addEventListener("change", function (event) {
-
     let val = event.target.value;
-
     console.log("productselected modifié", productSelected.quantite)
 
     /* selectionner l'ancêtre le plus proche de l'input et qui soit un article avec closest()
@@ -93,12 +86,10 @@ for (let productSelected of tabCartStorage) {
     let dataArticleProduct = inputQuantity.closest("article");
     let color = dataArticleProduct.getAttribute("data-color");
     let id = dataArticleProduct.getAttribute("data-id");
-
-
-    // product selected avec la modification de la valeur de l input stockée pour la comparaison pour le total de la quantité et le total du prix 
-    let previousQuantite = productSelected.quantite;
-
     console.log("inputQuantity value modifié listener", dataArticleProduct);
+
+    // productSelected  sans modification(previousQuantite) et product selected avec la modification de la valeur de l input stockée pour la comparaison pour le total de la quantité et le total du prix 
+    let previousQuantite = productSelected.quantite;
     productSelected.quantite = val;
     console.log( "productedSelected quantite val",productSelected.quantite)
 
@@ -121,8 +112,6 @@ for (let productSelected of tabCartStorage) {
     localStorage.setItem("produits", JSON.stringify(tabCartStorage));
     console.log("TAB CART STORAGE", tabCartStorage);
     tabCartStorage = JSON.parse(localStorage.getItem("produits"));
-
-
 
     // comparaison  de la quantité du produit et de la quantité modifié du produit par l input  pour incrementer ou desincrementer le total de quantité
    
@@ -152,12 +141,10 @@ for (let productSelected of tabCartStorage) {
       tabCartStorage = JSON.parse(localStorage.getItem("produits"));
 
       console.log(" total quantité function descrementé", totalQuantite);
-
-
     };
 
-  localStorage.setItem("produits", JSON.stringify(tabCartStorage));
-   tabCartStorage = JSON.parse(localStorage.getItem("produits"));
+    localStorage.setItem("produits", JSON.stringify(tabCartStorage));
+    tabCartStorage = JSON.parse(localStorage.getItem("produits"));
 
   });
 
@@ -191,11 +178,9 @@ for (let productSelected of tabCartStorage) {
     /* on recupere la TabCartStorage avec les elements du DOM generé par la boucle for avec la mise à jour de la tabCartStorage 
    dans lequel la boucle itere sur chaque element et les affiche un a un et sans l element supprimé*/
     localStorage.setItem("produits", JSON.stringify(tabCartStorage));
-
     tabCartStorage = JSON.parse(localStorage.getItem("produits"));
   });
-
-}
+};
 
 console.log("produit selected storage", tabCartStorage);
 
@@ -208,28 +193,24 @@ const address= document.getElementById("address");
 const city= document.getElementById("city");
 const email= document.getElementById("email");
 class objetContact {
-  
   constructor(firstName, lastName, address, city, email){
     this.firstName= firstName.value,
     this.lastName= lastName.value,
     this.address= address.value,
     this.city= city.value,
     this.email=email.value
-
   }
-
 };
-console.log("objet contact", objetContact);
+console.log(" class objet contact", objetContact);
 const user={};
-user.contact= new objetContact(firstName, lastName, address, city, email)
-
+user.contact= new objetContact(firstName, lastName, address, city, email);
 console.log("class instance contact", user);
 
 // recuperation des données du formulaire dans l'objet contact avec verification des données au préalable
 
 firstName.addEventListener("input", function(event){
   let msgError= document.getElementById("firstNameErrorMsg");
-  let datafirstName=event.target.value
+  let datafirstName=event.target.value;
  
   console.log("valeur is nan",isNaN(datafirstName));
   
@@ -238,7 +219,7 @@ firstName.addEventListener("input", function(event){
   }else {
     user.contact.firstName= datafirstName;
   }
-  console.log("contact input value",user)
+  console.log("contact input value",user);
 });
 
 lastName.addEventListener("input", function(event){
@@ -249,14 +230,14 @@ lastName.addEventListener("input", function(event){
   }else {
     user.contact.lastName=datalastName;
   }
-  console.log("contact input value",user)
+  console.log("contact input value",user);
 });
 
 address.addEventListener("input", function(event){
   let msgError= document.getElementById("addressErrorMsg");
-  let dataAdress=event.target.value
+  let dataAdress=event.target.value;
   const regex=/^(([A-Z])*(\d+)([A-Z])*)(-|\/|&)*(([A-Z])*(\d+)([A-Z])*)*((\/)*(([A-Z])*(\d+)([A-Z])*))*/;
- 
+ //test des normes du regex adresse avec les données de l'utilisateur
   let testRegex=regex.test(dataAdress);
   console.log("test regex", testRegex);
   if(testRegex){
@@ -264,39 +245,53 @@ address.addEventListener("input", function(event){
   }else{
     error(address,msgError,"Adresse invalide, commencez par le numéro de votre rue");
   }
-    console.log("contact input value",user)
+    console.log("contact input value",user);
 });
 
 city.addEventListener("input", function(event){
- 
-  user.contact.city=event.target.value;
-
+  let msgError= document.getElementById("cityErrorMsg");
+  let dataCity=event.target.value;
+  if(isNaN(dataCity)!=true){
+    error(city,msgError,"Ville non valide");
+  }else {
+    user.contact.lastName=dataCity;
+  }
   console.log("contact input value",user)
 });
 
 email.addEventListener("input", function(event){
- 
-  user.contact.email=event.target.value;
-
-  console.log("contact input value",user)
+  let msgError= document.getElementById("emailErrorMsg");
+  let emailAdress=event.target.value;
+  const regex= /^(?=[a-z][a-z0-9@._-]{5,40}$)[a-z0-9._-]{1,20}@(?:(?=[a-z0-9-]{1,15}\.)[a-z0-9]+(?:-[a-z0-9]+)*\.){1,2}[a-z]{2,6}$/;
+  //test des normes du regex email avec les données de l'utilisateur
+  let testRegex=regex.test(emailAdress);
+  console.log("test regex", testRegex);
+  if(testRegex){
+    user.contact.address=emailAdress;
+  }else{
+    error(email,msgError,"Email invalide, n'oubliez pas l'arobase et l'extension '.fr, .com...'");
+  }
+    console.log("contact input value",user);
 });
 
-console.log("class instance contact apres remplissage du formulaire", user);
-//Enregistrement de l object contact dans localstorage et post object contact
-const orderForm = document.querySelector(".cart__order__form");
-console.log("order form", orderForm);
-orderForm.addEventListener("submit", function(event){
-  localStorage.setItem("contact",JSON.stringify(user))
-
-})
-
-// function css border error
+// function error input
 function error(inputDataUser,msgError,txtError){
   inputDataUser.setAttribute("disabled", true);
   inputDataUser.style.border= " 2px solid #fbbcbc";
   msgError.textContent=txtError;
 
 }
+
+console.log("class instance contact apres remplissage du formulaire", user);
+
+//Enregistrement de l object contact dans localstorage et post object contact
+const orderForm = document.querySelector(".cart__order__form");
+console.log("order form", orderForm);
+orderForm.addEventListener("submit", function(event){
+  localStorage.setItem("contact",JSON.stringify(user));
+});
+
+
 
 
 
