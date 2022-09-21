@@ -345,20 +345,23 @@ console.log("order form", orderForm);
 orderForm.addEventListener("submit", function(event){
   event.preventDefault();
   localStorage.setItem("contact",JSON.stringify(user));
-  fetch("http://localhost:3000/api/products/order/"+ `${orderId}`,{
+  fetch("http://localhost:3000/api/products/order",{
     method:"POST",
     headers:{
-      "accept": "application/json",
-      "content-type":"application/json"
+      "Accept": "application/json",
+      "Content-Type":"application/json"
     },
     body:JSON.stringify(user)
   }).then(function(res){
     if(res.ok){
-      return res.json();
+      console.log("res", res)
+      return res.json()
       /*return JSON.parse(res);*/
     }
   }).then(function(value){
     console.log("value promise post",value)
+    console.log("value promise postdata",value.postData.text)
+
   }).catch(function(error){
      console.log("erreur", error)
   });
