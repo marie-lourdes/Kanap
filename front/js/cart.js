@@ -202,6 +202,7 @@ class objetContact {
   }
 };
 console.log(" class objet contact", objetContact);
+//creation de l'objet user à envoyer à l'api, contenant un objet contact et un tableau products(requête POST)
 const user={};
 user.contact= new objetContact(firstName, lastName, address, city, email);
 console.log("class instance contact", user);
@@ -289,10 +290,11 @@ function error(inputDataUser,msgError,txtError){
   msgError.textContent=txtError;
 
 }
-
+//enregistrement de l obejt user dans le localstorage avec les données utilisateur
 localStorage.setItem("contact",JSON.stringify(user));
 let command= JSON.parse(localStorage.getItem("contact"));
 
+//Création de l'objet commandProduit avec les details du produit
 let commandProduit={}
 commandProduit.id_Product=tabCartStorage.map(elem => {
   return elem.idProduit; /*(elem.nameProduct, elem.couleur,elem.quantite);*/
@@ -310,19 +312,19 @@ commandProduit.total_Quantity= document.getElementById("totalQuantity").textCont
 commandProduit.total= document.getElementById("totalPrice").textContent +" "+ "€";
 user.products.push(commandProduit);
 
-
 localStorage.setItem("contact",JSON.stringify(user));
 command= JSON.parse(localStorage.getItem("contact"));
-
 
 console.log("class instance contact apres remplissage du formulaire", user);
 console.log("tabcartstorage map",commandProduit)
 console.log("tab user commande", user)
+
 // fonction pour generer numero de commande
 function generateNumberOrder(){
   return Math.floor(Math.random()*100);
 }
 console.log( "fonction numberOrder", generateNumberOrder())
+
 //creation d'un tableau qui va recuperer des valeurs aleatoire
 let numberOrder=[0,0,0,0]
 for(number of numberOrder){
@@ -334,8 +336,7 @@ for(number of numberOrder){
 console.log(" tableau number Order non tronqué",numberOrder)
 numberOrder.length=4;
 console.log(" tableau number Order  tronqué",numberOrder)
-/*console.log(" tableau number Order",tabNumberOrder)*/
-/*console.log(" tableau numbersplice",tabNumber)*/
+
 let orderId= numberOrder.join(""); // eviter les espaces dans le numero de commande lors de la reecriture dans l
 console.log("orderId", orderId)
 
@@ -344,29 +345,29 @@ const orderForm = document.querySelector(".cart__order__form");
 console.log("order form", orderForm);
 orderForm.addEventListener("submit", function(event){
   event.preventDefault();
-  localStorage.setItem("contact",JSON.stringify(user));
+ /* localStorage.setItem("contact",JSON.stringify(user));*/
   fetch("http://localhost:3000/api/products/order",{
-    method:"POST",
-    headers:{
-      "Accept": "application/json",
-      "Content-Type":"application/json"
-    },
-    body:JSON.stringify(user)
+  method:"POST",
+  headers:{
+    "Accept":"application/json",
+    "Content-Type":"application/json"  
+  },
+  body:JSON.stringify(user)
   }).then(function(res){
     if(res.ok){
       console.log("res", res)
-      return res.json()
+      return res.json();
       /*return JSON.parse(res);*/
     }
   }).then(function(value){
     console.log("value promise post",value)
-    console.log("value promise postdata",value.postData.text)
+  /* console.log("value promise postdata",value.postData.text)*/
 
-  }).catch(function(error){
-     console.log("erreur", error)
   });
+ 
   
 });
+
 
 
 
