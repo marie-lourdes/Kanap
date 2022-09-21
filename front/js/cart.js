@@ -310,14 +310,7 @@ commandProduit.total_Quantity= document.getElementById("totalQuantity").textCont
 commandProduit.total= document.getElementById("totalPrice").textContent +" "+ "€";
 user.products.push(commandProduit);
 
-//Enregistrement de l object contact dans localstorage et post object contact
-const orderForm = document.querySelector(".cart__order__form");
-console.log("order form", orderForm);
-orderForm.addEventListener("submit", function(event){
-  event.preventDefault();
-  localStorage.setItem("contact",JSON.stringify(user));
-  
-});
+
 localStorage.setItem("contact",JSON.stringify(user));
 command= JSON.parse(localStorage.getItem("contact"));
 
@@ -343,9 +336,34 @@ numberOrder.length=4;
 console.log(" tableau number Order  tronqué",numberOrder)
 /*console.log(" tableau number Order",tabNumberOrder)*/
 /*console.log(" tableau numbersplice",tabNumber)*/
-let orderId= numberOrder.join("%");
+let orderId= numberOrder.join(""); // eviter les espaces dans le numero de commande lors de la reecriture dans l
 console.log("orderId", orderId)
 
+//Enregistrement de l object contact dans localstorage et post object contact
+const orderForm = document.querySelector(".cart__order__form");
+console.log("order form", orderForm);
+orderForm.addEventListener("submit", function(event){
+  event.preventDefault();
+  localStorage.setItem("contact",JSON.stringify(user));
+  fetch("http://localhost:3000/api/products/order/"+ `${orderId}`,{
+    method:"POST",
+    headers:{
+      "accept": "application/json",
+      "content-type":"application/json"
+    },
+    body:JSON.stringify(user)
+  }).then(function(res){
+    if(res.ok){
+      return res.json();
+      /*return JSON.parse(res);*/
+    }
+  }).then(function(value){
+    console.log("value promise post",value)
+  }).catch(function(error){
+     console.log("erreur", error)
+  });
+  
+});
 
 
 
