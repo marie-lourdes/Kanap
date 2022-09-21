@@ -221,7 +221,7 @@ firstName.addEventListener("input", function(event){
    error(firstName,msgError,"Prénom invalide");
   }else {
     user.contact.firstName= datafirstName;
-    localStorage.setItem("contact",JSON.stringify(user));
+ 
   }
   console.log("contact input value",user);
 });
@@ -233,7 +233,7 @@ lastName.addEventListener("input", function(event){
     error(lastName,msgError,"Nom invalide");
   }else {
     user.contact.lastName=datalastName;
-    localStorage.setItem("contact",JSON.stringify(user));
+    
   }
   console.log("contact input value",user);
 });
@@ -247,7 +247,7 @@ address.addEventListener("change", function(event){
   console.log("test regex", testRegex);
   if(testRegex){
     user.contact.address=dataAdress;
-    localStorage.setItem("contact",JSON.stringify(user));
+   
   }else{
     error(address,msgError,"Adresse invalide, Ex: 45, boulevard de Paris");
   }
@@ -261,7 +261,7 @@ city.addEventListener("input", function(event){
     error(city,msgError,"Ville non valide");
   }else {
     user.contact.city=dataCity;
-    localStorage.setItem("contact",JSON.stringify(user));
+    
   }
   console.log("contact input value",user)
 });
@@ -275,7 +275,7 @@ email.addEventListener("change", function(event){
   console.log("test regex email", testRegexEmail);
   if(testRegexEmail){
     user.contact.email=emailAddress;
-    localStorage.setItem("contact",JSON.stringify(user));
+
   }else{
     error(email,msgError,"Email invalide, Ex: contact@kanap.com");
   }
@@ -289,19 +289,9 @@ function error(inputDataUser,msgError,txtError){
   msgError.textContent=txtError;
 
 }
-//Enregistrement de l object contact dans localstorage et post object contact
-const orderForm = document.querySelector(".cart__order__form");
-console.log("order form", orderForm);
-orderForm.addEventListener("submit", function(event){
-  event.preventDefault();
-  localStorage.setItem("contact",JSON.stringify(user));
-});
+
 localStorage.setItem("contact",JSON.stringify(user));
 let command= JSON.parse(localStorage.getItem("contact"));
-
-
-console.log("class instance contact apres remplissage du formulaire", user);
-
 
 let commandProduit={}
 commandProduit.id_Product=tabCartStorage.map(elem => {
@@ -319,6 +309,20 @@ commandProduit.quantity_Model=tabCartStorage.map(elem => {
 commandProduit.total_Quantity= document.getElementById("totalQuantity").textContent;
 commandProduit.total= document.getElementById("totalPrice").textContent +" "+ "€";
 user.products.push(commandProduit);
+
+//Enregistrement de l object contact dans localstorage et post object contact
+const orderForm = document.querySelector(".cart__order__form");
+console.log("order form", orderForm);
+orderForm.addEventListener("submit", function(event){
+  event.preventDefault();
+  localStorage.setItem("contact",JSON.stringify(user));
+});
+localStorage.setItem("contact",JSON.stringify(user));
+command= JSON.parse(localStorage.getItem("contact"));
+
+
+console.log("class instance contact apres remplissage du formulaire", user);
+
 
 
 
