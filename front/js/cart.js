@@ -183,7 +183,7 @@ for (let productSelected of tabCartStorage) {
 };
 
 console.log("produit selected storage", tabCartStorage);
-
+/*..................................modification...........................................*/
 //Récupération dans  un objet contact des données saisies par  l'utilisateur dans le fomulaire 
 
 //creation de l objet contact
@@ -192,22 +192,21 @@ const lastName= document.getElementById("lastName");
 const address= document.getElementById("address");
 const city= document.getElementById("city");
 const email= document.getElementById("email");
-class objetContact {
-  constructor(firstName, lastName, address, city, email){
-    this.firstName= firstName.value,
-    this.lastName= lastName.value,
-    this.address= address.value,
-    this.city= city.value,
-    this.email=email.value
-  }
-};
-console.log(" class objet contact", objetContact);
+let contact = {
+  firstName: firstName,
+  lastName: lastName,
+  address: address,
+  city: city,
+  email: email
+
+}
+/*console.log(" class objet contact", objetContact);
 //creation de l'objet user à envoyer à l'api, contenant un objet contact et un tableau products(requête POST)
 const user={};
 user.contact= new objetContact(firstName, lastName, address, city, email);
 console.log("class instance contact", user);
 user.products=[]
-// recuperation des données du formulaire dans l'objet contact avec verification des données au préalable
+// recuperation des données du formulaire dans l'objet contact avec verification des données au préalable*/
 
 firstName.addEventListener("input", function(event){
   let msgError= document.getElementById("firstNameErrorMsg");
@@ -218,10 +217,10 @@ firstName.addEventListener("input", function(event){
   if(isNaN(datafirstName)!=true){
    error(firstName,msgError,"Prénom invalide");
   }else {
-    user.contact.firstName= datafirstName;
+    contact.firstName= datafirstName;
  
   }
-  console.log("contact input value",user);
+  console.log("contact input value",contact);
 });
 
 lastName.addEventListener("input", function(event){
@@ -230,10 +229,10 @@ lastName.addEventListener("input", function(event){
   if(isNaN(datalastName)!=true){
     error(lastName,msgError,"Nom invalide");
   }else {
-    user.contact.lastName=datalastName;
+   contact.lastName=datalastName;
     
   }
-  console.log("contact input value",user);
+  console.log("contact input value",contact);
 });
 
 address.addEventListener("change", function(event){
@@ -244,12 +243,12 @@ address.addEventListener("change", function(event){
   let testRegex=regex.test(dataAdress);
   console.log("test regex", testRegex);
   if(testRegex){
-    user.contact.address=dataAdress;
+    contact.address=dataAdress;
    
   }else{
     error(address,msgError,"Adresse invalide, Ex: 45, boulevard de Paris");
   }
-    console.log("contact input value",user);
+    console.log("contact input value",contact);
 });
 
 city.addEventListener("input", function(event){
@@ -258,10 +257,10 @@ city.addEventListener("input", function(event){
   if(isNaN(dataCity)!=true){
     error(city,msgError,"Ville non valide");
   }else {
-    user.contact.city=dataCity;
+    contact.city=dataCity;
     
   }
-  console.log("contact input value",user)
+  console.log("contact input value",contact)
 });
 
 email.addEventListener("change", function(event){
@@ -272,12 +271,12 @@ email.addEventListener("change", function(event){
   let testRegexEmail=regexEmail.test(emailAddress);
   console.log("test regex email", testRegexEmail);
   if(testRegexEmail){
-    user.contact.email=emailAddress;
+   contact.email=emailAddress;
 
   }else{
     error(email,msgError,"Email invalide, Ex: contact@kanap.com");
   }
-    console.log("contact input value",user);
+    console.log("contact input value",contact);
 });
 
 // function error input
@@ -288,82 +287,62 @@ function error(inputDataUser,msgError,txtError){
 
 }
 //enregistrement de l obejt user dans le localstorage avec les données utilisateur
-localStorage.setItem("contact",JSON.stringify(user));
-let command= JSON.parse(localStorage.getItem("contact"));
+localStorage.setItem("contact",JSON.stringify(contact));
+let commandContact= JSON.parse(localStorage.getItem("contact"));
 
 //Création de l'objet commandProduit avec les details du produit
-let commandProduit={}
-commandProduit.id_Product=tabCartStorage.map(elem => {
+let products=[];
+
+products=tabCartStorage.map(elem => {
   return elem.idProduit; /*(elem.nameProduct, elem.couleur,elem.quantite);*/
 });
-commandProduit.name_Product=tabCartStorage.map(elem => {
-  return elem.nameProduct; /*(elem.nameProduct, elem.couleur,elem.quantite);*/
-});
-commandProduit.color=tabCartStorage.map(elem => {
-  return elem.couleur; /*(elem.nameProduct, elem.couleur,elem.quantite);*/
-});
-commandProduit.quantity_Model=tabCartStorage.map(elem => {
-  return elem.quantite; /*(elem.nameProduct, elem.couleur,elem.quantite);*/
-});
-commandProduit.total_Quantity= document.getElementById("totalQuantity").textContent;
-commandProduit.total= document.getElementById("totalPrice").textContent +" "+ "€";
-user.products.push(commandProduit);
 
-localStorage.setItem("contact",JSON.stringify(user));
-command= JSON.parse(localStorage.getItem("contact"));
+console.log("tableau products", products)
+localStorage.setItem("products",JSON.stringify(products));
+let commandProducts= JSON.parse(localStorage.getItem("products"));
 
-console.log("class instance contact apres remplissage du formulaire", user);
-console.log("tabcartstorage map",commandProduit)
-console.log("tab user commande", user)
+console.log("tabcartstorage map",products)
 
-// fonction pour generer numero de commande
-function generateNumberOrder(){
-  return Math.floor(Math.random()*100);
-}
-console.log( "fonction numberOrder", generateNumberOrder())
 
-//creation d'un tableau qui va recuperer des valeurs aleatoire
-let numberOrder=[0,0,0,0]
-for(number of numberOrder){
-  console.log("number", number)
-  number=generateNumberOrder();// genere sur l index
-  console.log("number  avec nombre aleatoir", numberOrder)
-  numberOrder[number]= generateNumberOrder(); //genere sur la valeur de l'index
-}
-console.log(" tableau number Order non tronqué",numberOrder)
-numberOrder.length=4;
-console.log(" tableau number Order  tronqué",numberOrder)
-
-let orderId= numberOrder.join(""); // eviter les espaces dans le numero de commande lors de la reecriture dans l
-console.log("orderId", orderId)
 
 //Enregistrement de l object contact dans localstorage et post object contact
 const orderForm = document.querySelector(".cart__order__form");
 console.log("order form", orderForm);
 orderForm.addEventListener("submit", function(event){
   event.preventDefault();
- localStorage.setItem("contact",JSON.stringify(user));
-  fetch("http://localhost:3000/api/products/order",{
+  commandContact=localStorage.setItem("contact",JSON.stringify(contact));
+  commandProducts=localStorage.setItem("products",JSON.stringify(products));
+  fetch("http://localhost:3000/api/products/"+"order",{
   method:"POST",
   headers:{
     "Accept":"application/json",
     "Content-Type":"application/json", 
   },
-  body:JSON.stringify(user),
+  body:JSON.stringify({contact,products})
   }).then(function(res){
+    console.log("reponse", res)
     if(res.ok){
-    
+  
       return res.json();
     }
   }).then(function(value){
   
     console.log("value promise post",value)
+    console.log("orderid ",value.orderId)
+    let commandProductApi=localStorage.setItem("commandProductsApi",JSON.stringify(value));
+    let idOrder=localStorage.setItem("idOrder",JSON.stringify(value.orderId));
+   let url= new URL(window.location);
+  console.log("url",url );
   /* console.log("value promise postdata",value.postData.text)*/
 
   }).then(function(error){
     console.log("error",error)
   });
-  console.log("req",req)
+
+
+  
+
+  
 });
  
  
