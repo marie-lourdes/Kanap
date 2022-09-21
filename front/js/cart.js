@@ -200,12 +200,7 @@ let contact = {
   email: email
 
 }
-/*console.log(" class objet contact", objetContact);
-//creation de l'objet user à envoyer à l'api, contenant un objet contact et un tableau products(requête POST)
-const user={};
-user.contact= new objetContact(firstName, lastName, address, city, email);
-console.log("class instance contact", user);
-user.products=[]
+
 // recuperation des données du formulaire dans l'objet contact avec verification des données au préalable*/
 
 firstName.addEventListener("input", function(event){
@@ -290,7 +285,7 @@ function error(inputDataUser,msgError,txtError){
 localStorage.setItem("contact",JSON.stringify(contact));
 let commandContact= JSON.parse(localStorage.getItem("contact"));
 
-//Création de l'objet commandProduit avec les details du produit
+//Création du tableau produit avec l' id des produits
 let products=[];
 
 products=tabCartStorage.map(elem => {
@@ -331,8 +326,8 @@ orderForm.addEventListener("submit", function(event){
     console.log("orderid ",value.orderId)
     let commandProductApi=localStorage.setItem("commandProductsApi",JSON.stringify(value));
     let idOrder=localStorage.setItem("idOrder",JSON.stringify(value.orderId));
-   let url= new URL(window.location);
-  console.log("url",url );
+   /*let url= new URL(window.location);
+  console.log("url",url );*/
   /* console.log("value promise postdata",value.postData.text)*/
 
   }).then(function(error){
