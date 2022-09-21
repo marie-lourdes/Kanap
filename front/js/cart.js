@@ -207,9 +207,6 @@ const user={};
 user.contact= new objetContact(firstName, lastName, address, city, email);
 console.log("class instance contact", user);
 user.products=[]
-
-
-
 // recuperation des données du formulaire dans l'objet contact avec verification des données au préalable
 
 firstName.addEventListener("input", function(event){
@@ -345,42 +342,29 @@ const orderForm = document.querySelector(".cart__order__form");
 console.log("order form", orderForm);
 orderForm.addEventListener("submit", function(event){
   event.preventDefault();
- /* localStorage.setItem("contact",JSON.stringify(user));*/
+ localStorage.setItem("contact",JSON.stringify(user));
   fetch("http://localhost:3000/api/products/order",{
   method:"POST",
   headers:{
     "Accept":"application/json",
-    "Content-Type":"application/json"  
+    "Content-Type":"application/json", 
   },
-  body:JSON.stringify(user)
+  body:JSON.stringify(user),
   }).then(function(res){
     if(res.ok){
-      console.log("res", res)
+    
       return res.json();
-      /*return JSON.parse(res);*/
     }
   }).then(function(value){
+  
     console.log("value promise post",value)
   /* console.log("value promise postdata",value.postData.text)*/
 
+  }).then(function(error){
+    console.log("error",error)
   });
- 
-  
+  console.log("req",req)
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
+ 
 
