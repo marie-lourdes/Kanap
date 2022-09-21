@@ -316,21 +316,35 @@ console.log("order form", orderForm);
 orderForm.addEventListener("submit", function(event){
   event.preventDefault();
   localStorage.setItem("contact",JSON.stringify(user));
+  
 });
 localStorage.setItem("contact",JSON.stringify(user));
 command= JSON.parse(localStorage.getItem("contact"));
 
 
 console.log("class instance contact apres remplissage du formulaire", user);
-
-
-
-
-
 console.log("tabcartstorage map",commandProduit)
-localStorage.setItem("contact",JSON.stringify(user));
-command= JSON.parse(localStorage.getItem("contact"));
 console.log("tab user commande", user)
+// fonction pour generer numero de commande
+function generateNumberOrder(){
+  return Math.floor(Math.random()*100);
+}
+console.log( "fonction numberOrder", generateNumberOrder())
+//creation d'un tableau qui va recuperer des valeurs aleatoire
+let numberOrder=[0,0,0,0]
+for(number of numberOrder){
+  console.log("number", number)
+  number=generateNumberOrder();// genere sur l index
+  console.log("number  avec nombre aleatoir", numberOrder)
+  numberOrder[number]= generateNumberOrder(); //genere sur la valeur de l'index
+}
+console.log(" tableau number Order non tronqué",numberOrder)
+numberOrder.length=4;
+console.log(" tableau number Order  tronqué",numberOrder)
+/*console.log(" tableau number Order",tabNumberOrder)*/
+/*console.log(" tableau numbersplice",tabNumber)*/
+let orderId= numberOrder.join("%");
+console.log("orderId", orderId)
 
 
 
