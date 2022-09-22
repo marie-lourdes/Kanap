@@ -298,8 +298,6 @@ let commandProducts= JSON.parse(localStorage.getItem("products"));
 
 console.log("tabcartstorage map",products)
 
-
-
 //Enregistrement de l object contact dans localstorage et post object contact
 const orderForm = document.querySelector(".cart__order__form");
 console.log("order form", orderForm);
@@ -307,7 +305,7 @@ orderForm.addEventListener("submit", function(event){
   event.preventDefault();
   commandContact=localStorage.setItem("contact",JSON.stringify(contact));
   commandProducts=localStorage.setItem("products",JSON.stringify(products));
-  fetch("http://localhost:3000/api/products/"+"order",{
+  fetch("http://localhost:3000/api/products/order",{
   method:"POST",
   headers:{
     "Accept":"application/json",
@@ -324,12 +322,9 @@ orderForm.addEventListener("submit", function(event){
   
     console.log("value promise post",value)
     console.log("orderid ",value.orderId)
-    let commandProductApi=localStorage.setItem("commandProductsApi",JSON.stringify(value));
-    let idOrder=localStorage.setItem("idOrder",JSON.stringify(value.orderId));
-   /*let url= new URL(window.location);
-  console.log("url",url );*/
-  /* console.log("value promise postdata",value.postData.text)*/
-
+    // recupération du numero de commande crypté dans la reponse de l api et rediraction vers l url réecrite de la page de confirmation
+    window.location.href= `./confirmation.html?orderId=${value.orderId}`
+  
   }).then(function(error){
     console.log("error",error)
   });
