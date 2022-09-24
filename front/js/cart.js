@@ -6,6 +6,7 @@ console.log("tabcart storage", tabCartStorage)
  pour donner le total du prix et de la quantité de tous les produits ajoutés au panier et enregistrés dans le localstorage*/
 let totalPrice = 0;
 let totalQuantite = 0;
+
 // récupération et affichage dans le DOM des produits du localStorag
 
 for (let productSelected of tabCartStorage) {
@@ -90,7 +91,7 @@ for (let productSelected of tabCartStorage) {
     let id = dataArticleProduct.getAttribute("data-id");
     console.log("inputQuantity value modifié listener", dataArticleProduct);
 
-    // productSelected  sans modification(previousQuantite) et product selected avec la modification de la valeur de l input stockée pour la comparaison pour le total de la quantité et le total du prix 
+    // productSelected  sans modification (previousQuantite) et product selected avec la modification de la valeur de l input stockée pour la comparaison pour le total de la quantité et le total du prix 
     let previousQuantite = productSelected.quantite;
     productSelected.quantite = val;
     console.log( "productedSelected quantite val",productSelected.quantite)
@@ -110,8 +111,8 @@ for (let productSelected of tabCartStorage) {
       }
     });
 
-    // on reenregistre dans le locastorage le tableau de produits stockés avec les quantité modifiés et recupere le tableau modifé de la tabCartStorage
-    // création fonction pour enregistrer les modifications du produit dans le localstorage et pour recuperer les nouvelles modification enregistrées dans le locastorage
+    // création fonction:on reenregistre dans le locastorage le tableau de produits stockés avec les quantité modifiés et recupere le tableau modifé de la tabCartStorage
+      
     const updateProductModified= () => {
       localStorage.setItem("produits", JSON.stringify(tabCartStorage));
       tabCartStorage = JSON.parse(localStorage.getItem("produits"));
@@ -145,9 +146,7 @@ for (let productSelected of tabCartStorage) {
 
       console.log(" total quantité function descrementé", totalQuantite);
     };
-
      updateProductModified();
-
   });
 
   // bouton supprimer produit
@@ -158,10 +157,11 @@ for (let productSelected of tabCartStorage) {
     let color = deleteProduct.getAttribute("data-color");
     let id = deleteProduct.getAttribute("data-id");
     console.log("deleteproduct", deleteProduct);
+
     /* verifier la data color et data-id corresponde au idproduit et couleur du produit de la tabCartStorage avec filter(),
      pour supprimer   dans la TabCartStorage*/
     tabCartStorage.forEach(elem => {
-      // supression de l element  par l event click dans le localstorage
+      // supression de l element  par l'event click dans le localstorage
       tabCartStorage = tabCartStorage.filter(function (elem) {
         if (elem.idProduit !== id) return true;
         if (elem.couleur !== color) return true;
@@ -187,7 +187,7 @@ console.log("produit selected storage", tabCartStorage);
 
 //Récupération dans  un objet contact des données saisies par  l'utilisateur dans le fomulaire 
 
-//creation de l objet contact
+//création de l objet contact
 const firstName= document.getElementById("firstName");
 const lastName= document.getElementById("lastName");
 const address= document.getElementById("address");
@@ -202,33 +202,31 @@ let contact = {
 
 }
 
-// recuperation des données du formulaire dans l'objet contact avec verification des données au préalable*/
+// recuperation des données du formulaire dans l'objet contact avec verification des données au préalable
 
 firstName.addEventListener("input", function(event){
   let msgError= document.getElementById("firstNameErrorMsg");
-  let datafirstName=event.target.value;
- 
-  console.log("valeur is nan",isNaN(datafirstName));
-  
-  if(isNaN(datafirstName)!=true){
-   error(firstName,msgError,"Prénom invalide");
+  let dataFirstName=event.target.value;
+  console.log("test dataFirstName", isNaN(dataFirstName));
+  if(isNaN(dataFirstName)!=true){
+   error(firstName,msgError, "Prénom invalide");
   }else {
-    contact.firstName= datafirstName;
- 
+    contact.firstName= dataFirstName;
   }
-  console.log("contact input value",contact);
+  console.log("contact input value", contact);
 });
 
 lastName.addEventListener("input", function(event){
   let msgError= document.getElementById("lastNameErrorMsg");
-  let datalastName=event.target.value
-  if(isNaN(datalastName)!=true){
+  let dataLastName=event.target.value
+  console.log("test dataLasttName", isNaN(dataLastName));
+
+  if(isNaN(dataLastName)!=true){
     error(lastName,msgError,"Nom invalide");
   }else {
-   contact.lastName=datalastName;
-    
+   contact.lastName= dataLastName; 
   }
-  console.log("contact input value",contact);
+  console.log("contact input value", contact);
 });
 
 address.addEventListener("change", function(event){
@@ -238,23 +236,24 @@ address.addEventListener("change", function(event){
  //test des normes du regex adresse avec les données de l'utilisateur
   let testRegex=regex.test(dataAdress);
   console.log("test regex", testRegex);
+
   if(testRegex){
     contact.address=dataAdress;
-   
   }else{
     error(address,msgError,"Adresse invalide, Ex: 45, boulevard de Paris");
   }
-    console.log("contact input value",contact);
+  console.log("contact input value", contact);
 });
 
 city.addEventListener("input", function(event){
   let msgError= document.getElementById("cityErrorMsg");
   let dataCity=event.target.value;
+  console.log("test city", isNaN(dataCity));
+
   if(isNaN(dataCity)!=true){
     error(city,msgError,"Ville non valide");
   }else {
-    contact.city=dataCity;
-    
+    contact.city= dataCity; 
   }
   console.log("contact input value",contact)
 });
@@ -266,13 +265,13 @@ email.addEventListener("change", function(event){
   //test des normes du regex email avec les données de l'utilisateur
   let testRegexEmail=regexEmail.test(emailAddress);
   console.log("test regex email", testRegexEmail);
+
   if(testRegexEmail){
    contact.email=emailAddress;
-
   }else{
     error(email,msgError,"Email invalide, Ex: contact@kanap.com");
   }
-    console.log("contact input value",contact);
+  console.log("contact input value", contact);
 });
 
 // function error input
@@ -280,26 +279,27 @@ function error(inputDataUser,msgError,txtError){
   inputDataUser.setAttribute("disabled", true);
   inputDataUser.style.border= " 2px solid #fbbcbc";
   msgError.textContent=txtError;
-
 }
-//enregistrement de l obejt user dans le localstorage avec les données utilisateur
+
+//enregistrement de l objet contact dans le localstorage avec les données utilisateur
 localStorage.setItem("contact",JSON.stringify(contact));
 let commandContact= JSON.parse(localStorage.getItem("contact"));
 
 //Création du tableau produit avec l' id des produits
 let products=[];
-
 products=tabCartStorage.map(elem => {
-  return elem.idProduit; /*(elem.nameProduct, elem.couleur,elem.quantite);*/
+  return elem.idProduit; 
 });
 
-console.log("tableau products", products)
+//enregistrement du tableau products dans le localstorage l 'id des produits
 localStorage.setItem("products",JSON.stringify(products));
 let commandProducts= JSON.parse(localStorage.getItem("products"));
 
-console.log("tabcartstorage map",products)
+console.log("tabcartstorage map id",products)
 
-//Enregistrement de l object contact dans localstorage et post object contact
+/*Au clic du bouton commander:
+-Enregistrement de l objet contact et du tableau id produit dans localstorage
+- et requete post sur l api de l objet contact et du tableau id produit*/
 const orderForm = document.querySelector(".cart__order__form");
 console.log("order form", orderForm);
 orderForm.addEventListener("submit", function(event){
@@ -313,23 +313,22 @@ orderForm.addEventListener("submit", function(event){
     "Content-Type":"application/json", 
   },
   body:JSON.stringify({contact,products})
-  }).then(function(res){
+  })
+  .then(function(res){
     console.log("reponse", res)
     if(res.ok){
-  
       return res.json();
     }
-  }).then(function(value){
-  
+  })
+  .then(function(value){
+   // recupération du numero de commande crypté dans la reponse de l api et redirection vers l url réecrite de la page de confirmation
     console.log("value promise post",value)
     console.log("orderid ",value.orderId)
-    // recupération du numero de commande crypté dans la reponse de l api et rediraction vers l url réecrite de la page de confirmation
-    window.location.href= `./confirmation.html?orderId=${value.orderId}`
-  
-  }).catch(function(error){
+    window.location.href= `./confirmation.html?orderId=${value.orderId}` 
+  })
+  .catch(function(error){
     console.log("error",error)
   });
- 
 });
  
  
