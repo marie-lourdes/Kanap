@@ -326,7 +326,7 @@ orderForm.addEventListener("submit", function(event){
     // recupération du numero de commande crypté dans la reponse de l api et rediraction vers l url réecrite de la page de confirmation
     window.location.href= `./confirmation.html?orderId=${value.orderId}`
   
-  }).then(function(error){
+  }).catch(function(error){
     console.log("error",error)
   });
  
