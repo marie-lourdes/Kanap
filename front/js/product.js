@@ -43,7 +43,7 @@ productSelected.then(function(productSelect){
         selectColor.appendChild(optionColor);
     };
   
-    // ajout du panier
+    // ajout du panier avec une "boite à outil de fonctions" class et ses methodes statiques
     class addCart {
         static addQuantity(inputQuantity){
             inputQuantity= document.querySelector("#quantity");
@@ -62,9 +62,10 @@ productSelected.then(function(productSelect){
             return selectColor;
         };
         static addQuantityColorWindowStorage(inputQuantity,selectColor){
+            //recuperation de la quantité et de la couleur  en appelant les methodes statique addQuantity et addColor
             inputQuantity= addCart.addQuantity();
             selectColor= addCart.addColor();
-            // recupération de la promesse resolue productSelected
+            // recupération de la promesse resolue productSelected et création du panier productStorage
             let btnAddCart= document.querySelector("#addToCart");
             btnAddCart.addEventListener("click", function(){
                 let productStorage= {
@@ -76,8 +77,8 @@ productSelected.then(function(productSelect){
                     priceProduct:productSelect.price,
                     quantite: inputQuantity.value,   
                 };
-               
-               const addProductSelected= ()=>{
+                //Enregistrement du panier dans le localstorage
+               const addProductSelected= ()=>{ //création de la fonction qui enregistre le panier productStorage
                     tabCartStorage.push(productStorage);
                     localStorage.setItem("produits",JSON.stringify(tabCartStorage));
                };
@@ -85,9 +86,7 @@ productSelected.then(function(productSelect){
                 let tabCartStorage= JSON.parse(localStorage.getItem("produits"));
                 // si le localstorage est vide on crée un nouveau tableau
                 if(tabCartStorage == null){
-                            
                     tabCartStorage= [];
-                
                     addProductSelected();
                     console.log("tableau storage",tabCartStorage);
                 
@@ -101,22 +100,18 @@ productSelected.then(function(productSelect){
                                 console.log("product quantité ++", product.quantite),
                                 localStorage.setItem("produits",JSON.stringify(tabCartStorage)),
                                 (tabCartStorage= JSON.parse(localStorage.getItem("produits")))
-
                             );
                         }
-
                     }              
                     addProductSelected();
-                }
-                
+                }               
                 return  tabCartStorage= JSON.parse(localStorage.getItem("produits"));                      
-            });             
-            
+            });                        
          };    
     };
     addCart.addQuantityColorWindowStorage();
 }).catch(function(error){
-    console.log("error response", error);
+    console.log("error reponse", error);
    
 });
 

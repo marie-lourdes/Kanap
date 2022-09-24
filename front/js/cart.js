@@ -2,6 +2,8 @@
 let tabCartStorage = JSON.parse(localStorage.getItem("produits"));
 console.log("tabcart storage", tabCartStorage)
 
+/* compteur à zero pour le prix et la quantité  dont les valeurs  s'accumuleront lors de la boucle du panier "tabCartStorage"
+ pour donner le total du prix et de la quantité de tous les produits ajoutés au panier et enregistrés dans le localstorage*/
 let totalPrice = 0;
 let totalQuantite = 0;
 // récupération et affichage dans le DOM des produits du localStorag
@@ -76,7 +78,7 @@ for (let productSelected of tabCartStorage) {
 
  console.log("typeof", typeof inputQuantity.value == "number")
 
-  // Bouton modifier quantité:Recuperation des quantité modifié avec listener sur les inputs de chaque article des produits du storage
+  // Bouton modifier quantité:Recuperation des quantités modifié avec listener sur les inputs de chaque article des produits du storage
   inputQuantity.addEventListener("change", function (event) {
     let val = event.target.value;
     console.log("productselected modifié", productSelected.quantite)
@@ -95,7 +97,7 @@ for (let productSelected of tabCartStorage) {
 
     tabCartStorage.forEach(elem => {
       if (elem.couleur === color && elem.idProduit === id) {
-        //recueperation de la quantité modifiée
+        //recupération de la quantité modifiée
         elem.quantite = val;
         console.log("elem quantité val",elem.quantite)
         // calcul de la quantité modifié avec le prix du produit
@@ -108,10 +110,14 @@ for (let productSelected of tabCartStorage) {
       }
     });
 
-    // on reenregistre dans le locastorage le tableau de produits stockés avec les quantité modifié et recupere le tableau modifé de la tabCartStorage
-    localStorage.setItem("produits", JSON.stringify(tabCartStorage));
-    console.log("TAB CART STORAGE", tabCartStorage);
-    tabCartStorage = JSON.parse(localStorage.getItem("produits"));
+    // on reenregistre dans le locastorage le tableau de produits stockés avec les quantité modifiés et recupere le tableau modifé de la tabCartStorage
+    // création fonction pour enregistrer les modifications du produit dans le localstorage et pour recuperer les nouvelles modification enregistrées dans le locastorage
+    const updateProductModified= () => {
+      localStorage.setItem("produits", JSON.stringify(tabCartStorage));
+      tabCartStorage = JSON.parse(localStorage.getItem("produits"));
+    }
+    updateProductModified();
+    console.log("tabCartStorage avec quantité modifié", tabCartStorage);
 
     // comparaison  de la quantité du produit et de la quantité modifié du produit par l input  pour incrementer ou desincrementer le total de quantité
    
@@ -126,8 +132,7 @@ for (let productSelected of tabCartStorage) {
       totalPrice += productSelected.priceProduct * (productSelected.quantite - previousQuantite);
       totalPriceElement.textContent = totalPrice;
 
-      localStorage.setItem("produits", JSON.stringify(tabCartStorage));
-      tabCartStorage = JSON.parse(localStorage.getItem("produits"));
+      updateProductModified();
 
       console.log(" total quantité function incrementé ", totalQuantite);
 
@@ -136,15 +141,12 @@ for (let productSelected of tabCartStorage) {
       totalQuantityElement.textContent = totalQuantite;
       totalPrice -= productSelected.priceProduct * (previousQuantite - productSelected.quantite);
       totalPriceElement.textContent = totalPrice;
-
-      localStorage.setItem("produits", JSON.stringify(tabCartStorage));
-      tabCartStorage = JSON.parse(localStorage.getItem("produits"));
+      updateProductModified();
 
       console.log(" total quantité function descrementé", totalQuantite);
     };
 
-    localStorage.setItem("produits", JSON.stringify(tabCartStorage));
-    tabCartStorage = JSON.parse(localStorage.getItem("produits"));
+     updateProductModified();
 
   });
 
@@ -157,7 +159,7 @@ for (let productSelected of tabCartStorage) {
     let id = deleteProduct.getAttribute("data-id");
     console.log("deleteproduct", deleteProduct);
     /* verifier la data color et data-id corresponde au idproduit et couleur du produit de la tabCartStorage avec filter(),
-     pour supprimer  supprimer dans la TabCartStorage*/
+     pour supprimer   dans la TabCartStorage*/
     tabCartStorage.forEach(elem => {
       // supression de l element  par l event click dans le localstorage
       tabCartStorage = tabCartStorage.filter(function (elem) {
@@ -171,19 +173,18 @@ for (let productSelected of tabCartStorage) {
         deleteProduct.remove();
         console.log("tabcartstorage apres supression element", tabCartStorage);
       }
-      console.log("evenet", event)
+      console.log("event", event)
     });
 
-    // on reenregistre dans le locastorage le tableau de produits stockés avec les produits non supprimé par le filter  dans la tabCartStorage
-    /* on recupere la TabCartStorage avec les elements du DOM generé par la boucle for avec la mise à jour de la tabCartStorage 
-   dans lequel la boucle itere sur chaque element et les affiche un a un et sans l element supprimé*/
-    localStorage.setItem("produits", JSON.stringify(tabCartStorage));
-    tabCartStorage = JSON.parse(localStorage.getItem("produits"));
+    /*- on reenregistre dans le locastorage le tableau de produits stockés avec les produits non supprimé par le filter  dans la tabCartStorage
+      -on recupere la TabCartStorage avec les elements du DOM generé par la boucle for avec la mise à jour de la tabCartStorage 
+    dans lequel la boucle itere sur chaque element et les affiche un a un et sans l element supprimé */
+    updateProductModified();
   });
 };
 
 console.log("produit selected storage", tabCartStorage);
-/*..................................modification...........................................*/
+
 //Récupération dans  un objet contact des données saisies par  l'utilisateur dans le fomulaire 
 
 //creation de l objet contact
@@ -328,11 +329,7 @@ orderForm.addEventListener("submit", function(event){
   }).then(function(error){
     console.log("error",error)
   });
-
-
-  
-
-  
+ 
 });
  
  
