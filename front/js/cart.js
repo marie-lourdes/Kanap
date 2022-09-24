@@ -127,7 +127,7 @@ for( let productSelected of tabCartStorage ){
     console.log( "total quantité  ", totalQuantite );
     console.log( "product selected total", productSelected.quantite )
     // si la quantité modifiée est supérieur à la quantité précédente on incremente la quantité total des articles et on recalcule le prix total avec la difference de quantité entre la variable previousQuantite (quantité non modifié) et la variable productSelected.quantite modifié
-    if( productSelected.quantite > previousQuantite ) {
+    if( productSelected.quantite > previousQuantite ){
       totalQuantite = totalQuantite + ( productSelected.quantite - previousQuantite );
       totalQuantityElement.textContent = totalQuantite;
       totalPrice += productSelected.priceProduct * ( productSelected.quantite - previousQuantite );
@@ -135,14 +135,13 @@ for( let productSelected of tabCartStorage ){
       updateProductModified();
       console.log(" total quantité function incrementé ", totalQuantite);
     // si la quantité modifiée est inférieure à la quantité précédente on desincremente la quantité total des articles et on recalcule le prix total avec la difference de quantité entre la variable previousQuantite (quantité non modifié) et la variable productSelected.quantite modifié
-    } else if (productSelected.quantite < previousQuantite) {
-      totalQuantite = totalQuantite - (previousQuantite - productSelected.quantite);
+    } else if ( productSelected.quantite < previousQuantite ){
+      totalQuantite = totalQuantite - ( previousQuantite - productSelected.quantite );
       totalQuantityElement.textContent = totalQuantite;
-      totalPrice -= productSelected.priceProduct * (previousQuantite - productSelected.quantite);
+      totalPrice -= productSelected.priceProduct * ( previousQuantite - productSelected.quantite );
       totalPriceElement.textContent = totalPrice;
       updateProductModified();
-
-      console.log(" total quantité function descrementé", totalQuantite);
+      console.log( " total quantité function descrementé", totalQuantite );
     };
      updateProductModified();
   });
@@ -151,29 +150,30 @@ for( let productSelected of tabCartStorage ){
 
   // bouton supprimer produit
 
-  deleteItem.addEventListener("click", function (event) {
+  deleteItem.addEventListener( "click", function ( event ){
     event.preventDefault();
-    let deleteProduct = deleteItem.closest("article");
-    let color = deleteProduct.getAttribute("data-color");
-    let id = deleteProduct.getAttribute("data-id");
-    console.log("deleteproduct", deleteProduct);
+    let deleteProduct = deleteItem.closest( "article" );
+    let color = deleteProduct.getAttribute( "data-color" );
+    let id = deleteProduct.getAttribute( "data-id" );
+    console.log( "deleteproduct", deleteProduct );
 
     /* verifier la data color et data-id corresponde au idproduit et couleur du produit de la tabCartStorage avec filter(),
      pour supprimer   dans la TabCartStorage*/
-    tabCartStorage.forEach(elem => {
-      // supression de l element  par l'event click dans le localstorage
-      tabCartStorage = tabCartStorage.filter(function (elem) {
-        if (elem.idProduit !== id) return true;
-        if (elem.couleur !== color) return true;
-        console.log("elem produit", elem);
+    tabCartStorage.forEach( elem => {
+      /*- supression de l'élément  par l'event click dans le localstorage en vérifiant de supprimer le produit stocké qui correspond a la data-id et à la dat-color de l article du DOM du produit
+         -en  generant un nouveau tableau de la tabCartStorage avec les elements qui ont un id et une couleur differente de l'element supprimé*/
+      tabCartStorage = tabCartStorage.filter( function ( elem ){
+        if ( elem.idProduit !== id ) return true;
+        if ( elem.couleur !== color ) return true;
+        console.log( "elem produit", elem );
       });
 
-      //suppression de l'article du produit  dans le DOM en  generant un tableau avec les elements qui ont un id et une couleur differente de l'element supprimé
-      if (elem.couleur === color && elem.idProduit === id) {
+      //suppression de l'article du produit  dans le DOM avec la verification de la correspondance entre l'idProduit et la couleur du produit stocké et la data-id et data-color de l'article du produit
+      if ( elem.couleur === color && elem.idProduit === id ){
         deleteProduct.remove();
-        console.log("tabcartstorage apres supression element", tabCartStorage);
+        console.log( "tabcartstorage apres supression element", tabCartStorage );
       }
-      console.log("event", event)
+      console.log( "event", event );
     });
 
     /*- on reenregistre dans le locastorage le tableau de produits stockés avec les produits non supprimé par le filter  dans la tabCartStorage
@@ -183,16 +183,16 @@ for( let productSelected of tabCartStorage ){
   });
 };
 
-console.log("produit selected storage", tabCartStorage);
+console.log( "produit selected storage", tabCartStorage );
 
 //....................Formulaire: Récupération dans  un objet contact des données saisies par  l'utilisateur................ 
 
 //création de l objet contact
-const firstName= document.getElementById("firstName");
-const lastName= document.getElementById("lastName");
-const address= document.getElementById("address");
-const city= document.getElementById("city");
-const email= document.getElementById("email");
+const firstName = document.getElementById( "firstName" );
+const lastName = document.getElementById( "lastName");
+const address = document.getElementById( "address" );
+const city = document.getElementById( "city" );
+const email = document.getElementById( "email" );
 
 let contact = {
   firstName: firstName,
@@ -200,105 +200,104 @@ let contact = {
   address: address,
   city: city,
   email: email
-
 };
 
-// recuperation des données du formulaire dans l'objet contact avec verification des données au préalable avant de le stocker dans l'objet contact
+// recuperation des données du formulaire dans l'objet contact avec verification des données au préalable (avec message d'erreur) avant de les stocker dans l'objet contact
 
-firstName.addEventListener("input", function(event){
-  let msgError= document.getElementById("firstNameErrorMsg");
-  let dataFirstName=event.target.value;
-  console.log("test dataFirstName", isNaN(dataFirstName));
-  if(isNaN(dataFirstName)!=true){
-   error(firstName,msgError, "Prénom invalide");
-  }else {
-    contact.firstName= dataFirstName;
+firstName.addEventListener( "input", function( event ){
+  let msgError = document.getElementById( "firstNameErrorMsg" );
+  let dataFirstName = event.target.value;
+  console.log( "test dataFirstName", isNaN( dataFirstName ) );
+  if( isNaN( dataFirstName ) != true ){
+   error( firstName, msgError, "Prénom invalide" );
+  }else{
+    contact.firstName = dataFirstName;
+  }
+  console.log( "contact input value", contact );
+});
+
+lastName.addEventListener( "input", function( event ){
+  let msgError = document.getElementById( "lastNameErrorMsg" );
+  let dataLastName = event.target.value
+  console.log( "test dataLasttName", isNaN( dataLastName ) );
+
+  if( isNaN( dataLastName ) != true ){
+    error( lastName, msgError, "Nom invalide" );
+  }else{
+   contact.lastName = dataLastName; 
   }
   console.log("contact input value", contact);
 });
 
-lastName.addEventListener("input", function(event){
-  let msgError= document.getElementById("lastNameErrorMsg");
-  let dataLastName=event.target.value
-  console.log("test dataLasttName", isNaN(dataLastName));
-
-  if(isNaN(dataLastName)!=true){
-    error(lastName,msgError,"Nom invalide");
-  }else {
-   contact.lastName= dataLastName; 
-  }
-  console.log("contact input value", contact);
-});
-
-address.addEventListener("change", function(event){
-  let msgError= document.getElementById("addressErrorMsg");
-  let dataAdress=event.target.value;
-  const regex=/^(([A-Z])*(\d+)([A-Z])*)(-|\/|&)*(([A-Z])*(\d+)([A-Z])*)*((\/)*(([A-Z])*(\d+)([A-Z])*))*/;
+address.addEventListener( "change", function( event ){
+  let msgError = document.getElementById( "addressErrorMsg" );
+  let dataAdress = event.target.value;
+  const regex = /^(([A-Z])*(\d+)([A-Z])*)(-|\/|&)*(([A-Z])*(\d+)([A-Z])*)*((\/)*(([A-Z])*(\d+)([A-Z])*))*/;
  //test des normes du regex adresse avec les données de l'utilisateur
-  let testRegex=regex.test(dataAdress);
-  console.log("test regex", testRegex);
+  let testRegex = regex.test( dataAdress );
+  console.log( "test regex", testRegex );
 
-  if(testRegex){
-    contact.address=dataAdress;
+  if( testRegex ){
+    contact.address = dataAdress;
   }else{
-    error(address,msgError,"Adresse invalide, Ex: 45, boulevard de Paris");
+    error( address, msgError, "Adresse invalide, Ex: 45, boulevard de Paris" );
   }
-  console.log("contact input value", contact);
+  console.log( "contact input value", contact );
 });
 
-city.addEventListener("input", function(event){
-  let msgError= document.getElementById("cityErrorMsg");
-  let dataCity=event.target.value;
-  console.log("test city", isNaN(dataCity));
+city.addEventListener( "input", function( event ){
+  let msgError = document.getElementById( "cityErrorMsg" );
+  let dataCity = event.target.value;
+  console.log( "test city", isNaN( dataCity ) );
 
-  if(isNaN(dataCity)!=true){
-    error(city,msgError,"Ville non valide");
-  }else {
-    contact.city= dataCity; 
+  if( isNaN( dataCity ) != true ){
+    error( city, msgError, "Ville non valide" );
+  }else{
+    contact.city = dataCity; 
   }
-  console.log("contact input value",contact)
+  console.log( "contact input value", contact );
 });
 
-email.addEventListener("change", function(event){
-  let msgError= document.getElementById("emailErrorMsg");
-  let emailAddress=event.target.value;
-  const regexEmail=/^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
+email.addEventListener( "change", function( event ){
+  let msgError = document.getElementById( "emailErrorMsg" );
+  let emailAddress = event.target.value;
+  const regexEmail = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
   //test des normes du regex email avec les données de l'utilisateur
-  let testRegexEmail=regexEmail.test(emailAddress);
-  console.log("test regex email", testRegexEmail);
+  let testRegexEmail = regexEmail.test( emailAddress );
+  console.log( "test regex email", testRegexEmail );
 
-  if(testRegexEmail){
-   contact.email=emailAddress;
+  if( testRegexEmail ){
+   contact.email = emailAddress;
   }else{
-    error(email,msgError,"Email invalide, Ex: contact@kanap.com");
+    error( email, msgError, "Email invalide, Ex: contact@kanap.com" );
   }
   console.log("contact input value", contact);
 });
 
-// function error input
-function error(inputDataUser,msgError,txtError){
-  inputDataUser.setAttribute("disabled", true);
-  inputDataUser.style.border= " 2px solid #fbbcbc";
-  msgError.textContent=txtError;
+// function error input pour un feedback visuel
+function error( inputDataUser, msgError, txtError ){
+  inputDataUser.setAttribute( "disabled", true );
+  inputDataUser.style.border = "2px solid #fbbcbc";
+  msgError.textContent = txtError;
 }
 
 //enregistrement de l objet contact dans le localstorage avec les données utilisateur
-localStorage.setItem("contact",JSON.stringify(contact));
-let commandContact= JSON.parse(localStorage.getItem("contact"));
+localStorage.setItem( "contact", JSON.stringify( contact ) );
+let commandContact = JSON.parse(localStorage.getItem( "contact" ) );
 
 //....................Récupération des id produit  dans  un tableau products ................ 
 
-//Création du tableau produit avec l' id des produits
-let products=[];
-products=tabCartStorage.map(elem => {
+//Création du tableau products avec la selection de l' id des produits stockés dans le localStorage
+let products = [];
+products = tabCartStorage.map( elem => {
   return elem.idProduit; 
 });
 
-//enregistrement du tableau products dans le localstorage l 'id des produits
-localStorage.setItem("products",JSON.stringify(products));
-let commandProducts= JSON.parse(localStorage.getItem("products"));
+//enregistrement du tableau products dans le localstorage avec l 'id des produits
+localStorage.setItem( "products", JSON.stringify( products ) );
+let commandProducts = JSON.parse( localStorage.getItem( "products" ) );
 
-console.log("tabcartstorage map id",products)
+console.log( "tabcartstorage map id", products );
 
 //....................Formulaire: Bouton commander ................ 
 
@@ -306,34 +305,34 @@ console.log("tabcartstorage map id",products)
 -Enregistrement de l objet contact et du tableau id produit dans localstorage
 - et requete POST sur l api de l objet contact et du tableau id produit*/
 
-const orderForm = document.querySelector(".cart__order__form");
-console.log("order form", orderForm);
-orderForm.addEventListener("submit", function(event){
+const orderForm = document.querySelector( ".cart__order__form" );
+console.log( "order form", orderForm );
+orderForm.addEventListener( "submit", function( event ){
   event.preventDefault();
-  commandContact=localStorage.setItem("contact",JSON.stringify(contact));
-  commandProducts=localStorage.setItem("products",JSON.stringify(products));
-  fetch("http://localhost:3000/api/products/order",{
-  method:"POST",
-  headers:{
-    "Accept":"application/json",
-    "Content-Type":"application/json", 
+  commandContact = localStorage.setItem( "contact", JSON.stringify( contact ) );
+  commandProducts = localStorage.setItem( "products", JSON.stringify( products ) );
+  fetch( "http://localhost:3000/api/products/order", {
+  method: "POST",
+  headers: {
+    "Accept": "application/json",
+    "Content-Type": "application/json" 
   },
-  body:JSON.stringify({contact,products})
+  body: JSON.stringify( {contact, products} )
   })
-  .then(function(res){
-    console.log("reponse", res)
-    if(res.ok){
+  .then( function( res ){
+    console.log("reponse", res);
+    if( res.ok ){
       return res.json();
     }
   })
-  .then(function(value){
+  .then( function( value ){
    // recupération du numero de commande crypté dans la reponse de l api et redirection vers l url réecrite de la page de confirmation
-    console.log("value promise post",value)
-    console.log("orderid ",value.orderId)
-    window.location.href= `./confirmation.html?orderId=${value.orderId}` 
+    console.log( "value promise post", value );
+    console.log( "orderid ", value.orderId );
+    window.location.href = `./confirmation.html?orderId=${value.orderId}`; 
   })
-  .catch(function(error){
-    console.log("error",error)
+  .catch( function( error ){
+    console.log( "error", error );
   });
 });
  
