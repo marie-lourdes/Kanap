@@ -12,10 +12,10 @@ let productSelected= request.then(function(res){
         return res.json();  
     };
 }).catch(function(error){
-    console.log("error", error);
+    console.log("error requête", error);
    
 });
-// recuperation du produit selectionné en objet javascrit 
+// recupération du produit selectionné en objet javascrit  de la promesse productSelected
 productSelected.then(function(productSelect){
     console.log("produit selectionné",productSelect)// verification du contenu de l objet du produit
     //Sélection et création des éléments du DOM et affichage des éléments (détails du produit) dans le DOM de la page produit
@@ -64,7 +64,7 @@ productSelected.then(function(productSelect){
         static addQuantityColorWindowStorage(inputQuantity,selectColor){
             inputQuantity= addCart.addQuantity();
             selectColor= addCart.addColor();
-            // recueperation de la promesse resolue de la requete fetch reqData
+            // recupération de la promesse resolue productSelected
             let btnAddCart= document.querySelector("#addToCart");
             btnAddCart.addEventListener("click", function(){
                 let productStorage= {
@@ -115,25 +115,12 @@ productSelected.then(function(productSelect){
          };    
     };
     addCart.addQuantityColorWindowStorage();
+}).catch(function(error){
+    console.log("error response", error);
+   
 });
 
 
-
-
-
-
-   
-
-
-
-/*inputQuantity.addEventListener("input",function(event){
-
-
-    inputQuantity = event.target.value;
-    
-    console.log("nombre de produit",inputQuantity)
-
-});*/
 
    
 
