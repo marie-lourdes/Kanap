@@ -4,10 +4,10 @@ let request = fetch( "http://localhost:3000/api/products" );
 let requestProducts = request.then( function( res ){
     if( res.ok ){
         return res.json();  
-    };
-}).catch( function( error ){
-    console.log("error", error);
-   
+    }
+})
+.catch( function( error ){
+    console.log( "error", error );  
 });
 
 //............... Récupération des produits retournés par l'api et sous forme d'objet javascript.............
