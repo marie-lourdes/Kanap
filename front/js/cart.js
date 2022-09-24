@@ -299,7 +299,7 @@ console.log("tabcartstorage map id",products)
 
 /*Au clic du bouton commander:
 -Enregistrement de l objet contact et du tableau id produit dans localstorage
-- et requete post sur l api de l objet contact et du tableau id produit*/
+- et requete POST sur l api de l objet contact et du tableau id produit*/
 const orderForm = document.querySelector(".cart__order__form");
 console.log("order form", orderForm);
 orderForm.addEventListener("submit", function(event){
