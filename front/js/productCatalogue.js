@@ -1,6 +1,5 @@
-let requet = fetch( "http://localhost:3000/api/products" );
-console.log( "requete", requet );
 //............ Requête GET des données des produits de l'api et transformation des données au format json en objet javascript...........
+
 let request = fetch( "http://localhost:3000/api/products" );
 let requestProducts = request.then( function( res ){
     if( res.ok ){
@@ -10,7 +9,9 @@ let requestProducts = request.then( function( res ){
     console.log("error", error);
    
 });
+
 //............... Récupération des produits retournés par l'api et sous forme d'objet javascript.............
+
 function reqProducts(){
     let req = requestProducts.then( function( catalogue ){
         console.log( "verification des produits kanapé", catalogue ); 
