@@ -1,4 +1,4 @@
-//recuperation du panier depuis le localStorage
+//................recuperation du panier depuis le localStorage...............
 let tabCartStorage = JSON.parse(localStorage.getItem("produits"));
 console.log("tabcart storage", tabCartStorage)
 
@@ -7,7 +7,7 @@ console.log("tabcart storage", tabCartStorage)
 let totalPrice = 0;
 let totalQuantite = 0;
 
-// récupération et affichage dans le DOM des produits du localStorag
+//.............. récupération et affichage dans le DOM des produits du localStorage..................
 
 for (let productSelected of tabCartStorage) {
   console.log("produit selctionné panier", productSelected);
@@ -78,6 +78,8 @@ for (let productSelected of tabCartStorage) {
   sectionBascket.appendChild(articleBascket);
 
  console.log("typeof", typeof inputQuantity.value == "number")
+  
+  //.......................Bouton modifier quantité produit.....................
 
   // Bouton modifier quantité:Recuperation des quantités modifié avec listener sur les inputs de chaque article des produits du storage
   inputQuantity.addEventListener("change", function (event) {
@@ -149,6 +151,8 @@ for (let productSelected of tabCartStorage) {
      updateProductModified();
   });
 
+  //.......................Bouton supprimer produit.....................
+
   // bouton supprimer produit
 
   deleteItem.addEventListener("click", function (event) {
@@ -185,7 +189,7 @@ for (let productSelected of tabCartStorage) {
 
 console.log("produit selected storage", tabCartStorage);
 
-//Récupération dans  un objet contact des données saisies par  l'utilisateur dans le fomulaire 
+//....................Formulaire: Récupération dans  un objet contact des données saisies par  l'utilisateur dans le fomulaire................ 
 
 //création de l objet contact
 const firstName= document.getElementById("firstName");
@@ -193,6 +197,7 @@ const lastName= document.getElementById("lastName");
 const address= document.getElementById("address");
 const city= document.getElementById("city");
 const email= document.getElementById("email");
+
 let contact = {
   firstName: firstName,
   lastName: lastName,
@@ -200,9 +205,9 @@ let contact = {
   city: city,
   email: email
 
-}
+};
 
-// recuperation des données du formulaire dans l'objet contact avec verification des données au préalable
+// recuperation des données du formulaire dans l'objet contact avec verification des données au préalable avant de le stocker dans l'objet contact
 
 firstName.addEventListener("input", function(event){
   let msgError= document.getElementById("firstNameErrorMsg");
@@ -285,6 +290,8 @@ function error(inputDataUser,msgError,txtError){
 localStorage.setItem("contact",JSON.stringify(contact));
 let commandContact= JSON.parse(localStorage.getItem("contact"));
 
+//....................Récupération des id produit  dans  un tableau products ................ 
+
 //Création du tableau produit avec l' id des produits
 let products=[];
 products=tabCartStorage.map(elem => {
@@ -297,9 +304,12 @@ let commandProducts= JSON.parse(localStorage.getItem("products"));
 
 console.log("tabcartstorage map id",products)
 
+//....................Formulaire: Bouton commander ................ 
+
 /*Au clic du bouton commander:
 -Enregistrement de l objet contact et du tableau id produit dans localstorage
 - et requete POST sur l api de l objet contact et du tableau id produit*/
+
 const orderForm = document.querySelector(".cart__order__form");
 console.log("order form", orderForm);
 orderForm.addEventListener("submit", function(event){
