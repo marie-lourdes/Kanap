@@ -1,9 +1,11 @@
-//recuperation de l id du produit selectionné sur la page  actuelle du produit
+//..............Recuperation de l id du produit selectionné sur la page  actuelle du produit.............
+
 params= new URLSearchParams(window.location.search);
 idSelected= params.get("id");
-
 console.log("id selectionné id selectionné",idSelected)
-// requête du produit selectionné avec son id
+
+//............ Requête du produit selectionné avec son id..................
+
 let request= fetch(`http://localhost:3000/api/products/${idSelected}`);
 console.log("requete",request);// vérification du code http 
 
@@ -15,7 +17,9 @@ let productSelected= request.then(function(res){
     console.log("error requête", error);
    
 });
-// recupération du produit selectionné en objet javascrit  de la promesse productSelected
+
+//................. Recupération du produit selectionné en objet javascrit  de la promesse productSelected...............
+
 productSelected.then(function(productSelect){
     console.log("produit selectionné",productSelect)// verification du contenu de l objet du produit
     //Sélection et création des éléments du DOM et affichage des éléments (détails du produit) dans le DOM de la page produit
@@ -43,8 +47,10 @@ productSelected.then(function(productSelect){
         selectColor.appendChild(optionColor);
     };
   
-    // ajout du panier avec une "boite à outil de fonctions" class et ses methodes statiques
+    //................ Ajout du panier avec une "boite à outil de fonctions" class et ses methodes statiques...............
+
     class addCart {
+         //création de la methode statique  pour recupérer la quantité
         static addQuantity(inputQuantity){
             inputQuantity= document.querySelector("#quantity");
             inputQuantity.addEventListener("input",function(event){
@@ -53,6 +59,8 @@ productSelected.then(function(productSelect){
             });
             return inputQuantity;
         };
+
+        //création de la methode statique  pour recupérer la couleur
         static addColor(selectColor) {
             selectColor= document.querySelector(".item__content__settings__color #colors"); 
             selectColor.addEventListener("input",function(event){
@@ -61,8 +69,10 @@ productSelected.then(function(productSelect){
             });
             return selectColor;
         };
+
+        //création de la methode statique pour enregistrer le panier et  le choix de la couleur et de la quantité du produit
         static addQuantityColorWindowStorage(inputQuantity,selectColor){
-            //recuperation de la quantité et de la couleur  en appelant les methodes statique addQuantity et addColor
+            //recupération de la quantité et de la couleur  en appelant les methodes statique addQuantity et addColor
             inputQuantity= addCart.addQuantity();
             selectColor= addCart.addColor();
             // recupération de la promesse resolue productSelected et création du panier productStorage
@@ -78,7 +88,7 @@ productSelected.then(function(productSelect){
                     quantite: inputQuantity.value,   
                 };
                 //Enregistrement du panier dans le localstorage
-               const addProductSelected= ()=>{ //création de la fonction qui enregistre le panier productStorage
+                const addProductSelected= ()=>{ //création de la fonction qui enregistre le panier productStorage
                     tabCartStorage.push(productStorage);
                     localStorage.setItem("produits",JSON.stringify(tabCartStorage));
                };
