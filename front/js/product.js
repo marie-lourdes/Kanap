@@ -1,7 +1,7 @@
 //..............Recuperation de l id du produit selectionné sur la page  actuelle du produit.............
 
 let params = new URLSearchParams( window.location.search );
-idSelected = params.get( "id" );
+let idSelected = params.get( "id" );
 console.log( "id selectionné id selectionné", idSelected );
 
 //............ Requête du produit selectionné avec son id..................
@@ -47,7 +47,7 @@ productSelected.then( function( productSelect ){
         optionColor.textContent = colorProduct;
        //relier les options au parent <select>
         selectColor.appendChild( optionColor );
-    };
+    }
   
     //................ Ajout du panier avec une "boite à outil de fonctions" class et ses methodes statiques...............
 
@@ -60,7 +60,7 @@ productSelected.then( function( productSelect ){
                 console.log( "nombre de produit", inputQuantity );
             });
             return inputQuantity;
-        };
+        }
 
         //création de la methode statique  pour recupérer la couleur
         static addColor( selectColor ){
@@ -70,7 +70,7 @@ productSelected.then( function( productSelect ){
                 console.log( "couleur", selectColor ); 
             });
             return selectColor;
-        };
+        }
 
         //création de la methode statique pour enregistrer le panier et  le choix de la couleur et de la quantité du produit
         static addQuantityColorWindowStorage( inputQuantity, selectColor ){
@@ -114,13 +114,13 @@ productSelected.then( function( productSelect ){
                                 ( tabCartStorage = JSON.parse( localStorage.getItem( "produits" ) ) )
                             );
                         }
-                    };              
+                    }              
                     addProductSelected();
                 }               
                 return tabCartStorage = JSON.parse( localStorage.getItem( "produits" ) );                      
             });                        
-         };    
-    };
+        }    
+    }
     addCart.addQuantityColorWindowStorage();
 })
 .catch( function( error ){

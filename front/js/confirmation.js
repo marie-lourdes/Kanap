@@ -1,5 +1,5 @@
 //............. Récupération du paramètre orderId dans l'url..............
-let urlConfirmationPage = new URLSearchParams( window.location.search )
+let urlConfirmationPage = new URLSearchParams( window.location.search );
 let orderId = urlConfirmationPage.get( "orderId" );
 console.log( "orderId", orderId ); 
 

@@ -42,10 +42,10 @@ function reqProducts(){
             articleProducts.appendChild( descriptionProduct );
             linkProduct.appendChild( articleProducts );
             productsCatalogue.appendChild( linkProduct );  
-        };    
+        }    
     });
     return req;
-};
+}
 reqProducts();
 
 

@@ -39,7 +39,7 @@ for( let productSelected of tabCartStorage ){
   const divContentSettingItem = document.createElement( "div" );
   divContentSettingItem.setAttribute( "class", "cart__item__content__settings" );
   const divContentQuantityItem = document.createElement( "div" );
-  divContentQuantityItem.setAttribute( "class", "cart__item__content__settings__quantity" )
+  divContentQuantityItem.setAttribute( "class", "cart__item__content__settings__quantity" );
   const quantityItem = document.createElement( "p" );
   quantityItem.textContent = "Qté" + " " + ":";
   const inputQuantity = document.createElement( "input" );
@@ -55,13 +55,13 @@ for( let productSelected of tabCartStorage ){
   deleteItem.setAttribute( "class", "deleteItem" );
   deleteItem.textContent = "Supprimer";
   const totalQuantityElement = document.getElementById( "totalQuantity" );
-  console.log( "span total quantity", totalQuantity );
+  console.log( "span total quantite", totalQuantite );
   const totalPriceElement = document.getElementById( "totalPrice" );
   totalQuantityElement.textContent = `${totalQuantite}`;
   totalPriceElement.textContent = `${totalPrice}`;
-  console.log( "total price", totalPrice )
-  console.log( "total quantité", totalQuantite )
-
+  console.log( "total price", totalPrice );
+  console.log( "total quantité", totalQuantite );
+ 
   divImgItem.appendChild( imgArticle );
   articleBascket.appendChild( divImgItem );
   divDescriptionItem.appendChild( titleItem );
@@ -111,21 +111,16 @@ for( let productSelected of tabCartStorage ){
       }
     });
 
-    // création fonction:on reenregistre dans le locastorage le tableau de produits stockés avec les quantité modifiés et recupere le tableau modifé de la tabCartStorage
-      
-    const updateProductModified= () => {
-      localStorage.setItem( "produits", JSON.stringify( tabCartStorage ) );
-      tabCartStorage = JSON.parse( localStorage.getItem( "produits" ) );
-    }
+    //on reenregistre dans le locastorage le tableau de produits stockés avec les quantité modifiés et recupere le tableau modifé de la tabCartStorage
     updateProductModified();
     console.log( "tabCartStorage avec quantité modifié", tabCartStorage );
 
     // comparaison  de la quantité du produit sans modification de la quantité (previousQuantote) et de la quantité modifiée du produit par l input  pour incrementer ou desincrementer le total de quantité
    
-    console.log( " val", val )
+    console.log( " val", val );
     console.log( "total quantity element avant modification ", totalQuantityElement.textContent );
     console.log( "total quantité  ", totalQuantite );
-    console.log( "product selected total", productSelected.quantite )
+    console.log( "product selected total", productSelected.quantite );
     // si la quantité modifiée est supérieur à la quantité précédente on incremente la quantité total des articles et on recalcule le prix total avec la difference de quantité entre la variable previousQuantite (quantité non modifié) et la variable productSelected.quantite modifié
     if( productSelected.quantite > previousQuantite ){
       totalQuantite = totalQuantite + ( productSelected.quantite - previousQuantite );
@@ -135,16 +130,23 @@ for( let productSelected of tabCartStorage ){
       updateProductModified();
       console.log(" total quantité function incrementé ", totalQuantite);
     // si la quantité modifiée est inférieure à la quantité précédente on desincremente la quantité total des articles et on recalcule le prix total avec la difference de quantité entre la variable previousQuantite (quantité non modifié) et la variable productSelected.quantite modifié
-    } else if ( productSelected.quantite < previousQuantite ){
+    }else if( productSelected.quantite < previousQuantite ){
       totalQuantite = totalQuantite - ( previousQuantite - productSelected.quantite );
       totalQuantityElement.textContent = totalQuantite;
       totalPrice -= productSelected.priceProduct * ( previousQuantite - productSelected.quantite );
       totalPriceElement.textContent = totalPrice;
       updateProductModified();
       console.log( " total quantité function descrementé", totalQuantite );
-    };
+    }
      updateProductModified();
   });
+
+  // création fonction pour enregistrer les modifications du localStorage et récupérer les modifications
+      
+  const updateProductModified= () => {
+    localStorage.setItem( "produits", JSON.stringify( tabCartStorage ) );
+    tabCartStorage = JSON.parse( localStorage.getItem( "produits" ) );
+  };
 
   //.......................Bouton supprimer produit.....................
 
@@ -181,7 +183,7 @@ for( let productSelected of tabCartStorage ){
     dans lequel la boucle itere sur chaque element et les affiche un a un et sans l element supprimé */
     updateProductModified();
   });
-};
+}
 
 console.log( "produit selected storage", tabCartStorage );
 
@@ -218,7 +220,7 @@ firstName.addEventListener( "input", function( event ){
 
 lastName.addEventListener( "input", function( event ){
   let msgError = document.getElementById( "lastNameErrorMsg" );
-  let dataLastName = event.target.value
+  let dataLastName = event.target.value;
   console.log( "test dataLasttName", isNaN( dataLastName ) );
 
   if( isNaN( dataLastName ) != true ){
