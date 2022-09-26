@@ -127,7 +127,7 @@ productSelected.then( function( productSelect ){
                             /*- incrémente la quantité de l'objet "productStorage" qui est représenté par la variable "product" dans la boucle,
                               - on enregistre le panier tableau storage sans ajouter au tableau un nouvel objet "productStorage*/
                             return(
-                                product.quantite++,
+                                product.quantite=+inputQuantity.value,
                                 console.log( "product quantité ++", product.quantite ),
                                 localStorage.setItem( "produits", JSON.stringify( tabCartStorage ) ),
                                 ( tabCartStorage = JSON.parse( localStorage.getItem( "produits" ) ) )
