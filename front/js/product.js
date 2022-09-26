@@ -89,7 +89,7 @@ productSelected.then( function( productSelect ){
             selectColor = addCart.addColor();
             inputQuantity = addCart.addQuantity();
             
-            // recupération de la promesse resolue productSelected et création du panier productStorage
+            // recupération de la promesse resolue productSelected et création de l'objet dub produit ajouté au panierproductStorage
             let btnAddCart = document.querySelector( "#addToCart" );
             btnAddCart.addEventListener( "click", function(){
                 let productStorage = {
@@ -102,23 +102,30 @@ productSelected.then( function( productSelect ){
                     quantite: inputQuantity.value  
                 };
 
-                //création de la fonction pour l'enregistrement du panier dans le localstorage
-                const addProductSelected = () => { //création de la fonction qui enregistre le panier productStorage
+                //création de la fonction pour l'enregistrement du panier dans un tableau dans le localstorage
+                const addProductSelectedStorage = () => { //création de la fonction qui enregistre le panier productStorage et l'objet productStorage
                     tabCartStorage.push( productStorage );
                     localStorage.setItem( "produits", JSON.stringify( tabCartStorage ) );
                };
             
                 let tabCartStorage = JSON.parse( localStorage.getItem( "produits" ) );
+                console.log("tableau storage avec valeur null ou valeur contenant le panier productStorage",tabCartStorage)
                 // si le localstorage est vide on crée un nouveau tableau
                 if(tabCartStorage == null){
+                    console.log( " panier vide", tabCartStorage );
+                    // Création du tableau panier
                     tabCartStorage = [];
-                    addProductSelected();
-                    console.log( "tableau storage", tabCartStorage );              
+                    // on ajoute l'objet productStorage dans le tableau et on enregistre le tableau panier
+                    addProductSelectedStorage();
+                    
                 }else if( tabCartStorage != null ){
-                //si le localstorage contient des produits et avec le même id et la meme couleur , on incremente la quantité en modifiant le tableau 
+                    console.log( " panier des produit existants ", tabCartStorage );
+                //si le panier "tabCartStorage" contient déjà un produit  avec le même id et la meme couleur , on incremente la quantité en modifiant le tableau 
                     for( let product of tabCartStorage ){
-                        console.log( "produt stockée", product );
+                        console.log( "produit stocké", product );
                         if( product.idProduit == idSelected && product.couleur == selectColor.value ){
+                            /*- incrémente la quantité de l'objet "productStorage" qui est représenté par la variable "product" dans la boucle,
+                              - on enregistre le panier tableau storage sans ajouter au tableau un nouvel objet "productStorage*/
                             return(
                                 product.quantite++,
                                 console.log( "product quantité ++", product.quantite ),
@@ -126,8 +133,9 @@ productSelected.then( function( productSelect ){
                                 ( tabCartStorage = JSON.parse( localStorage.getItem( "produits" ) ) )
                             );
                         }
-                    }              
-                    addProductSelected();
+                    } 
+                // Si le panier contient déjà des produits on ajoute l'objet productStorage au tableau panier "tabCartStorage" et on l'enregistre           
+                    addProductSelectedStorage();
                 }               
                 return tabCartStorage = JSON.parse( localStorage.getItem( "produits" ) );                      
             });                        
