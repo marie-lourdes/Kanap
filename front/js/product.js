@@ -64,7 +64,7 @@ productSelected.then( function( productSelect ){
             document.getElementById( "itemQuantity" ).setAttribute( "value", val );
 
             console.log("nombre de produit", inputQuantity)
-            console.log( "nombre de produit dans le DOM", document.getElementById( "itemQuantity" ) );           
+            console.log( "nombre de produit affiché dans le DOM", document.getElementById( "itemQuantity" ) );           
             });           
             return inputQuantity; 
         }
