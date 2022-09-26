@@ -58,16 +58,17 @@ productSelected.then( function( productSelect ){
             inputQuantity.addEventListener( "input", function( event ){
             let val = event.target.value;
             inputQuantity = val;
-            console.log( "nombre de produit", inputQuantity )
 
             //mise à jour dans le DOM de la quantité dans l'attribut value de l imputQuantity 
             document.getElementById( "itemQuantity" ).removeAttribute( "value" );
             document.getElementById( "itemQuantity" ).setAttribute( "value", val );
-            console.log( "nombre de produit DOM", document.getElementById( "itemQuantity" ) );
-            });    
+
+            console.log("nombre de produit", inputQuantity)
+            console.log( "nombre de produit dans le DOM", document.getElementById( "itemQuantity" ) );           
+            });           
             return inputQuantity; 
         }
-
+        
         //création de la methode statique  pour recupérer la couleur
         static addColor( selectColor ){
             selectColor = document.querySelector( ".item__content__settings__color #colors" ); 
