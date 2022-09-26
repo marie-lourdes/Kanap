@@ -52,6 +52,18 @@ productSelected.then( function( productSelect ){
     //................ Ajout du panier avec une "boite à outil de fonctions" class et ses methodes statiques...............
    
     class addCart{
+        //création de la methode statique  pour recupérer la couleur
+        static addColor( selectColor ){
+            selectColor = document.querySelector( ".item__content__settings__color #colors" ); 
+            selectColor.addEventListener( "input", function( event ){
+                selectColor = event.target.value;
+                console.log( "couleur", selectColor );
+                let option = document.querySelector( ".item__content__settings__color #colors option" ).value = selectColor; 
+                console.log( "couleur methode statique", document.querySelector( ".item__content__settings__color #colors option" ) );
+            });       
+            return selectColor;   
+        }
+      
          //création de la methode statique  pour recupérer la quantité
         static addQuantity( inputQuantity ){
             inputQuantity = document.getElementById( "itemQuantity" );
@@ -69,21 +81,12 @@ productSelected.then( function( productSelect ){
             return inputQuantity; 
         }
         
-        //création de la methode statique  pour recupérer la couleur
-        static addColor( selectColor ){
-            selectColor = document.querySelector( ".item__content__settings__color #colors" ); 
-            selectColor.addEventListener( "input", function( event ){
-                selectColor = event.target.value;
-                console.log( "couleur", selectColor ); 
-            });
-            return selectColor;
-        }
-
         //création de la methode statique pour enregistrer le panier et  le choix de la couleur et de la quantité du produit
         static addQuantityColorWindowStorage( inputQuantity, selectColor ){
             //recupération de la quantité et de la couleur  en appelant les methodes statique addQuantity et addColor
-            inputQuantity = addCart.addQuantity();
             selectColor = addCart.addColor();
+            inputQuantity = addCart.addQuantity();
+            
             // recupération de la promesse resolue productSelected et création du panier productStorage
             let btnAddCart = document.querySelector( "#addToCart" );
             btnAddCart.addEventListener( "click", function(){
