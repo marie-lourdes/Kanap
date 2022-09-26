@@ -50,16 +50,22 @@ productSelected.then( function( productSelect ){
     }
   
     //................ Ajout du panier avec une "boite à outil de fonctions" class et ses methodes statiques...............
-
+   
     class addCart{
          //création de la methode statique  pour recupérer la quantité
         static addQuantity( inputQuantity ){
-            inputQuantity = document.querySelector( "#quantity" );
+            inputQuantity = document.getElementById( "itemQuantity" );
             inputQuantity.addEventListener( "input", function( event ){
-                inputQuantity = event.target.value;
-                console.log( "nombre de produit", inputQuantity );
-            });
-            return inputQuantity;
+               
+             let val = event.target.value;
+             inputQuantity = val;
+             console.log( "nombre de produit", inputQuantity )
+            //mise à jour de la quantité dans l'attribut value de l imputQuantity 
+             inputQuantity = document.getElementById( "itemQuantity" ).removeAttribute( "value" );
+             inputQuantity = document.getElementById( "itemQuantity" ).setAttribute( "value", val );
+             
+            });    
+            return inputQuantity; 
         }
 
         //création de la methode statique  pour recupérer la couleur
