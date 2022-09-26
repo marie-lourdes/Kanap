@@ -58,8 +58,9 @@ productSelected.then( function( productSelect ){
             selectColor.addEventListener( "input", function( event ){
                 selectColor = event.target.value;
                 console.log( "couleur", selectColor );
-                let option = document.querySelector( ".item__content__settings__color #colors option" ).value = selectColor; 
-                console.log( "couleur methode statique", document.querySelector( ".item__content__settings__color #colors option" ) );
+                let option = document.querySelector( ".item__content__settings__color #colors option" )
+                option.value = selectColor; 
+                console.log( "couleur methode statique", option );
             });       
             return selectColor;   
         }
