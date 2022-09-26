@@ -58,26 +58,27 @@ productSelected.then( function( productSelect ){
             selectColor.addEventListener( "input", function( event ){
                 selectColor = event.target.value;
                 console.log( "couleur", selectColor );
-                let option = document.querySelector( ".item__content__settings__color #colors option" )
+                // afficher dans le DOM l'option de couleur choisie
+                let option = document.querySelector( ".item__content__settings__color #colors option" );
                 option.value = selectColor; 
-                console.log( "couleur methode statique", option );
+                console.log( "couleur choisie", option );
             });       
             return selectColor;   
         }
-      
+       
          //création de la methode statique  pour recupérer la quantité
         static addQuantity( inputQuantity ){
             inputQuantity = document.getElementById( "itemQuantity" );
             inputQuantity.addEventListener( "input", function( event ){
             let val = event.target.value;
-            inputQuantity = val;
+            inputQuantity.value = val;
 
             //mise à jour dans le DOM de la quantité dans l'attribut value de l imputQuantity 
             document.getElementById( "itemQuantity" ).removeAttribute( "value" );
             document.getElementById( "itemQuantity" ).setAttribute( "value", val );
 
-            console.log("nombre de produit", inputQuantity)
-            console.log( "nombre de produit affiché dans le DOM", document.getElementById( "itemQuantity" ) );           
+            console.log("nombre de produit", inputQuantity.value)
+            console.log( "nombre de produit affiché dans le DOM", inputQuantity );           
             });           
             return inputQuantity; 
         }
