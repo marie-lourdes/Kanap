@@ -56,14 +56,14 @@ productSelected.then( function( productSelect ){
         static addQuantity( inputQuantity ){
             inputQuantity = document.getElementById( "itemQuantity" );
             inputQuantity.addEventListener( "input", function( event ){
-               
-             let val = event.target.value;
-             inputQuantity = val;
-             console.log( "nombre de produit", inputQuantity )
-            //mise à jour de la quantité dans l'attribut value de l imputQuantity 
-             inputQuantity = document.getElementById( "itemQuantity" ).removeAttribute( "value" );
-             inputQuantity = document.getElementById( "itemQuantity" ).setAttribute( "value", val );
-             
+            let val = event.target.value;
+            inputQuantity = val;
+            console.log( "nombre de produit", inputQuantity )
+
+            //mise à jour dans le DOM de la quantité dans l'attribut value de l imputQuantity 
+            document.getElementById( "itemQuantity" ).removeAttribute( "value" );
+            document.getElementById( "itemQuantity" ).setAttribute( "value", val );
+            console.log( "nombre de produit DOM", document.getElementById( "itemQuantity" ) );
             });    
             return inputQuantity; 
         }
@@ -93,7 +93,7 @@ productSelected.then( function( productSelect ){
                     nameProduct:productSelect.name,
                     couleur: selectColor.value,
                     priceProduct:productSelect.price,
-                    quantite: inputQuantity.value   
+                    quantite: inputQuantity.value  
                 };
 
                 //création de la fonction pour l'enregistrement du panier dans le localstorage
