@@ -178,10 +178,16 @@ for( let productSelected of tabCartStorage ){
 
        //suppression de l'article du produit  dans le DOM avec la verification de la correspondance entre l'idProduit et la couleur du produit stocké et la data-id et data-color de l'article du produit
        if( elem.couleur === color && elem.idProduit === id ){
-        deleteProduct.remove(); 
-        totalPrice -= priceItem.content;
+       
+        deleteProduct.remove();
+        totalQuantite-=elem.quantite;
+        totalPrice-=elem.priceProduct * elem.quantite;
+        totalQuantityElement.textContent = totalQuantite;
+        totalPriceElement.textContent = totalPrice;
+        
          
       }
+    
       console.log( "produit supprimé dans la page", deleteProduct );
 
       /*- supression de l'élément  par l'event click dans le localstorage en vérifiant de supprimer le produit stocké qui correspond a la data-id et à la dat-color de l article du DOM du produit
