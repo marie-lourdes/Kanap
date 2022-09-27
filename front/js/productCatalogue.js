@@ -42,7 +42,7 @@ requestProducts.then( function( catalogue ){
         linkProduct.appendChild( articleProducts );
         productsCatalogue.appendChild( linkProduct );  
     }  
-    console.log("verification  des éléments insérés dans le dom dans la section '#items'",productsCatalogue)  
+    console.log( "verification  des éléments insérés dans le dom dans la section '#items'", productsCatalogue ); 
 })
 .catch( function( error ){
     console.log( "error response", error );  

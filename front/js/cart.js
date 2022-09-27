@@ -1,6 +1,6 @@
 //................recupération du panier depuis le localStorage...............
 let tabCartStorage = JSON.parse( localStorage.getItem( "produits" ) );
-console.log( "tabcart storage", tabCartStorage );
+console.log( "panier du localStorage", tabCartStorage );
 
 /* compteur à zero pour le prix et la quantité  dont les valeurs  s'accumuleront lors de la boucle du panier "tabCartStorage"
  pour donner le total du prix et de la quantité de tous les produits ajoutés au panier et enregistrés dans le localstorage*/
@@ -76,6 +76,9 @@ for( let productSelected of tabCartStorage ){
   divContentItem.appendChild( divContentSettingItem );
   articleBascket.appendChild( divContentItem );
   sectionBascket.appendChild( articleBascket );
+
+  console.log( "section racapitulatif du panier", sectionBascket );
+  console.log( "article produit", articleBascket );
   
   //.......................Bouton modifier quantité produit.....................
 

@@ -101,6 +101,7 @@ productSelected.then( function( productSelect ){
                     priceProduct:productSelect.price,
                     quantite: inputQuantity.value  
                 };
+                console.log( "produit storage", productStorage );
 
                 //création de la fonction pour l'enregistrement du panier dans un tableau dans le localstorage
                 const addProductSelectedStorage = () => { //création de la fonction qui enregistre le panier productStorage et l'objet productStorage
@@ -109,7 +110,7 @@ productSelected.then( function( productSelect ){
                };
             
                 let tabCartStorage = JSON.parse( localStorage.getItem( "produits" ) );
-                console.log("tableau storage avec valeur null ou valeur contenant le panier productStorage",tabCartStorage)
+                console.log( "tableau storage avec valeur null ou valeur contenant l' objet productStorage", tabCartStorage );
                 // si le localstorage est vide on crée un nouveau tableau
                 if(tabCartStorage == null){
                     console.log( " panier vide", tabCartStorage );
@@ -127,8 +128,8 @@ productSelected.then( function( productSelect ){
                             /*- incrémente la quantité de l'objet "productStorage" qui est représenté par la variable "product" dans la boucle,
                               - on enregistre le panier tableau storage sans ajouter au tableau un nouvel objet "productStorage*/
                             return(
-                                product.quantite=+inputQuantity.value,
-                                console.log( "product quantité ++", product.quantite ),
+                                product.quantite =+ inputQuantity.value,
+                                console.log( "produit quantité ", product.quantite ),
                                 localStorage.setItem( "produits", JSON.stringify( tabCartStorage ) ),
                                 ( tabCartStorage = JSON.parse( localStorage.getItem( "produits" ) ) )
                             );
