@@ -5,7 +5,9 @@ console.log( "panier du localStorage", tabCartStorage );
 /* compteur à zero pour le prix et la quantité  dont les valeurs  s'accumuleront lors de la boucle du panier "tabCartStorage"
  pour donner le total du prix et de la quantité de tous les produits ajoutés au panier et enregistrés dans le localstorage*/
 let totalPrice = 0;
+console.log( "compteur prix total du panier", totalPrice );
 let totalQuantite = 0;
+console.log( "compteur quantité totale d'article du panier", totalQuantite );
 
 //.............. récupération et affichage dans le DOM des produits du localStorage..................
 
@@ -33,6 +35,7 @@ for( let productSelected of tabCartStorage ){
   colorItem.textContent = productSelected.couleur;
   const priceItem = document.createElement( "p" );
   let priceArticles = productSelected.priceProduct * productSelected.quantite;
+  console.log( "prix total article", priceArticles );
   totalPrice += priceArticles;
   totalQuantite += parseInt( productSelected.quantite );
   priceItem.textContent = priceArticles + " " + "€";
@@ -85,19 +88,18 @@ for( let productSelected of tabCartStorage ){
   // Bouton modifier quantité:Recuperation des quantités modifié avec listener sur les inputs de chaque article des produits du storage
   inputQuantity.addEventListener( "change", function ( event ){
     let val = event.target.value;
-    console.log( "productselected modifié", productSelected.quantite );
 
     /* selectionner l'ancêtre le plus proche de l'input et qui soit un article avec closest()
      pour recuperer les datasets des articles  de produits parents de chaque input, correspondant au idproduit et couleur du produit stockée dans la TabCartStorage*/
     let dataArticleProduct = inputQuantity.closest( "article" );
     let color = dataArticleProduct.getAttribute( "data-color" );
     let id = dataArticleProduct.getAttribute( "data-id" );
-    console.log( "inputQuantity value modifié listener", dataArticleProduct );
+    console.log( "article avec inputQuantity value modifié listener", dataArticleProduct );
 
     // productSelected  sans modification (previousQuantite) et product selected avec la modification de la valeur de l input stockée pour la comparaison pour le total de la quantité et le total du prix 
     let previousQuantite = productSelected.quantite;
     productSelected.quantite = val;
-    console.log( "productedSelected quantite val", productSelected.quantite );
+    console.log( "quantité produit modifié", productSelected.quantite );
     // On reparcourt le tabCartorage pour s'assurer de modifier la quantité correspondant à la data-id et à la data-color de l article du DOM du produit corresponant à l idProduit et à la couleur du produit stocké dans le localStorage
     // si les id et couleur correspondent au data-id et data-color de l article , on modifie la quantité du produit dans localstorage avec la valeur recuperé par le listener "val"
     tabCartStorage.forEach( elem => {
@@ -105,6 +107,10 @@ for( let productSelected of tabCartStorage ){
         //recupération de la quantité modifiée
         elem.quantite = val;
         console.log( "elem quantité val", elem.quantite );
+        //mise à jour de la quantité dans le DOM
+        inputQuantity.removeAttribute( "value" );
+        inputQuantity.setAttribute( "value", `${elem.quantite}` );
+
         // calcul de la quantité modifié avec le prix du produit
         let calculArticlePrice = productSelected.priceProduct * val;
         console.log( "price product: ", productSelected.priceProduct );
@@ -207,7 +213,7 @@ let contact = {
   email: email
 };
 
-// recuperation des données du formulaire dans l'objet contact avec verification des données au préalable (avec message d'erreur) avant de les stocker dans l'objet contact
+// récupération des données du formulaire dans l'objet contact avec verification des données au préalable (avec message d'erreur) avant de les stocker dans l'objet contact
 
 firstName.addEventListener( "input", function( event ){
   let msgError = document.getElementById( "firstNameErrorMsg" );
