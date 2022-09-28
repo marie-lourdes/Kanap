@@ -294,7 +294,7 @@ email.addEventListener( "change", function( event ){
   console.log("contact input value", contact);
 });
 
-// function error input pour un feedback visuel
+// fonction error input pour un feedback visuel
 function error( inputDataUser, msgError, txtError ){
   inputDataUser.setAttribute( "disabled", true );
   inputDataUser.style.border = "2px solid #fbbcbc";
@@ -303,7 +303,7 @@ function error( inputDataUser, msgError, txtError ){
 
 //....................Récupération des id produit  dans  un tableau products ................ 
 
-//Création du tableau products avec la selection de l' id des produits stockés dans le localStorage
+//Création du tableau products avec la sélection de l' id des produits stockés dans le localStorage
 let products = [];
 products = tabCartStorage.map( elem => {
   return elem.idProduit; 
@@ -314,8 +314,9 @@ console.log( "tabcartstorage map id", products );
 //....................Formulaire: Bouton commander ................ 
 
 /*Au clic du bouton commander:
--Enregistrement de l objet contact et du tableau id produit dans localstorage
-- et requete POST sur l api de l objet contact et du tableau id produit*/
+- requete POST sur l api de l objet contact et du tableau id produit
+-récuperation du numéro de commande cryté dans la réponse de l'API
+-redirection sur la page de confirmation avec l'affichage du numéro de commande dans l'url et sur la page dans la partie dédiée*/
 
 const orderForm = document.querySelector( ".cart__order__form" );
 console.log( "order form", orderForm );
@@ -337,7 +338,7 @@ orderForm.addEventListener( "submit", function( event ){
   })
   .then( function( value ){
    // recupération du numero de commande crypté dans la reponse de l api et redirection vers l url réecrite de la page de confirmation
-    console.log( "value promise post", value );
+    console.log( "réponse retourné de l'API en objet javascript", value );
     console.log( "orderid ", value.orderId );
     window.location.href = `./confirmation.html?orderId=${value.orderId}`;  
   })
