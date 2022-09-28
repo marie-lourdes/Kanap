@@ -178,14 +178,11 @@ for( let productSelected of tabCartStorage ){
 
        //suppression de l'article du produit  dans le DOM avec la verification de la correspondance entre l'idProduit et la couleur du produit stocké et la data-id et data-color de l'article du produit
        if( elem.couleur === color && elem.idProduit === id ){
-       
         deleteProduct.remove();
-        totalQuantite-=elem.quantite;
-        totalPrice-=elem.priceProduct * elem.quantite;
+        totalQuantite -= elem.quantite;
+        totalPrice -= elem.priceProduct * elem.quantite;
         totalQuantityElement.textContent = totalQuantite;
-        totalPriceElement.textContent = totalPrice;
-        
-         
+        totalPriceElement.textContent = totalPrice;     
       }
     
       console.log( "produit supprimé dans la page", deleteProduct );
@@ -304,10 +301,6 @@ function error( inputDataUser, msgError, txtError ){
   msgError.textContent = txtError;
 }
 
-//enregistrement de l objet contact dans le localstorage avec les données utilisateur
-localStorage.setItem( "contact", JSON.stringify( contact ) );
-let commandContact = JSON.parse(localStorage.getItem( "contact" ) );
-
 //....................Récupération des id produit  dans  un tableau products ................ 
 
 //Création du tableau products avec la selection de l' id des produits stockés dans le localStorage
@@ -315,10 +308,6 @@ let products = [];
 products = tabCartStorage.map( elem => {
   return elem.idProduit; 
 });
-
-//enregistrement du tableau products dans le localstorage avec l 'id des produits
-localStorage.setItem( "products", JSON.stringify( products ) );
-let commandProducts = JSON.parse( localStorage.getItem( "products" ) );
 
 console.log( "tabcartstorage map id", products );
 
@@ -332,8 +321,6 @@ const orderForm = document.querySelector( ".cart__order__form" );
 console.log( "order form", orderForm );
 orderForm.addEventListener( "submit", function( event ){
   event.preventDefault();
-  commandContact = localStorage.setItem( "contact", JSON.stringify( contact ) );
-  commandProducts = localStorage.setItem( "products", JSON.stringify( products ) );
   fetch( "http://localhost:3000/api/products/order", {
   method: "POST",
   headers: {
@@ -352,10 +339,10 @@ orderForm.addEventListener( "submit", function( event ){
    // recupération du numero de commande crypté dans la reponse de l api et redirection vers l url réecrite de la page de confirmation
     console.log( "value promise post", value );
     console.log( "orderid ", value.orderId );
-    window.location.href = `./confirmation.html?orderId=${value.orderId}`; 
+    window.location.href = `./confirmation.html?orderId=${value.orderId}`;  
   })
   .catch( function( error ){
-    console.log( "error", error );
+    console.log( "error requete post", error );
   });
 });
  
