@@ -5,8 +5,7 @@
 body {
 	font-family: 'Montserrat', sans-serif;
 	margin: 0;
-	color: white;
-	min-width: 300px;
+	color: white;	
 }
 h1 {
 	font-size: 48px;
@@ -60,11 +59,13 @@ h2 {
 .informations ul {
 	display: flex;
 	padding-left: 0;
+	justify-content: space-evenly;
+	width: 70%;
+	margin: 20px auto;
 }
 .informations ul li {
 	display: flex;
 	list-style: none;
-	margin-right: 36px;
 }
 .informations__phone,
 .informations__mail {
@@ -113,9 +114,6 @@ nav ul li a:hover {
 	display: flex;
 }
 
-
-
-
 /******/
 /*Main*/
 /******/
@@ -150,13 +148,13 @@ main {
 	border-radius: 10px;
 }
 .items article img {
-	width: 160px;
+	width: 80%;
 	height: 160px;
 	object-fit: cover;
 	border-radius: 10px;
 }
 .items article h3 {
-	font-size: 22px;
+	font-size: 20px;
 	font-weight: 700;
 	text-align: center;
 	text-transform: uppercase;
@@ -218,39 +216,68 @@ footer .footerSecondary {
 	padding: 25px 0;
 }
 
-
-
-
 /***************/
 /*Media queries*/
 /***************/
 
-@media screen and (min-width: 768px) and (max-width: 991px) {
-	nav ul {
-		display: flex;
-		justify-content: space-around;
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+	.informations {
+		font-size: 100%;
+	}
+	.informations ul {
+		width: 100%;
+	}
+	.informations img {
+		height: 20px;
 	}
 	.items a {
-		width: 42%;
+		width: 40%;
+	}
+	.menu .limitedWidthBlock {
+		padding: 0 30px;
+	}
+	main .limitedWidthBlock {
+		padding: 0;
 	}
 	.footerMain .limitedWidthBlock {
 		display: flex;
-		flex-direction: column;
 		align-items: center;
+	}
+	.footerMain .logo{
+		height: 70px;
 	}
 	.footerSecondary .limitedWidthBlock p {
 		text-align: center;
 	}
 }
 
-@media (max-width: 575px) { 
-	.informations ul {
-		flex-direction: column;
-		align-items: center;
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+	.items article img {
+		height: 250px;
 	}
-	.informations ul li{
-		margin-bottom: 14px;
+
+}
+
+@media screen and (max-width: 767px) { 
+	h1 {
+		font-size: 38px;
+	}
+	.informations .limitedWidthBlock {
+		padding: 0;
+		display: flex;
+		justify-content: space-around;
+	}
+	.informations ul {
+		font-size: 80%;
+		justify-content: space-around;
+		align-items: center;
+		width: 100%;
+	}
+	.informations ul li {
 		margin-right: 0;
+	}
+	.informations img {
+		height: 12px;
 	}
 	.menu .limitedWidthBlock {
 		display: flex;
