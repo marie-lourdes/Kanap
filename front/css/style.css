@@ -221,6 +221,9 @@ footer .footerSecondary {
 /***************/
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
+	body{
+		font-size: 110%;
+	}
 	.informations {
 		font-size: 100%;
 	}
@@ -293,6 +296,9 @@ footer .footerSecondary {
 	.menu nav ul {
 		padding: 0;
 		line-height: 80px;
+	}
+	 nav ul li {
+		margin: 0 20px;
 	}
 	.menu nav ul a:first-child li {
 		margin-left: 0;

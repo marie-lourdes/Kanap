@@ -111,6 +111,10 @@ option[name="color"] {
 	.item__content__settings__color {
 		margin-bottom: 26px;
 	}
+	select#colors, .item__content__settings__quantity input { 
+		font-size: 80%;
+	}
+	
 }
 
 @media screen and (max-width: 767px) { 

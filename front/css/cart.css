@@ -142,8 +142,24 @@ h2 {
 /*Media queries*/
 /***************/
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-	.cart__item__content__titlePrice {
+	.cart__item {
+		min-height: 190px
+	}
+	.cart__item__content, .cart__item__img {
+		width: 35%;
+	}
+	.cart__item__img {
+		width:30%;
+		max-height: 200px;
+	}
+	.cart__item__img img {
+		height: 100%;
+	}
+	.cart__item__content__description {
 		flex-direction: column;
+	}
+	.cart__price {
+		padding-right: 20px;
 	}
 }
 
@@ -151,16 +167,22 @@ h2 {
 	.cart__item {
 		flex-direction: column;
 		align-items: center;
+		
 	}
 	.cart__item__img {
-		width: 50%;
+		width: 100%;
+	}
+	.cart__item__img img {
+		min-height: 300px;
+		object-fit: cover;
 	}
 	.cart__item__content {
 		width: 90%;
 	}
-	.cart__item__content__titlePrice {
-		margin-bottom: 20px;
+	.cart__item__content__description {
+		flex-direction: column;
 	}
+
 	.cart__price p {
 		text-align: center;
 	}
