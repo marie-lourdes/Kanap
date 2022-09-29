@@ -45,9 +45,6 @@ h2 {
 	/*background-color: var(--main-color);*/
 }
 
-
-
-
 /********/
 /*Header*/
 /********/
@@ -94,6 +91,7 @@ nav ul {
 	display: flex;
 	margin: 0;
 	line-height: 130px;
+	padding-left: 0px;
 }
 nav ul li {
 	list-style: none;
@@ -185,9 +183,6 @@ article p.product-description{
 
 }
 
-
-
-
 /********/
 /*Footer*/
 /********/
@@ -230,8 +225,8 @@ footer .footerSecondary {
 /*Media queries*/
 /***************/
 
-@media (max-width: 991.98px) {
-	.informations ul {
+@media screen and (min-width: 768px) and (max-width: 991px) {
+	nav ul {
 		display: flex;
 		justify-content: space-around;
 	}
@@ -248,7 +243,7 @@ footer .footerSecondary {
 	}
 }
 
-@media (max-width: 575.98px) { 
+@media (max-width: 575px) { 
 	.informations ul {
 		flex-direction: column;
 		align-items: center;
