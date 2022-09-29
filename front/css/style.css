@@ -90,19 +90,21 @@ h2 {
 .menu nav {
 	display: flex;
 }
-.menu nav ul {
+nav ul {
 	display: flex;
 	margin: 0;
 	line-height: 130px;
 }
-.menu nav ul li {
+nav ul li {
 	list-style: none;
 	margin-left: 50px;
+}
+nav ul li a{
 	color: var(--text-color);
 }
-.menu nav ul li:hover {
+nav ul li a:hover {
 	font-weight: 600;
-	color: #3498db !important;
+	color: #3498db;
 }
 
 /*banniere*/
