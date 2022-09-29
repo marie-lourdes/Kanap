@@ -138,19 +138,16 @@ h2 {
 	box-shadow: rgb(42 18 206 / 90%) 0 0 22px 6px;
 }
 
-
-
 /***************/
 /*Media queries*/
 /***************/
-
-@media (max-width: 991.98px) {
+@media screen and (min-width: 768px) and (max-width: 1024px) {
 	.cart__item__content__titlePrice {
 		flex-direction: column;
 	}
 }
 
-@media (max-width: 575.98px) { 
+@media screen and (max-width: 767px) { 
 	.cart__item {
 		flex-direction: column;
 		align-items: center;

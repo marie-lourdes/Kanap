@@ -230,6 +230,9 @@ footer .footerSecondary {
 	.informations img {
 		height: 20px;
 	}
+	.items {
+		justify-content: space-evenly;
+	}
 	.items a {
 		width: 40%;
 	}
@@ -295,6 +298,14 @@ footer .footerSecondary {
 		margin-left: 0;
 	}
 	.items a {
-		width: 75%;
+		width: 95%;
+	}
+	.footerMain {
+		justify-content: flex-start;
+	}
+	.footerMain .limitedWidthBlock {
+		display: flex;
+		flex-wrap: wrap;
+		width: 50%;
 	}
 }
