@@ -25,6 +25,8 @@ let productSelected = request.then( function( res ){
 productSelected.then( function( productSelect ){
     console.log( "produit selectionné", productSelect ); // verification du contenu de l objet du produit
     //Sélection et création des éléments du DOM et affichage des éléments (détails du produit) dans le DOM de la page produit
+    const title = document.querySelector( "title" );
+    title.textContent = productSelect.name;
     let itemImg = document.querySelector( ".item__img" );
     let imgProductSelected = document.createElement( "img" );
     imgProductSelected.src = productSelect.imageUrl;
