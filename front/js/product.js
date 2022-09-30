@@ -114,7 +114,7 @@ productSelected.then( function( productSelect ){
                 let tabCartStorage = JSON.parse( localStorage.getItem( "produits" ) );
                 console.log( "tableau storage avec valeur null ou valeur contenant l' objet productStorage", tabCartStorage );
                 // si le localstorage est vide on crée un nouveau tableau
-                if(tabCartStorage == null){
+                if( tabCartStorage == null ){
                     console.log( " panier vide", tabCartStorage );
                     // Création du tableau panier
                     tabCartStorage = [];
