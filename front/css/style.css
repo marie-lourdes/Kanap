@@ -314,4 +314,7 @@ footer .footerSecondary {
 		flex-wrap: wrap;
 		width: 50%;
 	}
+	.footerSecondary {
+		text-align: center;
+	}
 }
