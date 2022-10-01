@@ -18,7 +18,7 @@ for( let productSelected of tabCartStorage ){
   articleBascket.setAttribute( "class", "cart__item" );
   articleBascket.dataset.id = productSelected.idProduit;
   articleBascket.dataset.color = productSelected.couleur;
-
+ 
   // Détails produits
   const divImgItem = document.createElement( "div" );
   divImgItem.setAttribute( "class", "cart__item__img" );
@@ -51,7 +51,22 @@ for( let productSelected of tabCartStorage ){
   inputQuantity.setAttribute( "name", "itemQuantity" );
   inputQuantity.min = "1";
   inputQuantity.max = "100";
+ 
   inputQuantity.setAttribute( "value", `${productSelected.quantite}` );
+ /* let dataProduct = inputQuantity.closest( "article" );
+  console.log("dataproduct", dataProduct)*/
+ /* if( articleBascket.dataset.color ===  productSelected.couleur && articleBascket.dataset.id === productSelected.idProduit){
+
+    productQuantity += productYetAdded;
+    productSelected.quantite += parseInt(productQte);
+    localStorage.setItem( "produits", JSON.stringify( tabCartStorage ) );
+   
+    inputQuantity.removeAttribute( "value")
+    inputQuantity.setAttribute( "value", `${productSelected.quantite}` );
+  
+  }*/
+ 
+
   const divContentDeleteItem = document.createElement( "div" );
   divContentDeleteItem.setAttribute( "class", "cart__item__content__settings__delete" );
   const deleteItem = document.createElement( "p" );
@@ -203,6 +218,9 @@ for( let productSelected of tabCartStorage ){
   });
 }
 
+
+
+
 console.log( "produit selected storage", tabCartStorage );
 
 //....................Formulaire: Récupération dans  un objet contact des données saisies par  l'utilisateur................ 
@@ -223,12 +241,15 @@ let contact = {
 };
 
 // récupération des données du formulaire dans l'objet contact avec verification des données au préalable (avec message d'erreur) avant de les stocker dans l'objet contact
+ function verifFirstName ( firstName) {
+  return isNaN( firstName ) != true; 
 
+ }
 firstName.addEventListener( "input", function( event ){
   let msgError = document.getElementById( "firstNameErrorMsg" );
   let dataFirstName = event.target.value;
   console.log( "test dataFirstName", isNaN( dataFirstName ) );
-  if( isNaN( dataFirstName ) != true ){
+  if( verifFirstName(dataFirstName)){
    error( firstName, msgError, "Prénom invalide" );
   }else{
     contact.firstName = dataFirstName;
@@ -322,6 +343,9 @@ const orderForm = document.querySelector( ".cart__order__form" );
 console.log( "order form", orderForm );
 orderForm.addEventListener( "submit", function( event ){
   event.preventDefault();
+  if(verifFirstName(firstName.value)){
+    return;
+  }
   fetch( "http://localhost:3000/api/products/order", {
   method: "POST",
   headers: {

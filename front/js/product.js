@@ -101,7 +101,7 @@ productSelected.then( function( productSelect ){
                     nameProduct:productSelect.name,
                     couleur: selectColor.value,
                     priceProduct:productSelect.price,
-                    quantite: inputQuantity.value  
+                    quantite: parseInt( inputQuantity.value )
                 };
                 console.log( "produit storage", productStorage );
 
@@ -129,12 +129,13 @@ productSelected.then( function( productSelect ){
                         if( product.idProduit == idSelected && product.couleur == selectColor.value ){
                             /*- incrémente la quantité de l'objet "productStorage" qui est représenté par la variable "product" dans la boucle,
                               - on enregistre le panier tableau storage sans ajouter au tableau un nouvel objet "productStorage*/
-                            return(
-                                product.quantite =+ inputQuantity.value,
-                                console.log( "produit quantité ", product.quantite ),
-                                localStorage.setItem( "produits", JSON.stringify( tabCartStorage ) ),
-                                ( tabCartStorage = JSON.parse( localStorage.getItem( "produits" ) ) )
-                            );
+                           
+                                product.quantite += parseInt( inputQuantity.value);
+                                console.log( "produit quantité ", product.quantite );
+                                localStorage.setItem( "produits", JSON.stringify( tabCartStorage ) );
+                                tabCartStorage = JSON.parse( localStorage.getItem( "produits" ) );
+                                return;
+                           
                         }
                     } 
                 // Si le panier contient déjà des produits on ajoute l'objet productStorage au tableau panier "tabCartStorage" et on l'enregistre           
