@@ -214,6 +214,7 @@ footer .footerSecondary {
 .footerSecondary {
 	background-color: var(--footer-secondary-color);
 	padding: 25px 0;
+	text-align: center;
 }
 
 /***************/
@@ -251,9 +252,6 @@ footer .footerSecondary {
 	}
 	.footerMain .logo{
 		height: 70px;
-	}
-	.footerSecondary .limitedWidthBlock p {
-		text-align: center;
 	}
 }
 
@@ -313,8 +311,5 @@ footer .footerSecondary {
 		display: flex;
 		flex-wrap: wrap;
 		width: 50%;
-	}
-	.footerSecondary {
-		text-align: center;
 	}
 }
