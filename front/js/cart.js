@@ -357,6 +357,7 @@ function valid( inputDataUser, msgError){
 let products = [];
 localStorage.setItem("products",JSON.stringify(products));
 products = JSON.parse(localStorage.getItem("products"))
+
 /*- si le panier du localStorage contient des produits, on recupère les produits dont la quantité est supérieur à 0 ou inférieur ou égal à 100
   -nous récupérons ensuite que l'id du produit*/
 
