@@ -218,31 +218,6 @@ for( let productSelected of tabCartStorage ){
 }
 }
 
- //....................Récupération des id produit  dans  un tableau products ................ 
-
-//Création du tableau products avec la sélection de l' id des produits stockés dans le localStorage
-let products = [];
-localStorage.setItem("products",JSON.stringify(products));
-products = JSON.parse(localStorage.getItem("products"))
-/*- si le panier du localStorage contient des produits, on recupère les produits dont la quantité est supérieur à 0 ou inférieur ou égal à 100
-  -nous récupérons ensuite que l'id du produit*/
-
-  
-  if( tabCartStorage != null ){
-    products = tabCartStorage.filter( function( elem ){
-      if( elem.quantite >= 1 ){
-        return true;
-      }   
-    })
-    .map( function( elem ){
-      if(elem.quantite >= 1){
-        return elem.idProduit; 
-      }  
-    });
-   
-    localStorage.setItem("products",JSON.stringify(products));
-  products = JSON.parse(localStorage.getItem("products")) 
-  }
 console.log( "produit selected storage", tabCartStorage );
 
 //....................Formulaire: Récupération dans  un objet contact des données saisies par  l'utilisateur................ 
@@ -376,7 +351,31 @@ function valid( inputDataUser, msgError){
   msgError.textContent = "";
 }
 
+ //....................Récupération des id produit  dans  un tableau products ................ 
 
+//Création du tableau products avec la sélection de l' id des produits stockés dans le localStorage
+let products = [];
+localStorage.setItem("products",JSON.stringify(products));
+products = JSON.parse(localStorage.getItem("products"))
+/*- si le panier du localStorage contient des produits, on recupère les produits dont la quantité est supérieur à 0 ou inférieur ou égal à 100
+  -nous récupérons ensuite que l'id du produit*/
+
+  
+  if( tabCartStorage != null ){
+    products = tabCartStorage.filter( function( elem ){
+      if( elem.quantite >= 1 ){
+        return true;
+      }   
+    })
+    .map( function( elem ){
+      if(elem.quantite >= 1){
+        return elem.idProduit; 
+      }  
+    });
+   
+    localStorage.setItem("products",JSON.stringify(products));
+  products = JSON.parse(localStorage.getItem("products")) 
+  }
   
  
 
