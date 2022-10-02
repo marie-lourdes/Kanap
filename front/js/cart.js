@@ -2,6 +2,7 @@
 let tabCartStorage = JSON.parse( localStorage.getItem( "produits" ) );
 console.log( "panier du localStorage", tabCartStorage );
 
+
 /* compteur à zero pour le prix et la quantité  dont les valeurs  s'accumuleront lors de la boucle du panier "tabCartStorage"
  pour donner le total du prix et de la quantité de tous les produits ajoutés au panier et enregistrés dans le localstorage*/
 let totalPrice = 0;
@@ -142,6 +143,8 @@ for( let productSelected of tabCartStorage ){
     console.log( "total quantity element avant modification ", totalQuantityElement.textContent );
     console.log( "total quantité  ", totalQuantite );
     console.log( "product selected quantité", productSelected.quantite );
+
+  
     // si la quantité modifiée est supérieur à la quantité précédente on incremente la quantité total des articles et on recalcule le prix total avec la difference de quantité entre la variable previousQuantite (quantité non modifié) et la variable productSelected.quantite modifié
     if( productSelected.quantite > previousQuantite ){
       totalQuantite = totalQuantite + ( productSelected.quantite - previousQuantite );
@@ -215,6 +218,31 @@ for( let productSelected of tabCartStorage ){
 }
 }
 
+ //....................Récupération des id produit  dans  un tableau products ................ 
+
+//Création du tableau products avec la sélection de l' id des produits stockés dans le localStorage
+let products = [];
+localStorage.setItem("products",JSON.stringify(products));
+products = JSON.parse(localStorage.getItem("products"))
+/*- si le panier du localStorage contient des produits, on recupère les produits dont la quantité est supérieur à 0 ou inférieur ou égal à 100
+  -nous récupérons ensuite que l'id du produit*/
+
+  
+  if( tabCartStorage != null ){
+    products = tabCartStorage.filter( function( elem ){
+      if( elem.quantite >= 1 ){
+        return true;
+      }   
+    })
+    .map( function( elem ){
+      if(elem.quantite >= 1){
+        return elem.idProduit; 
+      }  
+    });
+   
+    localStorage.setItem("products",JSON.stringify(products));
+  products = JSON.parse(localStorage.getItem("products")) 
+  }
 console.log( "produit selected storage", tabCartStorage );
 
 //....................Formulaire: Récupération dans  un objet contact des données saisies par  l'utilisateur................ 
@@ -348,37 +376,7 @@ function valid( inputDataUser, msgError){
   msgError.textContent = "";
 }
 
-//....................Récupération des id produit  dans  un tableau products ................ 
 
-//Création du tableau products avec la sélection de l' id des produits stockés dans le localStorage
-let products = [];
-/*- si le panier du localStorage contient des produits, on recupère les produits dont la quantité est supérieur à 0 ou inférieur ou égal à 100
-  -nous récupérons ensuite que l'id du produit*/
-  localStorage.setItem("produits",JSON.stringify(tabCartStorage));
-  tabCartStorage= JSON.parse(localStorage.getItem("produits")) 
-  if( tabCartStorage != null ){
-    products = tabCartStorage.filter( function( elem ){
-      if( elem.quantite >= 1 ){
-      
-        return true;
-    
-        
-      }
-      
-  localStorage.setItem("products",JSON.stringify(products));
-  
-    });
-    
-    products = products.map( function( elem ){
-      if(elem.quantite >= 1){
-        return elem.idProduit; 
-      }
-     
-    });
-   
-    localStorage.setItem("products",JSON.stringify(products));
-  products = JSON.parse(localStorage.getItem("products")) 
-  }
   
  
 
