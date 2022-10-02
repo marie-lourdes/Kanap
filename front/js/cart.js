@@ -343,13 +343,13 @@ function error( inputDataUser, msgError, txtError ){
 let products = [];
 /*- si le panier du localStorage contient des produits, on recupère les produits dont la quantité est supérieur à 0 ou inférieur ou égal à 100
   -nous récupérons ensuite que l'id du produit*/
-if( tabCartStorage != null){
-  products=tabCartStorage.filter(function(elem){
-    if(elem.quantite > 0 && elem.quantite <= 100) return true;
-  }).map(function(elem){
-    return elem.idProduit; 
-  });
-}
+  if( tabCartStorage != null){
+    products=tabCartStorage.filter(function(elem){
+      if(elem.quantite > 0 && elem.quantite <= 100) return true;
+    }).map(function(elem){
+      return elem.idProduit; 
+    });
+  }
 
 console.log( "tabcartstorage map id", products );
 
