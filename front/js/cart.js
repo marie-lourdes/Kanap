@@ -360,7 +360,7 @@ products = JSON.parse(localStorage.getItem("products"))
 /*- si le panier du localStorage contient des produits, on recupère les produits dont la quantité est supérieur à 0 ou inférieur ou égal à 100
   -nous récupérons ensuite que l'id du produit*/
 
-  
+function selectIdProduit (){
   if( tabCartStorage != null ){
     products = tabCartStorage.filter( function( elem ){
       if( elem.quantite >= 1 ){
@@ -372,13 +372,9 @@ products = JSON.parse(localStorage.getItem("products"))
         return elem.idProduit; 
       }  
     });
-   
-    localStorage.setItem("products",JSON.stringify(products));
-  products = JSON.parse(localStorage.getItem("products")) 
   }
-  
+}
  
-
 console.log( "tabcartstorage map id", products );
 
 //....................Formulaire: Bouton commander ................ 
@@ -394,7 +390,7 @@ const orderForm = document.querySelector( ".cart__order__form" );
 console.log( "order form", orderForm );
 orderForm.addEventListener( "submit", function( event ){
   event.preventDefault();
-
+ selectIdProduit();
   //Si les valeurs retournées dans ces variables  par la vérification de chaque champs de formulaire est false et que le tableau de products e contient aucun id produit, on arrête l'execution du code de la callback sur l'évènement du bouton commander
   if(!isFirstNameOk || !isLastNameOk || !isAddressOk || !isCityOk || !isEmailOk || products.length === 0){
     return;
