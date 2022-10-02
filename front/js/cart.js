@@ -241,7 +241,7 @@ let contact = {
 };
 
 // récupération des données du formulaire dans l'objet contact avec verification des données au préalable (avec message d'erreur) avant de les stocker dans l'objet contact
- function verifFirstName ( firstName) {
+ function verifDataNumber ( firstName) {
   return isNaN( firstName ) != true; 
 
  }
@@ -249,7 +249,7 @@ firstName.addEventListener( "input", function( event ){
   let msgError = document.getElementById( "firstNameErrorMsg" );
   let dataFirstName = event.target.value;
   console.log( "test dataFirstName", isNaN( dataFirstName ) );
-  if( verifFirstName(dataFirstName)){
+  if( verifDataNumber(dataFirstName)){
    error( firstName, msgError, "Prénom invalide" );
   }else{
     contact.firstName = dataFirstName;
@@ -343,7 +343,13 @@ const orderForm = document.querySelector( ".cart__order__form" );
 console.log( "order form", orderForm );
 orderForm.addEventListener( "submit", function( event ){
   event.preventDefault();
-  if(verifFirstName(firstName.value)){
+  if(verifDataNumber(firstName.value)){
+    return;
+  }
+  if(verifDataNumber(lastName.value)){
+    return;
+  }
+  if(verifDataNumber(city.value)){
     return;
   }
   fetch( "http://localhost:3000/api/products/order", {
