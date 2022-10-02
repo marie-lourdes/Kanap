@@ -10,7 +10,7 @@ let totalQuantite = 0;
 console.log( "compteur quantité totale d'article du panier", totalQuantite );
 
 //.............. récupération et affichage dans le DOM des produits du localStorage..................
-
+if ( tabCartStorage != null){
 for( let productSelected of tabCartStorage ){
   console.log( "produit selctionné panier", productSelected );
   const sectionBascket = document.getElementById( "cart__items" );
@@ -51,22 +51,18 @@ for( let productSelected of tabCartStorage ){
   inputQuantity.setAttribute( "name", "itemQuantity" );
   inputQuantity.min = "1";
   inputQuantity.max = "100";
- 
   inputQuantity.setAttribute( "value", `${productSelected.quantite}` );
- /* let dataProduct = inputQuantity.closest( "article" );
-  console.log("dataproduct", dataProduct)*/
- /* if( articleBascket.dataset.color ===  productSelected.couleur && articleBascket.dataset.id === productSelected.idProduit){
 
-    productQuantity += productYetAdded;
-    productSelected.quantite += parseInt(productQte);
-    localStorage.setItem( "produits", JSON.stringify( tabCartStorage ) );
-   
-    inputQuantity.removeAttribute( "value")
-    inputQuantity.setAttribute( "value", `${productSelected.quantite}` );
-  
-  }*/
+  inputQuantity.addEventListener("input", (event) => {
+    //on empeche la modification de la quantité inférieur ou égal à 0 ou une chaine vide dans le champ inputQuantity
+    let val = parseInt(event.target.value);
+    if (val <= 0 || isNaN(val)) {
+      inputQuantity.value = 0;
+    } else if (val > 100) {
+      inputQuantity.value = 0;
+    }
+  })
  
-
   const divContentDeleteItem = document.createElement( "div" );
   divContentDeleteItem.setAttribute( "class", "cart__item__content__settings__delete" );
   const deleteItem = document.createElement( "p" );
@@ -102,8 +98,10 @@ for( let productSelected of tabCartStorage ){
 
   // Bouton modifier quantité:Recuperation des quantités modifié avec listener sur les inputs de chaque article des produits du storage
   inputQuantity.addEventListener( "change", function ( event ){
-    let val = event.target.value;
+    /*let val = event.target.value;*/
 
+    let val = event.target.value;
+    
     /* selectionner l'ancêtre le plus proche de l'input et qui soit un article avec closest()
      pour recuperer les datasets des articles  de produits parents de chaque input, correspondant au idproduit et couleur du produit stockée dans la TabCartStorage*/
     let dataArticleProduct = inputQuantity.closest( "article" );
@@ -120,6 +118,7 @@ for( let productSelected of tabCartStorage ){
     // si les id et couleur correspondent au data-id et data-color de l article , on modifie la quantité du produit dans localstorage avec la valeur recuperé par le listener "val"
     tabCartStorage.forEach( elem => {
       if( elem.couleur === color && elem.idProduit === id ){
+      
         //recupération de la quantité modifiée
         elem.quantite = val;
         console.log( "elem quantité val", elem.quantite );
@@ -217,9 +216,7 @@ for( let productSelected of tabCartStorage ){
     updateProductModified();
   });
 }
-
-
-
+}
 
 console.log( "produit selected storage", tabCartStorage );
 
@@ -240,9 +237,17 @@ let contact = {
   email: email
 };
 
+let verifChamps = {
+  isFirstNameOk: false,
+  isLastNameOk: false,
+  isAddressOk: false,
+  isCityOk: false,
+  isEmailOk: false,
+}
+
 // récupération des données du formulaire dans l'objet contact avec verification des données au préalable (avec message d'erreur) avant de les stocker dans l'objet contact
  function verifDataNumber ( firstName) {
-  return isNaN( firstName ) != true; 
+  return isNaN( firstName) != true; 
 
  }
 firstName.addEventListener( "input", function( event ){
@@ -251,8 +256,10 @@ firstName.addEventListener( "input", function( event ){
   console.log( "test dataFirstName", isNaN( dataFirstName ) );
   if( verifDataNumber(dataFirstName)){
    error( firstName, msgError, "Prénom invalide" );
+   isFirstNameOk = false;
   }else{
     contact.firstName = dataFirstName;
+    isFirstNameOk = true;
   }
   console.log( "contact input value", contact );
 });
@@ -262,10 +269,12 @@ lastName.addEventListener( "input", function( event ){
   let dataLastName = event.target.value;
   console.log( "test dataLasttName", isNaN( dataLastName ) );
 
-  if( isNaN( dataLastName ) != true ){
+  if(verifDataNumber(dataLastName)){
     error( lastName, msgError, "Nom invalide" );
+    isLastNameOk = false;
   }else{
    contact.lastName = dataLastName; 
+   isLastNameOk = true;
   }
   console.log("contact input value", contact);
 });
@@ -280,8 +289,10 @@ address.addEventListener( "change", function( event ){
 
   if( testRegex ){
     contact.address = dataAdress;
+    isAddressOk = true;
   }else{
     error( address, msgError, "Adresse invalide, Ex: 45, boulevard de Paris" );
+    isAddressOk = false;
   }
   console.log( "contact input value", contact );
 });
@@ -291,10 +302,12 @@ city.addEventListener( "input", function( event ){
   let dataCity = event.target.value;
   console.log( "test city", isNaN( dataCity ) );
 
-  if( isNaN( dataCity ) != true ){
+  if( verifDataNumber(dataCity)){
     error( city, msgError, "Ville non valide" );
+    isCityOk = false;
   }else{
-    contact.city = dataCity; 
+    contact.city = dataCity;
+    isCityOk = true; 
   }
   console.log( "contact input value", contact );
 });
@@ -309,8 +322,10 @@ email.addEventListener( "change", function( event ){
 
   if( testRegexEmail ){
    contact.email = emailAddress;
+   isEmailOk = true;
   }else{
     error( email, msgError, "Email invalide, Ex: contact@kanap.com" );
+    isEmailOk = false;
   }
   console.log("contact input value", contact);
 });
@@ -326,15 +341,23 @@ function error( inputDataUser, msgError, txtError ){
 
 //Création du tableau products avec la sélection de l' id des produits stockés dans le localStorage
 let products = [];
-products = tabCartStorage.map( elem => {
-  return elem.idProduit; 
-});
+/*- si le panier du localStorage contient des produits, on recupère les produits dont la quantité est supérieur à 0 ou inférieur ou égal à 100
+  -nous récupérons ensuite que l'id du produit*/
+if( tabCartStorage != null){
+  products=tabCartStorage.filter(function(elem){
+    if(elem.quantite > 0 && elem.quantite <= 100) return true;
+  }).map(function(elem){
+    return elem.idProduit; 
+  });
+}
 
 console.log( "tabcartstorage map id", products );
 
 //....................Formulaire: Bouton commander ................ 
 
 /*Au clic du bouton commander:
+-vérication des erreurs du formulaire
+- verification de la présence d'un produit dans le tableau products qui récupère les id des produit ajoutés
 - requete POST sur l api de l objet contact et du tableau id produit
 -récuperation du numéro de commande cryté dans la réponse de l'API
 -redirection sur la page de confirmation avec l'affichage du numéro de commande dans l'url et sur la page dans la partie dédiée*/
@@ -343,13 +366,8 @@ const orderForm = document.querySelector( ".cart__order__form" );
 console.log( "order form", orderForm );
 orderForm.addEventListener( "submit", function( event ){
   event.preventDefault();
-  if(verifDataNumber(firstName.value)){
-    return;
-  }
-  if(verifDataNumber(lastName.value)){
-    return;
-  }
-  if(verifDataNumber(city.value)){
+  //Si les valeurs retournées dans ces variables  par la vérification de chaque champs de formulaire est false et que le tableau de products e contient aucun id produit, on arrête l'execution du code de la callback sur l'évènement du bouton commander
+  if(!isFirstNameOk || !isLastNameOk || !isAddressOk || !isCityOk || !isEmailOk || products.length === 0){
     return;
   }
   fetch( "http://localhost:3000/api/products/order", {
@@ -370,7 +388,8 @@ orderForm.addEventListener( "submit", function( event ){
    // recupération du numero de commande crypté dans la reponse de l api et redirection vers l url réecrite de la page de confirmation
     console.log( "réponse retourné de l'API en objet javascript", value );
     console.log( "orderid ", value.orderId );
-    window.location.href = `./confirmation.html?orderId=${value.orderId}`;  
+    window.location.href = `./confirmation.html?orderId=${value.orderId}`; 
+    localStorage.removeItem("produits"); 
   })
   .catch( function( error ){
     console.log( "error requete post", error );
