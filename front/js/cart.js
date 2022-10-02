@@ -59,7 +59,7 @@ for( let productSelected of tabCartStorage ){
     if (val <= 0 || isNaN(val)) {
       inputQuantity.value = 0;
     } else if (val > 100) {
-      inputQuantity.value = 0;
+      inputQuantity.value = 100;
     }
   });
  
@@ -353,10 +353,8 @@ function valid( inputDataUser, msgError){
 
  //....................Récupération des id produit  dans  un tableau products ................ 
 
-//Création du tableau products avec la sélection de l' id des produits stockés dans le localStorage
+//Création du tableau products avec la sélection de l' id des produits stockés 
 let products = [];
-localStorage.setItem("products",JSON.stringify(products));
-products = JSON.parse(localStorage.getItem("products"))
 
 /*- si le panier du localStorage contient des produits, on recupère les produits dont la quantité est supérieur à 0 ou inférieur ou égal à 100
   -nous récupérons ensuite que l'id du produit*/
@@ -376,8 +374,6 @@ function selectIdProduit (){
   }
 }
  
-console.log( "tabcartstorage map id", products );
-
 //....................Formulaire: Bouton commander ................ 
 
 /*Au clic du bouton commander:
