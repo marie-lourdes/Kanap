@@ -237,27 +237,27 @@ let contact = {
   email: email
 };
 
-let verifChamps = {
+/* -variables qui stockent le résultats  false par defaut et dont les valeurs sont modifiées par les valeurs retournées des differents test de verifications des champs du formulaire 
+   -variables utilisées pour la verification du formulaire et la validation du bouton commander*/
+let checkInput = {
   isFirstNameOk: false,
   isLastNameOk: false,
   isAddressOk: false,
   isCityOk: false,
-  isEmailOk: false,
-}
+  isEmailOk: false
+};
 
 // récupération des données du formulaire dans l'objet contact avec verification des données au préalable (avec message d'erreur) avant de les stocker dans l'objet contact
- function verifDataNumber ( firstName) {
-  return isNaN( firstName) != true; 
 
- }
 firstName.addEventListener( "input", function( event ){
   let msgError = document.getElementById( "firstNameErrorMsg" );
   let dataFirstName = event.target.value;
   console.log( "test dataFirstName", isNaN( dataFirstName ) );
-  if( verifDataNumber(dataFirstName)){
-   error( firstName, msgError, "Prénom invalide" );
-   isFirstNameOk = false;
+  if( verifDataNumber( dataFirstName ) ){
+    error( firstName, msgError, "Prénom invalide" );
+    isFirstNameOk = false;
   }else{
+    valid( firstName, msgError);
     contact.firstName = dataFirstName;
     isFirstNameOk = true;
   }
@@ -269,12 +269,13 @@ lastName.addEventListener( "input", function( event ){
   let dataLastName = event.target.value;
   console.log( "test dataLasttName", isNaN( dataLastName ) );
 
-  if(verifDataNumber(dataLastName)){
+  if( verifDataNumber( dataLastName ) ){
     error( lastName, msgError, "Nom invalide" );
     isLastNameOk = false;
   }else{
-   contact.lastName = dataLastName; 
-   isLastNameOk = true;
+    valid( lastName, msgError);
+    contact.lastName = dataLastName; 
+    isLastNameOk = true;
   }
   console.log("contact input value", contact);
 });
@@ -288,6 +289,7 @@ address.addEventListener( "change", function( event ){
   console.log( "test regex", testRegex );
 
   if( testRegex ){
+    valid( address, msgError);
     contact.address = dataAdress;
     isAddressOk = true;
   }else{
@@ -302,10 +304,11 @@ city.addEventListener( "input", function( event ){
   let dataCity = event.target.value;
   console.log( "test city", isNaN( dataCity ) );
 
-  if( verifDataNumber(dataCity)){
+  if( verifDataNumber( dataCity ) ){
     error( city, msgError, "Ville non valide" );
     isCityOk = false;
   }else{
+    valid( city, msgError);
     contact.city = dataCity;
     isCityOk = true; 
   }
@@ -321,8 +324,9 @@ email.addEventListener( "change", function( event ){
   console.log( "test regex email", testRegexEmail );
 
   if( testRegexEmail ){
-   contact.email = emailAddress;
-   isEmailOk = true;
+    valid( email, msgError);
+    contact.email = emailAddress;
+    isEmailOk = true;
   }else{
     error( email, msgError, "Email invalide, Ex: contact@kanap.com" );
     isEmailOk = false;
@@ -330,11 +334,21 @@ email.addEventListener( "change", function( event ){
   console.log("contact input value", contact);
 });
 
+// fonction pour verifier si les données du formulaire sont des nombres
+function verifDataNumber( dataNumber) {
+  return isNaN( dataNumber) != true; 
+}
+
 // fonction error input pour un feedback visuel
 function error( inputDataUser, msgError, txtError ){
-  inputDataUser.setAttribute( "disabled", true );
   inputDataUser.style.border = "2px solid #fbbcbc";
   msgError.textContent = txtError;
+}
+
+// fonction valid 
+function valid( inputDataUser, msgError){
+  inputDataUser.style.border = "0";
+  msgError.textContent = "";
 }
 
 //....................Récupération des id produit  dans  un tableau products ................ 
@@ -343,10 +357,11 @@ function error( inputDataUser, msgError, txtError ){
 let products = [];
 /*- si le panier du localStorage contient des produits, on recupère les produits dont la quantité est supérieur à 0 ou inférieur ou égal à 100
   -nous récupérons ensuite que l'id du produit*/
-  if( tabCartStorage != null){
-    products=tabCartStorage.filter(function(elem){
-      if(elem.quantite > 0 && elem.quantite <= 100) return true;
-    }).map(function(elem){
+  if( tabCartStorage != null ){
+    products = tabCartStorage.filter( function( elem ){
+      if( elem.quantite > 0 && elem.quantite <= 100) return true;
+    })
+    .map( function( elem ){
       return elem.idProduit; 
     });
   }
@@ -366,6 +381,7 @@ const orderForm = document.querySelector( ".cart__order__form" );
 console.log( "order form", orderForm );
 orderForm.addEventListener( "submit", function( event ){
   event.preventDefault();
+
   //Si les valeurs retournées dans ces variables  par la vérification de chaque champs de formulaire est false et que le tableau de products e contient aucun id produit, on arrête l'execution du code de la callback sur l'évènement du bouton commander
   if(!isFirstNameOk || !isLastNameOk || !isAddressOk || !isCityOk || !isEmailOk || products.length === 0){
     return;
